@@ -15,4 +15,5 @@ When some unit from one team, A, land of a neutual planet, the planet of be turn
 
 ## Terms
 **Planets**: Planet is a base for storing units. A planet can belong to on team or no team. 
-**Resource**: Each planet has a set amount of resource, 
+**Resource**: Each planet has a set amount of resource, when a unit land on the planet, it will start reproducing (don't think dirty) using the resource on the planet. This basically increase the units of one team on the planet gradually. When the resouce runs out. this process stops. Reproduction will be paused when multiple teams are on the planet.   
+**Reward**: Reward is different from Resource. It is given at the end of the stage if player beat this stage. Reward can be used outside of gameplay for skill ups or reinforcement. more details to be decided.  
