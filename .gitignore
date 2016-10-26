@@ -28,3 +28,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# ignore the all the folder meta files
+*.meta
+!*.*.meta
