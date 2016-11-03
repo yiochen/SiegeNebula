@@ -1,7 +1,7 @@
-# Siege Nebulus
+# Siege Nebula
 Game Project for CSE381  
 ## Overview  
-**Siege Nebulus** is a 3D RTS(Real time strategy) game composed of multiple stages. Players act as a space commanders in charge of allocating the units on different planets. The objective is to take down all the enemy planets.
+**Siege Nebula** is a 3D RTS(Real time strategy) game composed of multiple stages. Players act as a space commanders in charge of allocating the units on different planets. The objective is to take down all the enemy planets.
 ## Platform  
 We are using Unity for this game project. The final game will be playable on PC.  
 ## Game Mechanics
