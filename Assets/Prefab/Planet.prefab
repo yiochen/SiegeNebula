@@ -84,9 +84,9 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 720ba056cabec5f48b6e0fb5915a7f22, type: 2}
-  - {fileID: 2100000, guid: 8c0297ecebff657459a7266de2abb3c4, type: 2}
-  - {fileID: 2100000, guid: ea5ce1a93c08680478874405e62b8690, type: 2}
+  - {fileID: 2100000, guid: 5823e4f287eeeaa45b145e8e8566760f, type: 2}
+  - {fileID: 2100000, guid: 0ceb593b7715b134ab35f5e3d8ce0d12, type: 2}
+  - {fileID: 2100000, guid: 7e2277b3a5ca14842b8293eda2e1dadd, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -108,7 +108,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011014721860}
-  m_Mesh: {fileID: 4300000, guid: d1449c8359b8409418cbbe32982641ac, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 93e1fe2612ffd3c42b7b5a3681be221b, type: 3}
 --- !u!114 &114000010714650518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,3 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdbc77d4ae617e449af4e665b0eb35cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
+  type: 0
+  soldierCount: 0
+  engineerCount: 0
+  resourceCount: 0
+  adjacentPlanet: []
+  gameManager: {fileID: 0}
