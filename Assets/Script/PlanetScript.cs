@@ -28,6 +28,7 @@ public class PlanetScript : MonoBehaviour {
 	public int engineerCount = 0;
 	public int resourceCount = 0;
 	public GameObject[] adjacentPlanet;
+	public ManagerScript gameManager;
 
 	/**
 	 * These will be used for keeping track of the ship.
