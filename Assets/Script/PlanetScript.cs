@@ -47,27 +47,27 @@ public class PlanetScript : MonoBehaviour {
         transform.Rotate(0, 0, 50 * Time.deltaTime);
     }
 
-	void mineResources() {
+	void MineResources() {
 
 	}
 
-	void createShip() {
+	void CreateShip() {
 
 	}
 
-	void createSoldiers() {
+	void CreateSoldiers() {
 
 	}
 
-	void createEngineers() {
+	void CreateEngineers() {
 
 	}
 		
-	void loadSoldiersToShip() {
+	void LoadSoldiersToShip() {
 
 	}
 
-	void unLoadSoldiersFromShip() {
+	void UnLoadSoldiersFromShip() {
 
 	}
 
