@@ -54,4 +54,8 @@ public class ManagerScript : MonoBehaviour {
 		return playerEngineers;
 	}
 
+	public int GetResourceCount() {
+		return playerResources;
+	}
+
 }

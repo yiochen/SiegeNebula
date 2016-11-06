@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 /**
  * Planet Script will include store all the information
  * related to the planet. 
@@ -21,34 +22,94 @@ public class PlanetScript : MonoBehaviour {
 		Hybrid, Resource, Soldier, Normal
 	};
 
-
 	public PlanetState state;
 	public PlanetType type;
 	public int soldierCount = 0;
 	public int engineerCount = 0;
-	public int resourceCount = 0;
+	public int resourceCount = 1200;
 	public GameObject[] adjacentPlanet;
 	public ManagerScript gameManager;
 
-	/**
-	 * These will be used for keeping track of the ship.
-	 * Currently, there is no ship implementation so this is commented to avoid errors.
-	**/
-	//private ShipScript[] ships;
-	//private ShipScript selectedShip;
+	public List<ShipScript> ships;
+	public ShipScript selectedShip;
+
+	private float timer;
+	public float planetTick = 1.5f;
+
+	public bool isSelected;
+	private bool isTrainingSoldiers;
+	private bool isTrainingEngineers;
+	private const int SHIP_COST = 300;
+	private const int SOLDIER_COST = 10;
+	private const int ENGINEER_COST = 3;
 
 	// Use this for initialization
 	void Start () {
-
+		ships = new List<ShipScript> (8);
+		timer = 0;
+		isSelected = false;
+		isTrainingSoldiers = false;
+		isTrainingEngineers = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
         transform.Rotate(0, 0, 50 * Time.deltaTime);
+
+		if(isSelected)
+			HandleKeyboardInput ();
+		
+		timer += Time.deltaTime;
+		if (timer >= planetTick) {
+			switch (type) {
+			case PlanetType.Hybrid:
+				MineResources ();
+				CreateSoldiers ();
+				CreateEngineers ();
+				break;
+			case PlanetType.Normal:
+				break;
+			case PlanetType.Resource:
+				MineResources ();
+				break;
+			case PlanetType.Soldier:
+				CreateSoldiers ();
+				CreateEngineers ();
+				break;
+			}
+			CreateShip ();
+			timer = 0;
+		}
     }
+	/**
+	 * This is mostly for testing.
+	 * S produces soldiers
+	 * E produces engineers
+	 * we want to have visual buttons for creating soldiers/engineers
+	**/
+	void HandleKeyboardInput() {
+		if (Input.GetKeyDown(KeyCode.S)) {
+			isTrainingSoldiers = !isTrainingSoldiers;
+		} else if (Input.GetKeyDown(KeyCode.E)) {
+			isTrainingEngineers = !isTrainingEngineers;
+		}
+	}
+	/**
+	 * Selections need to be managed by the GameManager.
+	 * We should see visual indication of a selection.
+	**/
+	void OnMouseDown() {
+		isSelected = true;
+	}
 
 	void MineResources() {
-
+		if (resourceCount >= engineerCount) {
+			resourceCount -= engineerCount;
+			gameManager.AddToResourceCount (engineerCount);
+		} else if(resourceCount > 0 && resourceCount < engineerCount) {
+			gameManager.AddToResourceCount (resourceCount);
+			resourceCount = 0;
+		}
 	}
 
 	void CreateShip() {
@@ -56,19 +117,45 @@ public class PlanetScript : MonoBehaviour {
 	}
 
 	void CreateSoldiers() {
-
+		if (isTrainingSoldiers) {
+			if (gameManager.GetResourceCount() >= SOLDIER_COST) {
+				gameManager.AddToResourceCount (-SOLDIER_COST);
+				gameManager.AddToSoldierCount (1);
+				resourceCount -= SOLDIER_COST;
+				soldierCount++;
+			}
+		}
 	}
 
 	void CreateEngineers() {
-
+		if (isTrainingEngineers) {
+			if (gameManager.GetResourceCount() >= ENGINEER_COST) {
+				gameManager.AddToResourceCount (-ENGINEER_COST);
+				gameManager.AddToEngineerCount (1);
+				resourceCount -= ENGINEER_COST;
+				engineerCount++;
+			}
+		}
 	}
 		
 	void LoadSoldiersToShip() {
-
+		selectedShip.StartLoadingSoldiersToShip (this);
 	}
 
-	void UnLoadSoldiersFromShip() {
+	void StopLoadingSoldiersToShip() {
+		selectedShip.StopLoadingSoldiersToShip ();
+	}
 
+	void LoadEngineersToShip() {
+		selectedShip.StartLoadingEngineersToShip (this);
+	}
+
+	void StopLoadingEngineersToShip() {
+		selectedShip.StopLoadingEngineersToShip ();
+	}
+
+	void UnLoadUnitsFromShip() {
+		selectedShip.UnloadShip (this);
 	}
 
 }
