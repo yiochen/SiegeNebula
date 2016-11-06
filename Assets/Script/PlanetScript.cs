@@ -103,7 +103,7 @@ public class PlanetScript : MonoBehaviour {
 	}
 
 	void MineResources() {
-		if (resourceCount >= engineerCount) {
+		if (resourceCount > engineerCount) {
 			resourceCount -= engineerCount;
 			gameManager.AddToResourceCount (engineerCount);
 		} else if(resourceCount > 0 && resourceCount < engineerCount) {
@@ -121,7 +121,6 @@ public class PlanetScript : MonoBehaviour {
 			if (gameManager.GetResourceCount() >= SOLDIER_COST) {
 				gameManager.AddToResourceCount (-SOLDIER_COST);
 				gameManager.AddToSoldierCount (1);
-				resourceCount -= SOLDIER_COST;
 				soldierCount++;
 			}
 		}
@@ -132,7 +131,6 @@ public class PlanetScript : MonoBehaviour {
 			if (gameManager.GetResourceCount() >= ENGINEER_COST) {
 				gameManager.AddToResourceCount (-ENGINEER_COST);
 				gameManager.AddToEngineerCount (1);
-				resourceCount -= ENGINEER_COST;
 				engineerCount++;
 			}
 		}
