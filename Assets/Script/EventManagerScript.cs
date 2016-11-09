@@ -18,7 +18,15 @@ public class EventManagerScript : Singleton<EventManagerScript> {
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
             if (hit)
             {
-                Debug.Log("hit " + hitInfo.transform.gameObject.name);
+                GameObject gameObject = hitInfo.transform.gameObject;
+                EventHandler[] handlers = gameObject.GetComponents<EventHandler>();
+                if (handlers.Length > 0)
+                {
+                    foreach (EventHandler handler in handlers)
+                    {
+                        handler.OnClick(hitInfo);
+                    }
+                }
             }
         }
     }
