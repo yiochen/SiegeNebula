@@ -9,15 +9,22 @@ public struct RankUnit
     public bool isLit;
 }
 public class RankingBarScript : MonoBehaviour {
-    public int maxRank = 5;
-    public int currentRank = 5;
-    public bool showShadow = false;
-    public GameObject unitSprite;
-    public Color color = Color.yellow;
-    public Color shadowColor = Color.white;
 
     private RankUnit[] ranks = new RankUnit[10]; // maximum 10 ranks
     private int count = 0;
+    private int _currentRank = 5;
+
+    public int maxRank = 5;
+    public int currentRank {
+        get { return _currentRank; }
+        set { _currentRank = value; UpdateRank(); }
+    }
+    public bool hideShadow = false;
+    public GameObject unitSprite;
+    public Color activeColor = Color.yellow;
+    public Color shadowColor = Color.white;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -30,14 +37,36 @@ public class RankingBarScript : MonoBehaviour {
             rank.sprite.transform.localPosition = new Vector3(i - (maxRank -1.0f) / 2.0f, -0.5f, 0.0f);
             rank.sprite.transform.localRotation = Quaternion.identity;
         }
-        SetRank(currentRank);
+        UpdateRank();
 	}
 
-    public void SetRank(int rank)
+    void UpdateRank()
     {
+        for (int i = 0; i < count; i++)
+        {
+            GameObject rankUnit = ranks[i].sprite.gameObject;
+            SpriteRenderer renderer = rankUnit.GetComponent<SpriteRenderer>();
+            if (i < _currentRank)
+            {
+                if (hideShadow)
+                {
+                    rankUnit.SetActive(true);
+                }
+                renderer.color = activeColor;
+            } else
+            {
+                if (hideShadow)
+                {
+                    rankUnit.SetActive(false);
+                }
+                else
+                {
+                    renderer.color = shadowColor;
+                }
 
+            }
+        }
     }
-
     RankUnit AddRank()
     {
         GameObject sprite = Instantiate(unitSprite, Vector3.zero, Quaternion.identity) as GameObject;
@@ -48,10 +77,5 @@ public class RankingBarScript : MonoBehaviour {
         ranks[count] = rank;
         count++;
         return rank;
-    }
-
-    void Refresh()
-    {
-
     }
 }

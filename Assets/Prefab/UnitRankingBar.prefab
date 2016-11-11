@@ -58,10 +58,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxRank: 5
-  showShadow: 1
+  hideShadow: 0
   unitSprite: {fileID: 1000010881327284, guid: 1f0cc93e62dcca443b9457fb2bc2b83c, type: 2}
-  color: {r: 0.75658643, g: 0.9264706, b: 0.1566825, a: 0}
-  shadowColor: {r: 1, g: 0.88235295, b: 0.88235295, a: 0.781}
+  activeColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  shadowColor: {r: 1, g: 1, b: 1, a: 0.281}
 --- !u!114 &114000011855454700
 MonoBehaviour:
   m_ObjectHideFlags: 1
