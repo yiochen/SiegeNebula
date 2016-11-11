@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 /**
  * Planet Script will include store all the information
- * related to the planet. 
+ * related to the planet.
  * This includes:
  * 1. Units (Soldiers, Engineers)
  * 2. Ships
@@ -54,11 +54,10 @@ public class PlanetScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(0, 0, 50 * Time.deltaTime);
 
 		if(isSelected)
 			HandleKeyboardInput ();
-		
+
 		timer += Time.deltaTime;
 		if (timer >= planetTick) {
 			switch (type) {
@@ -135,7 +134,7 @@ public class PlanetScript : MonoBehaviour {
 			}
 		}
 	}
-		
+
 	void LoadSoldiersToShip() {
 		selectedShip.StartLoadingSoldiersToShip (this);
 	}

@@ -5,10 +5,10 @@ public class EventManagerScript : Singleton<EventManagerScript> {
 
 	// Update is called once per frame
 	void Update () {
-        handleMouseDown();
+        HandleMouseDown();
 	}
 
-    void handleMouseDown()
+    void HandleMouseDown()
     {
         if (Input.GetMouseButtonDown(0))
         {
