@@ -2,9 +2,11 @@
 using System.Collections;
 using System;
 
+// This class is in charged of the ship icon behavior.
+// ship icons are located on the bottom right of planets.
+// They show a circular progress bar for loading unit.
 public class ShipIconScript : MonoBehaviour {
 
-    private bool isDragging = false;
 	// Use this for initialization
 	void Start () {
 
@@ -12,19 +14,5 @@ public class ShipIconScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        if (isDragging)
-        {
-            Debug.Log(Input.mousePosition);
-        }
 	}
-
-    void OnMouseDown()
-    {
-        isDragging = true;
-    }
-
-    void OnMouseUp()
-    {
-        isDragging = false;
-    }
 }

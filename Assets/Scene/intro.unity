@@ -254,11 +254,23 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41e7353571eb3064488a7ba8472c9d38, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &352503826 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1197923965}
+  m_Script: {fileID: 11500000, guid: a14ddbb4bebe4f442bf42b94d22dc388, type: 3}
 --- !u!4 &494532775 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000011619903582, guid: 41e7353571eb3064488a7ba8472c9d38,
     type: 2}
   m_PrefabInternal: {fileID: 1185969134}
+--- !u!114 &536536107 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000011076024838, guid: 43f008a7e19aecf4093d108bb3cf297e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1193796144}
+  m_Script: {fileID: 11500000, guid: d6237e3f2d4171d49af399843c7f16a3, type: 3}
 --- !u!4 &537955740 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000010806138274, guid: 528db8d1c63da0a49af74420eb4e5786,
@@ -662,6 +674,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 919084587}
     m_Modifications:
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: ships.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: adjacentPaths.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4000011619903582, guid: 41e7353571eb3064488a7ba8472c9d38, type: 2}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -698,6 +720,16 @@ Prefab:
       propertyPath: m_Name
       value: Planet_Yiou_debug
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: adjacentPaths.Array.data[0]
+      value: 
+      objectReference: {fileID: 536536107}
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: ships.Array.data[0]
+      value: 
+      objectReference: {fileID: 352503826}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41e7353571eb3064488a7ba8472c9d38, type: 2}
   m_IsPrefabParent: 0
@@ -795,6 +827,11 @@ Prefab:
     - target: {fileID: 1000012697122658, guid: e64c078d047535e40bbe8c039639d61e, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
+        type: 2}
+      propertyPath: movementSpeed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e64c078d047535e40bbe8c039639d61e, type: 2}

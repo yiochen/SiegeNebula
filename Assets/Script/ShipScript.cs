@@ -27,11 +27,13 @@ public class ShipScript : MonoBehaviour {
 	private PlanetScript dockedPlanet;
 	private PlanetScript targetPlanet;
 
+    private DirectionalPath travelPath;
+
 	// Use this for initialization
 	void Start () {
 		timer = 0;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -74,9 +76,22 @@ public class ShipScript : MonoBehaviour {
 		this.dockedPlanet = planet;
 	}
 
-	public void MoveShipTo(PlanetScript planet) {
+	public void LaunchShipOnPath(PathScript path, bool isReverse) {
 		isShipMoving = true;
-		this.targetPlanet = planet;
+        // Note from Yiou: The target planet might not be used since I plan on using the PathScript to handle movement
+        if (isReverse)
+        {
+            this.targetPlanet = path.start.GetComponent<PlanetScript>();
+        } else
+        {
+            this.targetPlanet = path.end.GetComponent<PlanetScript>();
+        }
+
+        this.travelPath = path.getDirectionalPath(isReverse);
+
+        this.transform.position = path.start.position;
+        this.transform.rotation = Quaternion.LookRotation(path.end.position - path.start.position);
+
 	}
 
 	void LoadSoldiersToShip() {
@@ -96,7 +111,7 @@ public class ShipScript : MonoBehaviour {
 			}
 		}
 	}
-	
+
 	void LoadEngineersToShip() {
 		if (engineersOnBoard >= engineerCapacity) {
 			engineersOnBoard = engineerCapacity;
@@ -125,7 +140,16 @@ public class ShipScript : MonoBehaviour {
 	}
 
 	void MoveShip() {
-		//TODO: Add implementation for moving to another planet
-		isShipMoving = false;
+        //TODO: Add implementation for moving to another planet
+        float remainingDistance = Vector3.Distance(transform.position, travelPath.end.position);
+        if (remainingDistance < 0.05f)
+        {
+            Debug.Log("Arrived at " + transform.position);
+            isShipMoving = false;
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, travelPath.end.position, Mathf.Min(movementSpeed * Time.deltaTime, remainingDistance));
+        }
 	}
 }

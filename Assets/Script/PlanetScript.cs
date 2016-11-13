@@ -28,9 +28,10 @@ public class PlanetScript : MonoBehaviour {
 	public int engineerCount = 0;
 	public int resourceCount = 1200;
 	public GameObject[] adjacentPlanet;
+    public PathScript[] adjacentPaths;
 	public ManagerScript gameManager;
 
-	public List<ShipScript> ships;
+	public ShipScript[] ships = new ShipScript[2]; // Two ship most right now, one for player, one for enermy
 	public ShipScript selectedShip;
 
 	private float timer;
@@ -45,7 +46,6 @@ public class PlanetScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		ships = new List<ShipScript> (8);
 		timer = 0;
 		isSelected = false;
 		isTrainingSoldiers = false;
