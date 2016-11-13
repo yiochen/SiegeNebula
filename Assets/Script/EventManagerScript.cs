@@ -8,8 +8,10 @@ public class EventManagerScript : Singleton<EventManagerScript> {
         HandleMouseDown();
 	}
 
+    // TODO: I just found that unity provide OnMouseDown and OnMouseUp function. This would be removed.
     void HandleMouseDown()
     {
+
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hitInfo = new RaycastHit();

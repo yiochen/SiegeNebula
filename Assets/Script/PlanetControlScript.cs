@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlanetControlScript : EventHandler {
+public class PlanetControlScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -13,7 +13,7 @@ public class PlanetControlScript : EventHandler {
 
 	}
 
-    public override void OnClick(RaycastHit hit)
+    void OnMouseDown() //unity built-in function
     {
         Debug.Log(gameObject.name + " was clicked");
     }
