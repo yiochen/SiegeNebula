@@ -215,9 +215,19 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 919084587}
     m_Modifications:
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: ships.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: adjacentPaths.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4000011619903582, guid: 41e7353571eb3064488a7ba8472c9d38, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 6.01
       objectReference: {fileID: 0}
     - target: {fileID: 4000011619903582, guid: 41e7353571eb3064488a7ba8472c9d38, type: 2}
       propertyPath: m_LocalPosition.y
@@ -225,7 +235,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011619903582, guid: 41e7353571eb3064488a7ba8472c9d38, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -6.79
       objectReference: {fileID: 0}
     - target: {fileID: 4000011619903582, guid: 41e7353571eb3064488a7ba8472c9d38, type: 2}
       propertyPath: m_LocalRotation.x
@@ -251,9 +261,30 @@ Prefab:
       propertyPath: m_Name
       value: Planet (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: selectedShip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: adjacentPaths.Array.data[0]
+      value: 
+      objectReference: {fileID: 344561305}
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: ships.Array.data[0]
+      value: 
+      objectReference: {fileID: 352503826}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41e7353571eb3064488a7ba8472c9d38, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &344561305 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000011076024838, guid: 43f008a7e19aecf4093d108bb3cf297e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1513397355}
+  m_Script: {fileID: 11500000, guid: d6237e3f2d4171d49af399843c7f16a3, type: 3}
 --- !u!114 &352503826 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
@@ -283,6 +314,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 919084587}
     m_Modifications:
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: ships.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: adjacentPaths.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4000011619903582, guid: 41e7353571eb3064488a7ba8472c9d38, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -315,6 +356,26 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: selectedShip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: adjacentPaths.Array.data[0]
+      value: 
+      objectReference: {fileID: 536536107}
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: adjacentPaths.Array.data[1]
+      value: 
+      objectReference: {fileID: 344561305}
+    - target: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: ships.Array.data[0]
+      value: 
+      objectReference: {fileID: 352503826}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41e7353571eb3064488a7ba8472c9d38, type: 2}
   m_IsPrefabParent: 0

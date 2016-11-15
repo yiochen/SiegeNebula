@@ -18,6 +18,9 @@ public class PathScript : MonoBehaviour {
 
     public Transform start;
     public Transform end;
+    public float pathChosingThreshold = 0.5f;
+
+    private Vector3 direction;
     LineRenderer lineRenderer;
 
 	void Start () {
@@ -27,6 +30,7 @@ public class PathScript : MonoBehaviour {
             lineRenderer.SetPosition(0, start.position);
             lineRenderer.SetPosition(1, end.position);
         }
+        direction = (end.position - start.position).normalized;
 	}
 
     public DirectionalPath getDirectionalPath(bool isReversed)
@@ -39,6 +43,28 @@ public class PathScript : MonoBehaviour {
         {
             return new DirectionalPath(start, end, this);
         }
+    }
+
+    public DirectionalPath getDirectionStartingFrom(Transform start) {
+        if (start.position == this.start.position) return getDirectionalPath(false);
+        if (start.position == this.end.position) return getDirectionalPath(true);
+        if (Vector3.Distance(start.position, this.start.position)<Vector3.Distance(start.position, this.end.position))
+        {
+            return getDirectionalPath(false);
+        } else
+        {
+            return getDirectionalPath(true);
+        }
+    }
+
+    public bool IsQualifiedForLaunching(Vector3 launchingPosition)
+    {
+        bool isCloseToPath = MathHelper.DistanceToLine(launchingPosition, start.position, end.position) < pathChosingThreshold;
+        Vector3 startToPos = launchingPosition - start.position;
+        Vector3 posToEnd = end.position - launchingPosition;
+        bool isBetweenStartAndEnd = Vector3.Dot(startToPos, direction) > 0 && Vector3.Dot(posToEnd, direction) > 0;
+
+        return isCloseToPath && isBetweenStartAndEnd;
     }
 
 }

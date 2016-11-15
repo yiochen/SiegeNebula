@@ -76,21 +76,12 @@ public class ShipScript : MonoBehaviour {
 		this.dockedPlanet = planet;
 	}
 
-	public void LaunchShipOnPath(PathScript path, bool isReverse) {
+	public void LaunchShipOnPath(PathScript path, Transform from) {
 		isShipMoving = true;
-        // Note from Yiou: The target planet might not be used since I plan on using the PathScript to handle movement
-        if (isReverse)
-        {
-            this.targetPlanet = path.start.GetComponent<PlanetScript>();
-        } else
-        {
-            this.targetPlanet = path.end.GetComponent<PlanetScript>();
-        }
+        this.travelPath = path.getDirectionStartingFrom(from);
 
-        this.travelPath = path.getDirectionalPath(isReverse);
-
-        this.transform.position = path.start.position;
-        this.transform.rotation = Quaternion.LookRotation(path.end.position - path.start.position);
+        this.transform.position = travelPath.start.position;
+        this.transform.rotation = Quaternion.LookRotation(travelPath.end.position - travelPath.start.position);
 
 	}
 
@@ -144,7 +135,6 @@ public class ShipScript : MonoBehaviour {
         float remainingDistance = Vector3.Distance(transform.position, travelPath.end.position);
         if (remainingDistance < 0.05f)
         {
-            Debug.Log("Arrived at " + transform.position);
             isShipMoving = false;
         }
         else
