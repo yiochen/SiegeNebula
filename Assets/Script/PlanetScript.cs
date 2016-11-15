@@ -27,12 +27,14 @@ public class PlanetScript : MonoBehaviour {
 	public int soldierCount = 0;
 	public int engineerCount = 0;
 	public int resourceCount = 1200;
-	public GameObject[] adjacentPlanet;
+	public PlanetScript[] adjacentPlanet;
     public PathScript[] adjacentPaths;
 	public ManagerScript gameManager;
 
 	public ShipScript[] ships = new ShipScript[2]; // Two ship most right now, one for player, one for enermy
 	public ShipScript selectedShip;
+
+	public RankingBarScript rankingScript;
 
 	private float timer;
 	public float planetTick = 1.5f;
@@ -54,6 +56,9 @@ public class PlanetScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		isSelected = gameManager.GetSelectedPlanet().Equals (this);
+
 
 		if(isSelected)
 			HandleKeyboardInput ();
@@ -98,7 +103,7 @@ public class PlanetScript : MonoBehaviour {
 	 * We should see visual indication of a selection.
 	**/
 	void OnMouseDown() {
-		isSelected = true;
+		gameManager.ChangeSelection (this);
 	}
 
 	void MineResources() {

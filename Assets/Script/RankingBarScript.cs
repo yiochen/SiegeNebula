@@ -12,7 +12,7 @@ public class RankingBarScript : MonoBehaviour {
 
     private RankUnit[] ranks = new RankUnit[10]; // maximum 10 ranks
     private int count = 0;
-    private int _currentRank = 5;
+    private int _currentRank = 3;
 
     public int maxRank = 5;
     public int currentRank {
@@ -38,6 +38,7 @@ public class RankingBarScript : MonoBehaviour {
             rank.sprite.transform.localRotation = Quaternion.identity;
         }
         UpdateRank();
+		SetActive (false);
 	}
 
     void UpdateRank()
@@ -78,4 +79,11 @@ public class RankingBarScript : MonoBehaviour {
         count++;
         return rank;
     }
+
+	public void SetActive(bool active) {
+		for (int i = 0; i < maxRank; i++) {
+			GameObject go = ranks [i].sprite;
+			go.SetActive (active);
+		}
+	}
 }

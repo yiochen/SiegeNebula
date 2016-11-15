@@ -23,15 +23,62 @@ public class ManagerScript : MonoBehaviour {
 	private int playerSoldiers;
 	private int playerEngineers;
 
+	public PlanetScript selectedPlanet;
+
 	// Use this for initialization
 	void Start () {
-		playerPlanets.Capacity = numberOfPlanets;
-		enemyPlanets.Capacity = numberOfPlanets;
+		playerPlanets = new List<PlanetScript>(numberOfPlanets);
+		enemyPlanets = new List<PlanetScript>(numberOfPlanets);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+	}
+
+	public void ChangeSelection(PlanetScript planet) {
 		
+		for (int i = 0; i < selectedPlanet.adjacentPlanet.Length; i++) {
+			PlanetScript ps = selectedPlanet.adjacentPlanet [i];
+			//Deactivate star ranking for non-adjacent planets
+			ps.rankingScript.SetActive (false);
+		}
+						
+
+		for (int i = 0; i < planet.adjacentPlanet.Length; i++) {
+			PlanetScript ps = planet.adjacentPlanet [i];
+
+			//Activate star ranking for adjacent planets
+			ps.rankingScript.SetActive (true);
+
+			//Determine Relative Soldier Strength
+			ps.rankingScript.currentRank = RelativePlanetStrength (planet, ps);
+		}
+		planet.rankingScript.SetActive (false);
+
+		this.selectedPlanet = planet;
+	}
+
+	public int RelativePlanetStrength(PlanetScript basePlanet, PlanetScript comparePlanet) {
+		int soldierDiff = comparePlanet.soldierCount - basePlanet.soldierCount;
+
+		float percDiff = basePlanet.soldierCount == 0 ? 0 : soldierDiff / (float)Mathf.Max(basePlanet.soldierCount,comparePlanet.soldierCount);
+
+		if (percDiff >= 0.3f)
+			return 5;
+		else if (percDiff > 0.1f)
+			return 4;
+		else if (percDiff >= -0.1f && percDiff <= 0.1f)
+			return 3;
+		else if (percDiff < -0.1f)
+			return 2;
+		else if (percDiff <= -0.3f)
+			return 1;
+		return 1;
+	}
+
+	public PlanetScript GetSelectedPlanet() {
+		return selectedPlanet;
 	}
 
 	public void AddToSoldierCount (int val) {
