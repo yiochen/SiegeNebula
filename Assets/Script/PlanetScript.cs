@@ -14,6 +14,13 @@ using System.Collections.Generic;
 
 public class PlanetScript : MonoBehaviour {
 
+	public struct SoldierUnit {
+		public int soldierCount;
+		public int defense;
+		public int defenseMod;
+		public int attackMod;
+	}
+
 	public enum PlanetState {
 		Player, Enemy, Contested, Neutral
 	};
@@ -24,8 +31,11 @@ public class PlanetScript : MonoBehaviour {
 
 	public PlanetState state;
 	public PlanetType type;
-	public int soldierCount = 0;
-	public int engineerCount = 0;
+	public PlanetState ownerShip;
+
+	public SoldierUnit playerSoldiers;
+	public SoldierUnit enemySoldiers;
+	public int playerEngineerCount = 0;
 	public int resourceCount = 1200;
 	public PlanetScript[] adjacentPlanet;
     public PathScript[] adjacentPaths;
@@ -49,6 +59,18 @@ public class PlanetScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		timer = 0;
+
+		playerSoldiers.soldierCount = 0;
+		playerSoldiers.defense = 0;
+		playerSoldiers.defenseMod = 0;
+		playerSoldiers.attackMod = 0;
+
+		enemySoldiers.soldierCount = 0;
+		enemySoldiers.defense = 0;
+		enemySoldiers.defenseMod = 0;
+		enemySoldiers.attackMod = 0;
+
+
 		isSelected = false;
 		isTrainingSoldiers = false;
 		isTrainingEngineers = false;
@@ -107,10 +129,10 @@ public class PlanetScript : MonoBehaviour {
 	}
 
 	void MineResources() {
-		if (resourceCount > engineerCount) {
-			resourceCount -= engineerCount;
-			gameManager.AddToResourceCount (engineerCount);
-		} else if(resourceCount > 0 && resourceCount < engineerCount) {
+		if (resourceCount > playerEngineerCount) {
+			resourceCount -= playerEngineerCount;
+			gameManager.AddToResourceCount (playerEngineerCount);
+		} else if(resourceCount > 0 && resourceCount < playerEngineerCount) {
 			gameManager.AddToResourceCount (resourceCount);
 			resourceCount = 0;
 		}
@@ -125,7 +147,7 @@ public class PlanetScript : MonoBehaviour {
 			if (gameManager.GetResourceCount() >= SOLDIER_COST) {
 				gameManager.AddToResourceCount (-SOLDIER_COST);
 				gameManager.AddToSoldierCount (1);
-				soldierCount++;
+				playerSoldiers.soldierCount++;
 			}
 		}
 	}
@@ -135,7 +157,7 @@ public class PlanetScript : MonoBehaviour {
 			if (gameManager.GetResourceCount() >= ENGINEER_COST) {
 				gameManager.AddToResourceCount (-ENGINEER_COST);
 				gameManager.AddToEngineerCount (1);
-				engineerCount++;
+				playerEngineerCount++;
 			}
 		}
 	}

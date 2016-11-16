@@ -92,9 +92,9 @@ public class ShipScript : MonoBehaviour {
 		} else {
 			timer += Time.deltaTime;
 			if (timer >= loadTimePerUnit) {
-				if (dockedPlanet.soldierCount > 0) {
+				if (dockedPlanet.playerSoldiers.soldierCount > 0) {
 					soldiersOnBoard++;
-					dockedPlanet.soldierCount--;
+					dockedPlanet.playerSoldiers.soldierCount--;
 				} else {
 					isSoldierLoading = false;
 				}
@@ -110,9 +110,9 @@ public class ShipScript : MonoBehaviour {
 		} else {
 			timer += Time.deltaTime;
 			if (timer >= loadTimePerUnit) {
-				if (dockedPlanet.engineerCount > 0) {
+				if (dockedPlanet.playerEngineerCount > 0) {
 					engineersOnBoard++;
-					dockedPlanet.engineerCount--;
+					dockedPlanet.playerEngineerCount--;
 				} else {
 					isEngineerLoading = false;
 				}
@@ -122,8 +122,8 @@ public class ShipScript : MonoBehaviour {
 	}
 
 	void UnloadShip() {
-		dockedPlanet.soldierCount += soldiersOnBoard;
-		dockedPlanet.engineerCount += engineersOnBoard;
+		dockedPlanet.playerSoldiers.soldierCount += soldiersOnBoard;
+		dockedPlanet.playerEngineerCount += engineersOnBoard;
 
 		soldiersOnBoard = 0;
 		engineersOnBoard = 0;
