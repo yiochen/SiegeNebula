@@ -39,6 +39,7 @@ GameObject:
   - 114: {fileID: 114000010714650518}
   - 114: {fileID: 114000013244661524}
   - 135: {fileID: 135000011565845782}
+  - 114: {fileID: 114000014095526212}
   m_Layer: 0
   m_Name: Planet
   m_TagString: Untagged
@@ -124,13 +125,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   type: 0
-  soldierCount: 0
-  engineerCount: 0
+  ownerShip: 0
+  playerEngineerCount: 0
   resourceCount: 0
   adjacentPlanet: []
+  adjacentPaths: []
   gameManager: {fileID: 0}
   ships: []
   selectedShip: {fileID: 0}
+  rankingScript: {fileID: 0}
   planetTick: 1.5
   isSelected: 0
 --- !u!114 &114000013244661524
@@ -142,6 +145,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5ea23c9f3182264dbef51ff78886c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minLaunchingDistance: 5
+  pathChosingThreshold: 0.5
+--- !u!114 &114000014095526212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011833804262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5f2c4a002bcb54f8ff73c19c76aa47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!135 &135000011565845782
