@@ -32,3 +32,6 @@ sysinfo.txt
 # ignore the all the folder meta files
 *.meta
 !*.*.meta
+
+# ignore project version file. 
+ProjectVersion.txt
