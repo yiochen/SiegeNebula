@@ -43,9 +43,7 @@ public class CombatScript : MonoBehaviour {
 			
 			StartRound();
 
-			AttackerRound();
-
-			DefenderRound();
+			Combat ();
 
 			UpdatePlanetData ();
 
@@ -59,14 +57,11 @@ public class CombatScript : MonoBehaviour {
 		this.enemySoldiers = planet.enemySoldiers;
 	}
 
-	void AttackerRound() {
-		int damageRolls = DetermineDamageRolls(isPlayerAttacker, true);
-		DetermineDamage(damageRolls, isPlayerAttacker);
-	}
-
-	void DefenderRound() {
-		int damageRolls = DetermineDamageRolls(isPlayerAttacker, false);
-		DetermineDamage(damageRolls, isPlayerAttacker);
+	void Combat() {
+		int attackerDamageRolls = DetermineDamageRolls(isPlayerAttacker, true);
+		int defenderDamageRolls = DetermineDamageRolls(!isPlayerAttacker, false);
+		DetermineDamage(attackerDamageRolls, isPlayerAttacker);
+		DetermineDamage(defenderDamageRolls, !isPlayerAttacker);
 	}
 
 	void UpdatePlanetData() {
