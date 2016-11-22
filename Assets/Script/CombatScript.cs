@@ -30,12 +30,12 @@ public class CombatScript : MonoBehaviour {
 		this.playerSoldiers = planet.playerSoldiers;
 		this.enemySoldiers = planet.enemySoldiers;
 		timer = 0.0f;
-		isPlayerAttacker = (planet.ownerShip == PlanetScript.PlanetState.Enemy);
+		isPlayerAttacker = (planet.planetOwnership == PlanetScript.Ownership.Enemy);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (planet.state != PlanetScript.PlanetState.Contested)
+		if (!planet.isContested)
 			return;
 		
 		timer += Time.deltaTime;

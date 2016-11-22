@@ -21,17 +21,17 @@ public class PlanetScript : MonoBehaviour {
 		public int attackMod;
 	}
 
-	public enum PlanetState {
-		Player, Enemy, Contested, Neutral
-	};
-
 	public enum PlanetType {
 		Hybrid, Resource, Soldier, Normal
 	};
 
-	public PlanetState state;
+	public enum Ownership {
+		Player, Enemy, Neutral
+	};
+
+	public bool isContested;
 	public PlanetType type;
-	public PlanetState ownerShip;
+	public Ownership planetOwnership;
 
 	public SoldierUnit playerSoldiers;
 	public SoldierUnit enemySoldiers;
@@ -47,7 +47,7 @@ public class PlanetScript : MonoBehaviour {
 	public RankingBarScript rankingScript;
 
 	private float timer;
-	public float planetTick = 1.5f;
+	private float changeTimer;
 
 	public bool isSelected;
 	private bool isTrainingSoldiers;
@@ -55,6 +55,9 @@ public class PlanetScript : MonoBehaviour {
 	private const int SHIP_COST = 300;
 	private const int SOLDIER_COST = 10;
 	private const int ENGINEER_COST = 3;
+
+	private const float PLANET_TICK = 1.5f;
+	private const float PLANET_CHANGE = 5.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -81,12 +84,13 @@ public class PlanetScript : MonoBehaviour {
 
 		isSelected = gameManager.GetSelectedPlanet().Equals (this);
 
+		PlanetStateChanges ();
 
 		if(isSelected)
 			HandleKeyboardInput ();
 
 		timer += Time.deltaTime;
-		if (timer >= planetTick) {
+		if (timer >= PLANET_TICK) {
 			switch (type) {
 			case PlanetType.Hybrid:
 				MineResources ();
@@ -126,6 +130,66 @@ public class PlanetScript : MonoBehaviour {
 	**/
 	void OnMouseDown() {
 		gameManager.ChangeSelection (this);
+	}
+
+	void PlanetStateChanges() {
+		switch (planetOwnership) {
+		case Ownership.Enemy:
+			if (playerSoldiers.soldierCount > 0 && enemySoldiers.soldierCount > 0) {
+				changeTimer = 0;
+				isContested = true;
+			} else if (enemySoldiers.soldierCount == 0 && playerSoldiers.soldierCount > 0) {
+				isContested = false;
+				changeTimer += Time.deltaTime;
+				if (changeTimer >= PLANET_CHANGE) {
+					planetOwnership = Ownership.Neutral;
+					changeTimer = 0;
+				}
+			} else {
+				isContested = false;
+				changeTimer = 0;
+			}
+			break;
+		case Ownership.Neutral:
+			if (playerSoldiers.soldierCount > 0 && enemySoldiers.soldierCount > 0) {
+				changeTimer = 0;
+				isContested = true;
+			} else if (playerSoldiers.soldierCount == 0 && enemySoldiers.soldierCount > 0) {
+				isContested = false;
+				changeTimer += Time.deltaTime;
+				if (changeTimer >= PLANET_CHANGE) {
+					planetOwnership = Ownership.Enemy;
+					changeTimer = 0;
+				}
+			} else if (enemySoldiers.soldierCount == 0 && playerSoldiers.soldierCount > 0) {
+				isContested = false;
+				changeTimer += Time.deltaTime;
+				if (changeTimer >= PLANET_CHANGE) {
+					planetOwnership = Ownership.Player;
+					changeTimer = 0;
+				}
+			} else {
+				isContested = false;
+				changeTimer = 0;
+			}
+			break;
+		case Ownership.Player:
+			if (playerSoldiers.soldierCount > 0 && enemySoldiers.soldierCount > 0) {
+				changeTimer = 0;
+				isContested = true;
+			} else if (playerSoldiers.soldierCount == 0 && enemySoldiers.soldierCount > 0) {
+				isContested = false;
+				changeTimer += Time.deltaTime;
+				if (changeTimer >= PLANET_CHANGE) {
+					planetOwnership = Ownership.Neutral;
+					changeTimer = 0;
+				}
+			} else {
+				isContested = false;
+				changeTimer = 0;
+			}
+			break;
+		}
 	}
 
 	void MineResources() {
