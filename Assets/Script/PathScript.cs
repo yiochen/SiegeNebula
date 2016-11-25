@@ -5,13 +5,17 @@ public struct DirectionalPath
 {
     public Transform start;
     public Transform end;
+    public Vector3 shipStart;
+    public Vector3 shipEnd;
     public PathScript pathScript;
 
-    public DirectionalPath(Transform start, Transform end, PathScript pathScript)
+    public DirectionalPath(PathScript pathScript, Transform start, Transform end,  Vector3 shipStart, Vector3 shipEnd)
     {
         this.start = start;
         this.end = end;
         this.pathScript = pathScript;
+        this.shipStart = shipStart;
+        this.shipEnd = shipEnd;
     }
 }
 public class PathScript : MonoBehaviour {
@@ -19,8 +23,13 @@ public class PathScript : MonoBehaviour {
     public Transform start;
     public Transform end;
     public float pathChosingThreshold = 0.5f;
+    public float paddingStart = 1.0f;
+    public float paddingEnd = 1.0f;
 
     private Vector3 direction;
+    private Vector3 shipStartPosition;
+    private Vector3 shipEndPosition;
+
     LineRenderer lineRenderer;
 
 	void Start () {
@@ -31,17 +40,19 @@ public class PathScript : MonoBehaviour {
             lineRenderer.SetPosition(1, end.position);
         }
         direction = (end.position - start.position).normalized;
+        this.shipStartPosition = start.position + direction * paddingStart;
+        this.shipEndPosition = end.position - direction * paddingEnd;
 	}
 
     public DirectionalPath getDirectionalPath(bool isReversed)
     {
         if (isReversed)
         {
-            return new DirectionalPath(end, start, this);
+            return new DirectionalPath(this, end, start, shipEndPosition, shipStartPosition);
         }
         else
         {
-            return new DirectionalPath(start, end, this);
+            return new DirectionalPath(this, start, end, shipStartPosition, shipEndPosition);
         }
     }
 

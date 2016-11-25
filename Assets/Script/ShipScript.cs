@@ -15,6 +15,7 @@ public class ShipScript : MonoBehaviour {
 	public int soldierCapacity;
 	public int engineerCapacity;
 	public int soldiersOnBoard;
+    public float sizeChangingDistance = 1.0f;
 	private int engineersOnBoard;
 	private bool isEngineerLoading;
 	private bool isSoldierLoading;
@@ -29,6 +30,21 @@ public class ShipScript : MonoBehaviour {
 
     private DirectionalPath travelPath;
 
+    private float remainingDistance
+    {
+        get
+        {
+            return Vector3.Distance(transform.position, travelPath.shipEnd);
+        }
+    }
+
+    private float traveledDistance
+    {
+        get
+        {
+            return Vector3.Distance(transform.position, travelPath.shipStart);
+        }
+    }
 	// Use this for initialization
 	void Start () {
 		timer = 0;
@@ -80,9 +96,9 @@ public class ShipScript : MonoBehaviour {
 		isShipMoving = true;
         this.travelPath = path.getDirectionStartingFrom(from);
 
-        this.transform.position = travelPath.start.position;
-        this.transform.rotation = Quaternion.LookRotation(travelPath.end.position - travelPath.start.position);
-
+        this.transform.position = travelPath.shipStart;
+        this.transform.rotation = Quaternion.LookRotation(travelPath.shipEnd - travelPath.shipStart);
+        this.transform.localScale = Vector3.zero;
 	}
 
 	void LoadSoldiersToShip() {
@@ -132,7 +148,11 @@ public class ShipScript : MonoBehaviour {
 
 	void MoveShip() {
         //TODO: Add implementation for moving to another planet
-        float remainingDistance = Vector3.Distance(transform.position, travelPath.end.position);
+        if (traveledDistance <= sizeChangingDistance || remainingDistance <= sizeChangingDistance)
+        {
+            this.transform.localScale = Mathf.Min(traveledDistance, remainingDistance) / sizeChangingDistance * Vector3.one;
+        }
+
         if (remainingDistance < 0.05f)
         {
             isShipMoving = false;
