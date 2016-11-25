@@ -678,16 +678,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 224000013668191442, guid: 06a77a60da8dd4b4fac8e2c0f44c4725,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000013668191442, guid: 06a77a60da8dd4b4fac8e2c0f44c4725,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1000010077699286, guid: 06a77a60da8dd4b4fac8e2c0f44c4725, type: 2}
       propertyPath: m_Name
       value: PlanetGUI (1)
@@ -1843,16 +1833,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000013668191442, guid: 06a77a60da8dd4b4fac8e2c0f44c4725,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000013668191442, guid: 06a77a60da8dd4b4fac8e2c0f44c4725,
-        type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1000010077699286, guid: 06a77a60da8dd4b4fac8e2c0f44c4725, type: 2}
       propertyPath: m_Name

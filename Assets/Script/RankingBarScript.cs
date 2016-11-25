@@ -36,6 +36,7 @@ public class RankingBarScript : MonoBehaviour {
             rank.sprite.transform.parent = gameObject.transform;
             rank.sprite.transform.localPosition = new Vector3(i - (maxRank -1.0f) / 2.0f, -0.5f, 0.0f);
             rank.sprite.transform.localRotation = Quaternion.identity;
+            rank.sprite.transform.localScale = Vector3.one;
         }
         UpdateRank();
 		SetActive (false);
