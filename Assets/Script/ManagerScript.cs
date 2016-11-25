@@ -12,7 +12,7 @@ using System.Collections.Generic;
  * 6. Whether there is a win condition
  **/
 
-public class ManagerScript : MonoBehaviour {
+public class ManagerScript : Singleton<ManagerScript> {
 
 	public int numberOfPlanets;
 	public List<PlanetScript> playerPlanets;

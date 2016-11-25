@@ -39,14 +39,15 @@ public class PlanetScript : MonoBehaviour {
 	public int resourceCount = 1200;
 	public PlanetScript[] adjacentPlanet;
     public PathScript[] adjacentPaths;
-	public ManagerScript gameManager;
+
 
 	public ShipScript[] ships = new ShipScript[2]; // Two ship most right now, one for player, one for enermy
 	public ShipScript selectedShip;
 
 	public RankingBarScript rankingScript;
 
-	private float timer;
+    private ManagerScript gameManager;
+    private float timer;
 	private float changeTimer;
 
 	public bool isSelected;
@@ -61,6 +62,7 @@ public class PlanetScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        gameManager = ManagerScript.Instance;
 		timer = 0;
 
 		playerSoldiers.soldierCount = 0;
