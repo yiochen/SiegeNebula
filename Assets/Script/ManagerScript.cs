@@ -30,20 +30,20 @@ public class ManagerScript : MonoBehaviour {
 		playerPlanets = new List<PlanetScript>(numberOfPlanets);
 		enemyPlanets = new List<PlanetScript>(numberOfPlanets);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
 	}
 
 	public void ChangeSelection(PlanetScript planet) {
-		
+
 		for (int i = 0; i < selectedPlanet.adjacentPlanet.Length; i++) {
 			PlanetScript ps = selectedPlanet.adjacentPlanet [i];
 			//Deactivate star ranking for non-adjacent planets
 			ps.rankingScript.SetActive (false);
 		}
-						
+
 
 		for (int i = 0; i < planet.adjacentPlanet.Length; i++) {
 			PlanetScript ps = planet.adjacentPlanet [i];
@@ -54,7 +54,11 @@ public class ManagerScript : MonoBehaviour {
 			//Determine Relative Soldier Strength
 			ps.rankingScript.currentRank = RelativePlanetStrength (planet, ps);
 		}
-		planet.rankingScript.SetActive (false);
+        if (planet.rankingScript)
+        {
+            planet.rankingScript.SetActive(false);
+        }
+
 
 		this.selectedPlanet = planet;
 	}
