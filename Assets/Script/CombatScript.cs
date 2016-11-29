@@ -11,8 +11,8 @@ using System.Collections;
 public class CombatScript : MonoBehaviour {
 
 	private PlanetScript planet;
-	private PlanetScript.SoldierUnit playerSoldiers;
-	private PlanetScript.SoldierUnit enemySoldiers;
+	private SoldierUnit playerSoldiers;
+	private SoldierUnit enemySoldiers;
 	private float timer;
 	private bool isPlayerAttacker;
 

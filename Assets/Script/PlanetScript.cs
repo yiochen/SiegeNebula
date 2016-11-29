@@ -12,15 +12,9 @@ using System.Collections.Generic;
  * 5. Planet Type
  **/
 
+
 public class PlanetScript : MonoBehaviour {
-
-	public struct SoldierUnit {
-		public int soldierCount;
-		public int defense;
-		public int defenseMod;
-		public int attackMod;
-	}
-
+		
 	public enum PlanetType {
 		Hybrid, Resource, Soldier, Normal
 	};
@@ -35,8 +29,10 @@ public class PlanetScript : MonoBehaviour {
 
 	public SoldierUnit playerSoldiers;
 	public SoldierUnit enemySoldiers;
-	public int playerEngineerCount = 0;
-	public int resourceCount = 1200;
+	public int playerEngineerCount;
+	public int enemyEngineerCount;
+
+	private int resourceCount = GamePlay.PLANET_RESOURCE_STD;
 	public PlanetScript[] adjacentPlanet;
     public PathScript[] adjacentPaths;
 
@@ -53,12 +49,7 @@ public class PlanetScript : MonoBehaviour {
 	public bool isSelected;
 	private bool isTrainingSoldiers;
 	private bool isTrainingEngineers;
-	private const int SHIP_COST = 300;
-	private const int SOLDIER_COST = 10;
-	private const int ENGINEER_COST = 3;
 
-	private const float PLANET_TICK = 1.5f;
-	private const float PLANET_CHANGE = 5.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -92,7 +83,7 @@ public class PlanetScript : MonoBehaviour {
 			HandleKeyboardInput ();
 
 		timer += Time.deltaTime;
-		if (timer >= PLANET_TICK) {
+		if (timer >= GamePlay.PLANET_TICK) {
 			switch (type) {
 			case PlanetType.Hybrid:
 				MineResources ();
@@ -109,7 +100,6 @@ public class PlanetScript : MonoBehaviour {
 				CreateEngineers ();
 				break;
 			}
-			CreateShip ();
 			timer = 0;
 		}
     }
@@ -143,7 +133,7 @@ public class PlanetScript : MonoBehaviour {
 			} else if (enemySoldiers.soldierCount == 0 && playerSoldiers.soldierCount > 0) {
 				isContested = false;
 				changeTimer += Time.deltaTime;
-				if (changeTimer >= PLANET_CHANGE) {
+				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Neutral;
 					changeTimer = 0;
 				}
@@ -159,14 +149,14 @@ public class PlanetScript : MonoBehaviour {
 			} else if (playerSoldiers.soldierCount == 0 && enemySoldiers.soldierCount > 0) {
 				isContested = false;
 				changeTimer += Time.deltaTime;
-				if (changeTimer >= PLANET_CHANGE) {
+				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Enemy;
 					changeTimer = 0;
 				}
 			} else if (enemySoldiers.soldierCount == 0 && playerSoldiers.soldierCount > 0) {
 				isContested = false;
 				changeTimer += Time.deltaTime;
-				if (changeTimer >= PLANET_CHANGE) {
+				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Player;
 					changeTimer = 0;
 				}
@@ -182,7 +172,7 @@ public class PlanetScript : MonoBehaviour {
 			} else if (playerSoldiers.soldierCount == 0 && enemySoldiers.soldierCount > 0) {
 				isContested = false;
 				changeTimer += Time.deltaTime;
-				if (changeTimer >= PLANET_CHANGE) {
+				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Neutral;
 					changeTimer = 0;
 				}
@@ -195,36 +185,56 @@ public class PlanetScript : MonoBehaviour {
 	}
 
 	void MineResources() {
-		if (resourceCount > playerEngineerCount) {
-			resourceCount -= playerEngineerCount;
-			gameManager.AddToResourceCount (playerEngineerCount);
-		} else if(resourceCount > 0 && resourceCount < playerEngineerCount) {
-			gameManager.AddToResourceCount (resourceCount);
-			resourceCount = 0;
+		switch (planetOwnership) {
+		case Ownership.Player:
+			if (resourceCount > playerEngineerCount) {
+				resourceCount -= playerEngineerCount;
+				gameManager.AddToResourceCount (playerEngineerCount, planetOwnership);
+			} else if(resourceCount > 0 && resourceCount < playerEngineerCount) {
+				gameManager.AddToResourceCount (resourceCount, planetOwnership);
+				resourceCount = 0;
+			}
+			break;
+		case Ownership.Enemy:
+			if (resourceCount > enemyEngineerCount) {
+				resourceCount -= enemyEngineerCount;
+				gameManager.AddToResourceCount (enemyEngineerCount, planetOwnership);
+			} else if(resourceCount > 0 && resourceCount < enemyEngineerCount) {
+				gameManager.AddToResourceCount (resourceCount, planetOwnership);
+				resourceCount = 0;
+			}
+			break;
+		case Ownership.Neutral:
+			break;
 		}
 	}
 
 	void CreateShip() {
+		switch (planetOwnership) {
+		case Ownership.Player:
+			//Need to devise a check so that we cant create a second ship.
+			//if one already exits.
+			if (ships [Indices.SHIP_PLAYER] == null) {
 
+			}
+			break;
+		case Ownership.Enemy:
+
+			break;
+		case Ownership.Neutral:
+			break;
+		}
 	}
 
 	void CreateSoldiers() {
 		if (isTrainingSoldiers) {
-			if (gameManager.GetResourceCount() >= SOLDIER_COST) {
-				gameManager.AddToResourceCount (-SOLDIER_COST);
-				gameManager.AddToSoldierCount (1);
-				playerSoldiers.soldierCount++;
-			}
+			gameManager.TrainSoldier (planetOwnership);
 		}
 	}
 
 	void CreateEngineers() {
 		if (isTrainingEngineers) {
-			if (gameManager.GetResourceCount() >= ENGINEER_COST) {
-				gameManager.AddToResourceCount (-ENGINEER_COST);
-				gameManager.AddToEngineerCount (1);
-				playerEngineerCount++;
-			}
+			gameManager.TrainEngineer (planetOwnership);
 		}
 	}
 

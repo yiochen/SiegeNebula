@@ -20,7 +20,10 @@ public class ManagerScript : Singleton<ManagerScript> {
 	public int playerResources;
 	public int enemyResources;
 
-	private int playerSoldiers;
+	public SoldierUnit playerSoldiers;
+	public SoldierUnit enemySoldiers;
+
+	private int enemyEngineers;
 	private int playerEngineers;
 
 	public PlanetScript selectedPlanet;
@@ -85,28 +88,83 @@ public class ManagerScript : Singleton<ManagerScript> {
 		return selectedPlanet;
 	}
 
-	public void AddToSoldierCount (int val) {
-		playerSoldiers += val;
+	public void TrainSoldier(PlanetScript.Ownership owner) {
+		switch (owner) {
+		case PlanetScript.Ownership.Player:
+			if (playerResources >= GamePlay.SOLDIER_COST) {
+				playerSoldiers.soldierCount++;
+				playerResources -= GamePlay.SOLDIER_COST;
+			}
+			break;
+		case PlanetScript.Ownership.Enemy:
+			if (enemyResources >= GamePlay.SOLDIER_COST) {
+				enemySoldiers.soldierCount++;
+				enemyResources -= GamePlay.SOLDIER_COST;
+			}
+			break;
+		case PlanetScript.Ownership.Neutral:
+			break;
+		}
 	}
 
-	public void AddToEngineerCount (int val) {
-		playerEngineers += val;
+	public void TrainEngineer(PlanetScript.Ownership owner) {
+		switch (owner) {
+		case PlanetScript.Ownership.Player:
+			if (playerResources >= GamePlay.ENGINEER_COST) {
+				playerEngineers++;
+				playerResources -= GamePlay.ENGINEER_COST;
+			}
+			break;
+		case PlanetScript.Ownership.Enemy:
+			if (enemyResources >= GamePlay.ENGINEER_COST) {
+				enemyEngineers++;
+				enemyResources -= GamePlay.ENGINEER_COST;
+			}
+			break;
+		case PlanetScript.Ownership.Neutral:
+			break;
+		}
+
 	}
 
-	public void AddToResourceCount (int val) {
-		playerResources += val;
+	public void AddToResourceCount (int val, PlanetScript.Ownership owner) {
+		switch (owner) {
+		case PlanetScript.Ownership.Player:
+			playerResources += val;
+			break;
+		case PlanetScript.Ownership.Enemy:
+			enemyResources += val;
+			break;
+		case PlanetScript.Ownership.Neutral:
+			break;
+
+		}
+	
 	}
 
 	public int GetPlayerSoldierCount() {
-		return playerSoldiers;
+		return playerSoldiers.soldierCount;
 	}
 
 	public int GetPlayerEngineerCount() {
 		return playerEngineers;
 	}
 
-	public int GetResourceCount() {
+	public int GetPlayerResourceCount() {
 		return playerResources;
 	}
+
+	public int GetEnemySoldierCount() {
+		return enemySoldiers.soldierCount;
+	}
+
+	public int GetEnemyEngineerCount() {
+		return enemyEngineers;
+	}
+
+	public int GetEnemyResourceCount() {
+		return enemyResources;
+	}
+
 
 }
