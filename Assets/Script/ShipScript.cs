@@ -108,11 +108,25 @@ public class ShipScript : MonoBehaviour {
 		} else {
 			timer += Time.deltaTime;
 			if (timer >= loadTimePerUnit) {
-				if (dockedPlanet.playerSoldiers.soldierCount > 0) {
-					soldiersOnBoard++;
-					dockedPlanet.playerSoldiers.soldierCount--;
-				} else {
-					isSoldierLoading = false;
+				switch (dockedPlanet.planetOwnership) {
+				case PlanetScript.Ownership.Player:
+					if (dockedPlanet.playerSoldiers.soldierCount > 0) {
+						soldiersOnBoard++;
+						dockedPlanet.playerSoldiers.soldierCount--;
+					} else {
+						isSoldierLoading = false;
+					}
+					break;
+				case PlanetScript.Ownership.Enemy:
+					if (dockedPlanet.enemySoldiers.soldierCount > 0) {
+						soldiersOnBoard++;
+						dockedPlanet.enemySoldiers.soldierCount--;
+					} else {
+						isSoldierLoading = false;
+					}
+					break;
+				case PlanetScript.Ownership.Neutral:
+					break;
 				}
 				timer = 0;
 			}
@@ -126,11 +140,25 @@ public class ShipScript : MonoBehaviour {
 		} else {
 			timer += Time.deltaTime;
 			if (timer >= loadTimePerUnit) {
-				if (dockedPlanet.playerEngineerCount > 0) {
-					engineersOnBoard++;
-					dockedPlanet.playerEngineerCount--;
-				} else {
-					isEngineerLoading = false;
+				switch (dockedPlanet.planetOwnership) {
+				case PlanetScript.Ownership.Player:
+					if (dockedPlanet.playerEngineerCount > 0) {
+						engineersOnBoard++;
+						dockedPlanet.playerEngineerCount--;
+					} else {
+						isEngineerLoading = false;
+					}
+					break;
+				case PlanetScript.Ownership.Enemy:
+					if (dockedPlanet.enemyEngineerCount > 0) {
+						engineersOnBoard++;
+						dockedPlanet.enemyEngineerCount--;
+					} else {
+						isEngineerLoading = false;
+					}
+					break;
+				case PlanetScript.Ownership.Neutral:
+					break;
 				}
 				timer = 0;
 			}
@@ -138,9 +166,19 @@ public class ShipScript : MonoBehaviour {
 	}
 
 	void UnloadShip() {
-		dockedPlanet.playerSoldiers.soldierCount += soldiersOnBoard;
-		dockedPlanet.playerEngineerCount += engineersOnBoard;
-
+		switch (dockedPlanet.planetOwnership) {
+		case PlanetScript.Ownership.Player:
+			dockedPlanet.playerSoldiers.soldierCount += soldiersOnBoard;
+			dockedPlanet.playerEngineerCount += engineersOnBoard;
+			break;
+		case PlanetScript.Ownership.Enemy:
+			dockedPlanet.enemySoldiers.soldierCount += soldiersOnBoard;
+			dockedPlanet.enemyEngineerCount += engineersOnBoard;
+			break;
+		case PlanetScript.Ownership.Neutral:
+			break;
+		}
+			
 		soldiersOnBoard = 0;
 		engineersOnBoard = 0;
 		isUnloading = false;
