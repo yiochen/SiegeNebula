@@ -12,6 +12,10 @@
 
 }
 
+class AI {
+	public const float THINK_TIME_EASY = 3.0f;
+}
+
 class Indices {
 	public const int SHIP_PLAYER = 0;
 	public const int SHIP_ENEMY = 1;
@@ -20,6 +24,7 @@ class Indices {
 class GamePlay 
 {
 	public const int SHIP_COST = 300;
+	public const int SHIP_CAPACITY = 100;
 	public const int SOLDIER_COST = 10;
 	public const int ENGINEER_COST = 3;
 
