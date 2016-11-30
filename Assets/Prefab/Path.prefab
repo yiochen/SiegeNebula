@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000010545520798}
   - 120: {fileID: 120000013140467564}
   - 114: {fileID: 114000011076024838}
+  - 114: {fileID: 114000010648417326}
   m_Layer: 0
   m_Name: Path
   m_TagString: Untagged
@@ -41,6 +42,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &114000010648417326
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013176118688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b79e57743e02084f86818e04ff45757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114000011076024838
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,6 +66,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 0}
   end: {fileID: 0}
+  pathChosingThreshold: 0.5
+  paddingStart: 1
+  paddingEnd: 1
 --- !u!120 &120000013140467564
 LineRenderer:
   m_ObjectHideFlags: 1
