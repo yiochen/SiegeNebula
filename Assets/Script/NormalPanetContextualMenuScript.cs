@@ -4,18 +4,22 @@ using System;
 
 public class NormalPanetContextualMenuScript : AbstractPanel {
 
-	// Use this for initialization
-	void Start () {
+    PlanetScript planetScript;
+    public StatLabelScript figherLabel;
+    public StatLabelScript engineerLabel;
 
-	}
-
-	// Update is called once per frame
-	void Update () {
-
-	}
-
+    protected override void OnActivate()
+    {
+        planetScript = targetGameObject.GetComponent<PlanetScript>();
+        CheckForUpdate();
+    }
     protected override void CheckForUpdate()
     {
+        if (planetScript)
+        {
+            figherLabel.SetValue("" + planetScript.playerSoldiers.soldierCount);
+            engineerLabel.SetValue("" + planetScript.playerEngineerCount);
+        }
 
     }
 }
