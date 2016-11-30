@@ -30,8 +30,8 @@ public class ManagerScript : Singleton<ManagerScript> {
 
 	// Use this for initialization
 	void Start () {
-		playerPlanets = new List<PlanetScript>(numberOfPlanets);
-		enemyPlanets = new List<PlanetScript>(numberOfPlanets);
+		playerPlanets.Capacity = numberOfPlanets;
+		enemyPlanets.Capacity = numberOfPlanets;
 	}
 
 	// Update is called once per frame
@@ -88,18 +88,20 @@ public class ManagerScript : Singleton<ManagerScript> {
 		return selectedPlanet;
 	}
 
-	public void TrainSoldier(PlanetScript.Ownership owner) {
-		switch (owner) {
+	public void TrainSoldier(PlanetScript planet) {
+		switch (planet.planetOwnership) {
 		case PlanetScript.Ownership.Player:
 			if (playerResources >= GamePlay.SOLDIER_COST) {
 				playerSoldiers.soldierCount++;
 				playerResources -= GamePlay.SOLDIER_COST;
+				planet.playerSoldiers.soldierCount++;
 			}
 			break;
 		case PlanetScript.Ownership.Enemy:
 			if (enemyResources >= GamePlay.SOLDIER_COST) {
 				enemySoldiers.soldierCount++;
 				enemyResources -= GamePlay.SOLDIER_COST;
+				planet.enemySoldiers.soldierCount++;
 			}
 			break;
 		case PlanetScript.Ownership.Neutral:
@@ -107,18 +109,20 @@ public class ManagerScript : Singleton<ManagerScript> {
 		}
 	}
 
-	public void TrainEngineer(PlanetScript.Ownership owner) {
-		switch (owner) {
+	public void TrainEngineer(PlanetScript planet) {
+		switch (planet.planetOwnership) {
 		case PlanetScript.Ownership.Player:
 			if (playerResources >= GamePlay.ENGINEER_COST) {
 				playerEngineers++;
 				playerResources -= GamePlay.ENGINEER_COST;
+				planet.playerEngineerCount++;
 			}
 			break;
 		case PlanetScript.Ownership.Enemy:
 			if (enemyResources >= GamePlay.ENGINEER_COST) {
 				enemyEngineers++;
 				enemyResources -= GamePlay.ENGINEER_COST;
+				planet.enemyEngineerCount++;
 			}
 			break;
 		case PlanetScript.Ownership.Neutral:

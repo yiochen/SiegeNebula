@@ -32,12 +32,12 @@ public class PlanetScript : MonoBehaviour {
 	public int playerEngineerCount;
 	public int enemyEngineerCount;
 
-	private int resourceCount = GamePlay.PLANET_RESOURCE_STD;
+	public int resourceCount;
 	public PlanetScript[] adjacentPlanet;
     public PathScript[] adjacentPaths;
 
 
-	public ShipScript[] ships = new ShipScript[2]; // Two ship most right now, one for player, one for enermy
+	public ShipScript[] ships; // Two ship most right now, one for player, one for enermy
 	public ShipScript selectedShip;
 
 	public RankingBarScript rankingScript;
@@ -66,6 +66,8 @@ public class PlanetScript : MonoBehaviour {
 		enemySoldiers.defenseMod = 0;
 		enemySoldiers.attackMod = 0;
 
+		resourceCount = GamePlay.PLANET_RESOURCE_STD;
+
 
 		isSelected = false;
 		isTrainingSoldiers = false;
@@ -78,6 +80,8 @@ public class PlanetScript : MonoBehaviour {
 		isSelected = gameManager.GetSelectedPlanet().Equals (this);
 
 		PlanetStateChanges ();
+
+		ShipSelection ();
 
 		if(isSelected)
 			HandleKeyboardInput ();
@@ -122,6 +126,19 @@ public class PlanetScript : MonoBehaviour {
 	**/
 	void OnMouseDown() {
 		gameManager.ChangeSelection (this);
+	}
+
+	void ShipSelection() {
+		switch (planetOwnership) {
+		case Ownership.Player:
+			selectedShip = ships [Indices.SHIP_PLAYER];
+			break;
+		case Ownership.Enemy:
+			selectedShip = ships [Indices.SHIP_ENEMY];
+			break;
+		case Ownership.Neutral:
+			break;
+		}
 	}
 
 	void PlanetStateChanges() {
@@ -209,7 +226,7 @@ public class PlanetScript : MonoBehaviour {
 		}
 	}
 
-	void CreateShip() {
+	public void CreateShip() {
 		switch (planetOwnership) {
 		case Ownership.Player:
 			//Need to devise a check so that we cant create a second ship.
@@ -226,35 +243,43 @@ public class PlanetScript : MonoBehaviour {
 		}
 	}
 
+	public void TrainSoldiers(bool isTrue) {
+		isTrainingSoldiers = isTrue;
+	}
+
+	public void TrainEngineers(bool isTrue) {
+		isTrainingEngineers = isTrue;
+	}
+
 	void CreateSoldiers() {
 		if (isTrainingSoldiers) {
-			gameManager.TrainSoldier (planetOwnership);
+			gameManager.TrainSoldier (this);
 		}
 	}
 
 	void CreateEngineers() {
 		if (isTrainingEngineers) {
-			gameManager.TrainEngineer (planetOwnership);
+			gameManager.TrainEngineer (this);
 		}
 	}
 
-	void LoadSoldiersToShip() {
+	public void LoadSoldiersToShip() {
 		selectedShip.StartLoadingSoldiersToShip (this);
 	}
 
-	void StopLoadingSoldiersToShip() {
+	public void StopLoadingSoldiersToShip() {
 		selectedShip.StopLoadingSoldiersToShip ();
 	}
 
-	void LoadEngineersToShip() {
+	public void LoadEngineersToShip() {
 		selectedShip.StartLoadingEngineersToShip (this);
 	}
 
-	void StopLoadingEngineersToShip() {
+	public void StopLoadingEngineersToShip() {
 		selectedShip.StopLoadingEngineersToShip ();
 	}
 
-	void UnLoadUnitsFromShip() {
+	public void UnLoadUnitsFromShip() {
 		selectedShip.UnloadShip (this);
 	}
 

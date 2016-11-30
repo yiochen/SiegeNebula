@@ -48,6 +48,7 @@ public class ShipScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		timer = 0;
+		soldierCapacity = GamePlay.SHIP_CAPACITY;
 	}
 
 	// Update is called once per frame
