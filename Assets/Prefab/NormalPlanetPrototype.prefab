@@ -23,7 +23,6 @@ GameObject:
   - 114: {fileID: 114000010096636506}
   - 135: {fileID: 135000014019512080}
   - 114: {fileID: 114000011698325062}
-  - 114: {fileID: 114000012849857802}
   m_Layer: 0
   m_Name: NormalPlanetPrototype
   m_TagString: Untagged
@@ -137,18 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5f2c4a002bcb54f8ff73c19c76aa47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114000012849857802
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012262495030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7673ac9af962ffb4184b91afd6577e7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 0}
 --- !u!114 &114000013973376000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -164,10 +151,10 @@ MonoBehaviour:
   type: 0
   planetOwnership: 0
   playerEngineerCount: 0
+  enemyEngineerCount: 0
   resourceCount: 0
   adjacentPlanet: []
   adjacentPaths: []
-  gameManager: {fileID: 0}
   ships: []
   selectedShip: {fileID: 0}
   rankingScript: {fileID: 0}

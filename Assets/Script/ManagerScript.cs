@@ -64,6 +64,8 @@ public class ManagerScript : Singleton<ManagerScript> {
 
 
 		this.selectedPlanet = planet;
+
+        ContextualMenuManagerScript.Instance.ActivateForPlanet(planet);
 	}
 
 	public int RelativePlanetStrength(PlanetScript basePlanet, PlanetScript comparePlanet) {
@@ -179,7 +181,7 @@ public class ManagerScript : Singleton<ManagerScript> {
 			break;
 
 		}
-	
+
 	}
 
 	public int GetPlayerSoldierCount() {
