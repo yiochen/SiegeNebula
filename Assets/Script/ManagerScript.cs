@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 public class ManagerScript : Singleton<ManagerScript> {
 
-	public int numberOfPlanets;
+	public GameObject planetContainer;
 	public List<PlanetScript> playerPlanets;
 	public List<PlanetScript> enemyPlanets;
 	public int playerResources;
@@ -25,18 +25,37 @@ public class ManagerScript : Singleton<ManagerScript> {
 
 	private int enemyEngineers;
 	private int playerEngineers;
+	private PlanetScript[] planets;
 
 	public PlanetScript selectedPlanet;
 
+
 	// Use this for initialization
 	void Start () {
-		playerPlanets.Capacity = numberOfPlanets;
-		enemyPlanets.Capacity = numberOfPlanets;
+		planets = planetContainer.GetComponentsInChildren<PlanetScript>();
+		playerPlanets.Capacity = planets.Length;
+		enemyPlanets.Capacity = planets.Length;
+		PlanetAssignment ();
 	}
 
 	// Update is called once per frame
 	void Update () {
 
+	}
+
+	void PlanetAssignment() {
+		foreach (PlanetScript planet in planets) {
+			switch (planet.planetOwnership) {
+			case PlanetScript.Ownership.Player:
+				playerPlanets.Add (planet);
+				break;
+			case PlanetScript.Ownership.Enemy:
+				enemyPlanets.Add (planet);
+				break;
+			case PlanetScript.Ownership.Neutral:
+				break;
+			}
+		}
 	}
 
 	public void ChangeSelection(PlanetScript planet) {
