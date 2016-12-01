@@ -52,7 +52,10 @@ public class NormalPanetContextualMenuScript : AbstractPanel {
     {
         if (planetScript)
         {
-            planetScript.CreateShip(PlanetScript.Ownership.Player);
+            ShipScript ship = planetScript.CreateShip(PlanetScript.Ownership.Player);
+            if (ship != null) {
+                planetScript.LoadSoldiersToShip(ship);
+            }
         }
     }
 }

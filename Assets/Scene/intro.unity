@@ -108,6 +108,16 @@ MonoBehaviour:
   shipPrefab: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
     type: 2}
   shipsContainer: {fileID: 1469571261}
+  playerSoldiers:
+    soldierCount: 0
+    defense: 0
+    defenseMod: 0
+    attackMod: 0
+  enemySoldiers:
+    soldierCount: 0
+    defense: 0
+    defenseMod: 0
+    attackMod: 0
   playerEngineerCount: 0
   enemyEngineerCount: 0
   resourceCount: 1200
@@ -1122,6 +1132,16 @@ MonoBehaviour:
   shipPrefab: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
     type: 2}
   shipsContainer: {fileID: 1469571261}
+  playerSoldiers:
+    soldierCount: 0
+    defense: 0
+    defenseMod: 0
+    attackMod: 0
+  enemySoldiers:
+    soldierCount: 0
+    defense: 0
+    defenseMod: 0
+    attackMod: 0
   playerEngineerCount: 20
   enemyEngineerCount: 0
   resourceCount: 1200
@@ -1413,6 +1433,16 @@ MonoBehaviour:
   shipPrefab: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
     type: 2}
   shipsContainer: {fileID: 1469571261}
+  playerSoldiers:
+    soldierCount: 49
+    defense: 0
+    defenseMod: 0
+    attackMod: 0
+  enemySoldiers:
+    soldierCount: 0
+    defense: 0
+    defenseMod: 0
+    attackMod: 0
   playerEngineerCount: 0
   enemyEngineerCount: 0
   resourceCount: 1200
@@ -1531,6 +1561,16 @@ MonoBehaviour:
   enemyPlanets: []
   playerResources: 0
   enemyResources: 0
+  playerSoldiers:
+    soldierCount: 0
+    defense: 0
+    defenseMod: 0
+    attackMod: 0
+  enemySoldiers:
+    soldierCount: 0
+    defense: 0
+    defenseMod: 0
+    attackMod: 0
   selectedPlanet: {fileID: 1684017899}
 --- !u!4 &1911109758
 Transform:

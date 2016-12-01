@@ -1,4 +1,5 @@
 ﻿using System;
+[Serializable]
 public struct SoldierUnit {
 	public int soldierCount;
 	public int defense;

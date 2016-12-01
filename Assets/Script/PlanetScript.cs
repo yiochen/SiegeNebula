@@ -217,18 +217,19 @@ public class PlanetScript : MonoBehaviour {
 		}
 	}
 
-	public void CreateShip(Ownership ownership) {
+	public ShipScript CreateShip(Ownership ownership) {
         Debug.Log("creating ship for " + ownership);
+        ShipScript ship = null;
 		switch (ownership) {
 		case Ownership.Player:
 			if (ships [Indices.SHIP_PLAYER] == null) {
 				switch (planetOwnership) {
 				case Ownership.Player:
-					ShipInstantiation (Indices.SHIP_PLAYER);
+					ship = ShipInstantiation (Indices.SHIP_PLAYER);
 					break;
 				default:
 					if (playerSoldiers.soldierCount > 0) {
-						ShipInstantiation (Indices.SHIP_PLAYER);
+						ship = ShipInstantiation (Indices.SHIP_PLAYER);
 					}
 					break;
 				}
@@ -238,11 +239,11 @@ public class PlanetScript : MonoBehaviour {
 			if (ships [Indices.SHIP_ENEMY] == null) {
 				switch (planetOwnership) {
 				case Ownership.Enemy:
-					ShipInstantiation (Indices.SHIP_ENEMY);
+					ship = ShipInstantiation (Indices.SHIP_ENEMY);
 					break;
 				default:
 					if (enemySoldiers.soldierCount > 0) {
-						ShipInstantiation (Indices.SHIP_ENEMY);
+						ship = ShipInstantiation (Indices.SHIP_ENEMY);
 					}
 					break;
 				}
@@ -251,13 +252,15 @@ public class PlanetScript : MonoBehaviour {
 		case Ownership.Neutral: //This shouldn't happen
 			break;
 		}
+        return ship;
 	}
 
 	//Helper function
-	void ShipInstantiation(int index) {
+	ShipScript ShipInstantiation(int index) {
 		ships [index] = Instantiate (shipPrefab) as ShipScript;
 		ships [index].transform.SetParent (shipsContainer.transform);
 		ships [index].gameObject.SetActive (false);
+        return ships[index];
 	}
 
 	public void TrainSoldiers(bool isTrue) {

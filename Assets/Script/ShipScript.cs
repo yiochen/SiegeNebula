@@ -68,7 +68,6 @@ public class ShipScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
 		if (isShipMoving) {
 			MoveShip();
 			return;
@@ -128,6 +127,7 @@ public class ShipScript : MonoBehaviour {
 				switch (dockedPlanet.planetOwnership) {
 				case PlanetScript.Ownership.Player:
 					if (dockedPlanet.playerSoldiers.soldierCount > 0) {
+                            Debug.Log("haaha got soldier");
 						soldiersOnBoard++;
 						dockedPlanet.playerSoldiers.soldierCount--;
 					} else {

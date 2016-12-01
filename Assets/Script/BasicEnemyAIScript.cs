@@ -76,6 +76,7 @@ public class BasicEnemyAIScript : MonoBehaviour {
 			}
 		}
 		ship.LaunchShipOnPath (chosenPath, planet.transform, target);
+        //TODO remove reference in planetScript to enemyShip
 	}
 
 	PlanetScript ChoosePlanet(PlanetScript planet) {
