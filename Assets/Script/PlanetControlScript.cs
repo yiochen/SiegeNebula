@@ -85,6 +85,7 @@ public class PlanetControlScript : MonoBehaviour {
 			ShipScript ship = planetScript.ships [Indices.SHIP_PLAYER];
 			ship.gameObject.SetActive (true);
 			ship.LaunchShipOnPath (path, transform, targetPlanet);
+            Debug.Log("Launched");
 		}
     }
 }

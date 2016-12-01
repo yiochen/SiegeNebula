@@ -150,13 +150,14 @@ MonoBehaviour:
   isContested: 0
   type: 0
   planetOwnership: 0
+  shipPrefab: {fileID: 0}
+  shipsContainer: {fileID: 0}
   playerEngineerCount: 0
   enemyEngineerCount: 0
   resourceCount: 0
   adjacentPlanet: []
   adjacentPaths: []
   ships: []
-  selectedShip: {fileID: 0}
   rankingScript: {fileID: 0}
   isSelected: 0
 --- !u!135 &135000014019512080

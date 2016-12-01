@@ -11,7 +11,7 @@ using System.Collections;
 
 public class ShipScript : MonoBehaviour {
 
-	public float movementSpeed;
+	public float movementSpeed = 5.0f;
 	public int soldierCapacity;
 	public int engineerCapacity;
 	public int soldiersOnBoard;
