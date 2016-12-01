@@ -27,6 +27,9 @@ public class PlanetScript : MonoBehaviour {
 	public PlanetType type;
 	public Ownership planetOwnership;
 
+	public ShipScript shipPrefab;
+	public GameObject shipsContainer;
+
 	public SoldierUnit playerSoldiers;
 	public SoldierUnit enemySoldiers;
 	public int playerEngineerCount;
@@ -45,6 +48,7 @@ public class PlanetScript : MonoBehaviour {
     private ManagerScript gameManager;
     private float timer;
 	private float changeTimer;
+
 
 	public bool isSelected;
 	private bool isTrainingSoldiers;
@@ -152,6 +156,7 @@ public class PlanetScript : MonoBehaviour {
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Neutral;
+					gameManager.CapturePlanet (Ownership.Enemy, this);
 					changeTimer = 0;
 				}
 			} else {
@@ -168,6 +173,7 @@ public class PlanetScript : MonoBehaviour {
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Enemy;
+					gameManager.CapturePlanet (Ownership.Neutral, this);
 					changeTimer = 0;
 				}
 			} else if (enemySoldiers.soldierCount == 0 && playerSoldiers.soldierCount > 0) {
@@ -175,6 +181,7 @@ public class PlanetScript : MonoBehaviour {
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Player;
+					gameManager.CapturePlanet (Ownership.Neutral, this);
 					changeTimer = 0;
 				}
 			} else {
@@ -191,6 +198,7 @@ public class PlanetScript : MonoBehaviour {
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Neutral;
+					gameManager.CapturePlanet (Ownership.Player, this);
 					changeTimer = 0;
 				}
 			} else {
@@ -230,18 +238,43 @@ public class PlanetScript : MonoBehaviour {
         Debug.Log("creating ship for " + ownership);
 		switch (ownership) {
 		case Ownership.Player:
-			//Need to devise a check so that we cant create a second ship.
-			//if one already exits.
 			if (ships [Indices.SHIP_PLAYER] == null) {
-
+				switch (planetOwnership) {
+				case Ownership.Player:
+					ShipInstantiation (Indices.SHIP_PLAYER);
+					break;
+				default:
+					if (playerSoldiers.soldierCount > 0) {
+						ShipInstantiation (Indices.SHIP_PLAYER);
+					}
+					break;
+				}
 			}
 			break;
 		case Ownership.Enemy:
-
+			if (ships [Indices.SHIP_ENEMY] == null) {
+				switch (planetOwnership) {
+				case Ownership.Enemy:
+					ShipInstantiation (Indices.SHIP_ENEMY);
+					break;
+				default:
+					if (enemySoldiers.soldierCount > 0) {
+						ShipInstantiation (Indices.SHIP_ENEMY);
+					}
+					break;
+				}
+			}
 			break;
-		case Ownership.Neutral:
+		case Ownership.Neutral: //This shouldn't happen
 			break;
 		}
+	}
+
+	//Helper function
+	void ShipInstantiation(int index) {
+		ships [index] = Instantiate (shipPrefab) as ShipScript;
+		ships [index].transform.SetParent (shipsContainer.transform);
+		ships [index].gameObject.SetActive (false);
 	}
 
 	public void TrainSoldiers(bool isTrue) {
