@@ -6,7 +6,6 @@ public class PlanetControlScript : MonoBehaviour {
     Vector3 mouseDownPosition;
     Vector3 launchingDirection;
     PlanetScript planetScript;
-	PlanetScript targetPlanet;
 
     public float minLaunchingDistance = 5.0f;
     public float pathChosingThreshold = 0.5f; // how far can player drop the ship away from the path
@@ -56,14 +55,6 @@ public class PlanetControlScript : MonoBehaviour {
             }
             if (chosenPath)
             {
-				foreach (PlanetScript neighbor in planetScript.adjacentPlanet) {
-					foreach (PathScript path in neighbor.adjacentPaths) {
-						if (path.Equals (chosenPath)) {
-							targetPlanet = neighbor;
-							break;
-						}
-					}
-				}
                 Launch(chosenPath);
             }
 
@@ -84,8 +75,13 @@ public class PlanetControlScript : MonoBehaviour {
 		if (planetScript.ships [Indices.SHIP_PLAYER]) {
 			ShipScript ship = planetScript.ships [Indices.SHIP_PLAYER];
 			ship.gameObject.SetActive (true);
-			ship.LaunchShipOnPath (path, transform, targetPlanet);
-            planetScript.ships[Indices.SHIP_PLAYER] = null;
+            PlanetScript targetPlanet = path.getDirectionStartingFrom(transform).end.gameObject.GetComponent<PlanetScript>();
+            if (targetPlanet != null)
+            {
+                ship.LaunchShipOnPath(path, transform, targetPlanet);
+                planetScript.ships[Indices.SHIP_PLAYER] = null;
+            }
+
 		}
     }
 }

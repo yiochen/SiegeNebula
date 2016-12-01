@@ -15,6 +15,9 @@ using System.Collections.Generic;
 public class ManagerScript : Singleton<ManagerScript> {
 
 	public GameObject planetContainer;
+    public GameObject shipContainer;
+    public PathManagerScript pathManager;
+
 	public List<PlanetScript> playerPlanets;
 	public List<PlanetScript> enemyPlanets;
 	public int playerResources;
@@ -62,7 +65,8 @@ public class ManagerScript : Singleton<ManagerScript> {
 
 		for (int i = 0; i < selectedPlanet.adjacentPlanet.Length; i++) {
 			PlanetScript ps = selectedPlanet.adjacentPlanet [i];
-			//Deactivate star ranking for non-adjacent planets
+            //Deactivate star ranking for non-adjacent planets
+
 			ps.rankingScript.SetActive (false);
 		}
 

@@ -50,12 +50,10 @@ public class NormalPanetContextualMenuScript : AbstractPanel {
     //helper function
     public void PlayerCreateShip()
     {
-        if (planetScript)
-        {
-            ShipScript ship = planetScript.CreateShip(PlanetScript.Ownership.Player);
-            if (ship != null) {
-                planetScript.LoadSoldiersToShip(ship);
-            }
+        Debug.Log("create ship for player");
+        ShipScript ship = planetScript.CreateShip(PlanetScript.Ownership.Player);
+        if (ship != null) {
+            planetScript.LoadSoldiersToShip(ship);
         }
     }
 }

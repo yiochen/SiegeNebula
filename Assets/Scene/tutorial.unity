@@ -374,7 +374,9 @@ Prefab:
     - target: {fileID: 114000013955426226, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
         type: 2}
       propertyPath: m_Text
-      value: Welcome to SeigeNebula
+      value: 'Welcome to SeigeNebula
+
+        hit [Space] to go next'
       objectReference: {fileID: 0}
     - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
         type: 2}
@@ -394,11 +396,16 @@ Prefab:
     - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 4.11
+      value: 2.79
       objectReference: {fileID: 0}
     - target: {fileID: 1000011221673116, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: -21.54
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
@@ -458,7 +465,7 @@ Prefab:
     - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0.09
+      value: -0.55
       objectReference: {fileID: 0}
     - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
         type: 2}
@@ -473,7 +480,7 @@ Prefab:
     - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -1.26
+      value: 0.34
       objectReference: {fileID: 0}
     - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
         type: 2}
@@ -483,6 +490,11 @@ Prefab:
     - target: {fileID: 114000013955426226, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
         type: 2}
       propertyPath: m_FontData.m_Alignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011058811088, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
+        type: 2}
+      propertyPath: clearScreen
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -553,17 +565,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011221673116, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0.1
+      value: 0.34
       objectReference: {fileID: 0}
     - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: -1.53
+      value: -2.81
       objectReference: {fileID: 0}
     - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
         type: 2}

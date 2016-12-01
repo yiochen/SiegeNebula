@@ -232,6 +232,7 @@ public class ShipScript : MonoBehaviour {
 
         if (remainingDistance < 0.05f)
         {
+
 			dockedPlanet = targetPlanet;
 			UnloadShip ();
 			Destroy (this.gameObject);

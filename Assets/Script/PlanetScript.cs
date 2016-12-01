@@ -28,7 +28,7 @@ public class PlanetScript : MonoBehaviour {
 	public Ownership planetOwnership;
 
 	public ShipScript shipPrefab;
-	public GameObject shipsContainer;
+	private GameObject shipsContainer;
 
 	public SoldierUnit playerSoldiers;
 	public SoldierUnit enemySoldiers;
@@ -36,7 +36,9 @@ public class PlanetScript : MonoBehaviour {
 	public int enemyEngineerCount;
 
 	public int resourceCount;
+
 	public PlanetScript[] adjacentPlanet;
+
     public PathScript[] adjacentPaths;
 
 	public ShipScript[] ships; // Two ship most right now, one for player, one for enermy
@@ -63,6 +65,11 @@ public class PlanetScript : MonoBehaviour {
 		isSelected = false;
 		isTrainingSoldiers = false;
 		isTrainingEngineers = false;
+
+        shipsContainer = gameManager.shipContainer;
+
+        adjacentPaths = gameManager.pathManager.GetAdjacentPaths(this);
+        adjacentPlanet = gameManager.pathManager.GetAdjacentPlanets(this);
 	}
 
 	// Update is called once per frame
@@ -207,7 +214,6 @@ public class PlanetScript : MonoBehaviour {
 	}
 
 	public ShipScript CreateShip(Ownership ownership) {
-        Debug.Log("creating ship for " + ownership);
         ShipScript ship = null;
 		switch (ownership) {
 		case Ownership.Player:
