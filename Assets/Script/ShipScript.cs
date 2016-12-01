@@ -10,8 +10,8 @@ using System.Collections;
 **/
 
 public class ShipScript : MonoBehaviour {
-
-	public Renderer shipRenderer;
+    [HideInInspector]
+	public Renderer shipRenderer; // get this using GetComponentInChildren
 	public float movementSpeed = 5.0f;
 	public int soldierCapacity;
 	public int engineerCapacity;
@@ -65,7 +65,7 @@ public class ShipScript : MonoBehaviour {
 	void Start () {
 		timer = 0;
 		soldierCapacity = GamePlay.SHIP_CAPACITY;
-		shipRenderer = GetComponent<Renderer> ();
+
 	}
 
 	// Update is called once per frame
@@ -89,8 +89,8 @@ public class ShipScript : MonoBehaviour {
 	void Awake() {
 		timer = 0;
 		soldierCapacity = GamePlay.SHIP_CAPACITY;
-		shipRenderer = GetComponent<Renderer> ();
-	}
+        shipRenderer = GetComponentInChildren<Renderer>();
+    }
 
 	public void StartLoadingSoldiersToShip(PlanetScript planet) {
 		isSoldierLoading = true;
@@ -135,7 +135,6 @@ public class ShipScript : MonoBehaviour {
 				switch (dockedPlanet.planetOwnership) {
 				case PlanetScript.Ownership.Player:
 					if (dockedPlanet.playerSoldiers.soldierCount > 0) {
-                            Debug.Log("haaha got soldier");
 						soldiersOnBoard++;
 						dockedPlanet.playerSoldiers.soldierCount--;
 					} else {

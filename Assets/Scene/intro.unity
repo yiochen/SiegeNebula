@@ -1556,7 +1556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf0d98bcc0d28c4fa148a05f4ccbac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfPlanets: 3
+  planetContainer: {fileID: 919084586}
   playerPlanets: []
   enemyPlanets: []
   playerResources: 0
