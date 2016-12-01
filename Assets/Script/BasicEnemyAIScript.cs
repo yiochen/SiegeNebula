@@ -23,7 +23,7 @@ public class BasicEnemyAIScript : MonoBehaviour {
 		planets = gameManager.enemyPlanets;
 		thinkTimer = 0.0f;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -48,7 +48,7 @@ public class BasicEnemyAIScript : MonoBehaviour {
 		CreateUnits(planet);
 		//Always send units to neighboring planets once ship capacity is met
 		//Create ship
-		planet.CreateShip();
+		planet.CreateShip(PlanetScript.Ownership.Enemy);
 		//Load Units to ship
 		planet.LoadSoldiersToShip ();
 		//Load Soldiers Units until ship capacity is met
