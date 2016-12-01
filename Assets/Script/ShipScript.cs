@@ -134,20 +134,30 @@ public class ShipScript : MonoBehaviour {
 		} else {
 			timer += Time.deltaTime;
 			if (timer >= loadTimePerUnit) {
+				int unitsToLoad = 0;
+				int unitRemain = 0;
 				switch (shipOwnership) {
 				case PlanetScript.Ownership.Player:
-					if (dockedPlanet.playerSoldiers.soldierCount > 0) {
-						soldiersOnBoard++;
-						dockedPlanet.playerSoldiers.soldierCount--;
+					unitsToLoad = Mathf.Min (GamePlay.LOAD_UNITS, dockedPlanet.playerSoldiers.soldierCount);
+					unitRemain = soldierCapacity - soldiersOnBoard;
+					if (unitsToLoad <= unitRemain) {
+						soldiersOnBoard += unitsToLoad;
+						dockedPlanet.playerSoldiers.soldierCount -= unitsToLoad;
 					} else {
+						soldiersOnBoard += unitRemain;
+						dockedPlanet.playerSoldiers.soldierCount -= unitRemain;
 						isSoldierLoading = false;
 					}
 					break;
 				case PlanetScript.Ownership.Enemy:
-					if (dockedPlanet.enemySoldiers.soldierCount > 0) {
-						soldiersOnBoard++;
-						dockedPlanet.enemySoldiers.soldierCount--;
+					unitsToLoad = Mathf.Min (GamePlay.LOAD_UNITS, dockedPlanet.enemySoldiers.soldierCount);
+					unitRemain = soldierCapacity - soldiersOnBoard;
+					if (unitsToLoad <= unitRemain) {
+						soldiersOnBoard += unitsToLoad;
+						dockedPlanet.enemySoldiers.soldierCount -= unitsToLoad;
 					} else {
+						soldiersOnBoard += unitRemain;
+						dockedPlanet.enemySoldiers.soldierCount -= unitRemain;
 						isSoldierLoading = false;
 					}
 					break;

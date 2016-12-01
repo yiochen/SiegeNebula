@@ -23,6 +23,7 @@ class Indices {
 
 class GamePlay 
 {
+	public const int LOAD_UNITS = 5;
 	public const int SHIP_COST = 300;
 	public const int SHIP_CAPACITY = 100;
 	public const int SOLDIER_COST = 10;
