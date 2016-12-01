@@ -21,7 +21,22 @@ public class ShipScript : MonoBehaviour {
 	private bool isSoldierLoading;
 	private bool isUnloading;
 	private bool isShipMoving;
-
+    public float filledPercentage
+    {
+        get
+        {
+            float totalPercent = 0;
+            if (soldierCapacity > 0)
+            {
+                totalPercent += (float)soldiersOnBoard / (float)soldierCapacity;
+            }
+            if (engineerCapacity > 0)
+            {
+                totalPercent += (float)engineersOnBoard / (float)engineerCapacity;
+            }
+            return totalPercent;
+        }
+    }
 	private float timer;
 	public float loadTimePerUnit = 0.25f;
 
@@ -179,7 +194,7 @@ public class ShipScript : MonoBehaviour {
 		case PlanetScript.Ownership.Neutral:
 			break;
 		}
-			
+
 		soldiersOnBoard = 0;
 		engineersOnBoard = 0;
 		isUnloading = false;

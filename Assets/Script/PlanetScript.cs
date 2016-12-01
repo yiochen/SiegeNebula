@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 
 public class PlanetScript : MonoBehaviour {
-		
+
 	public enum PlanetType {
 		Hybrid, Resource, Soldier, Normal
 	};
@@ -226,8 +226,9 @@ public class PlanetScript : MonoBehaviour {
 		}
 	}
 
-	public void CreateShip() {
-		switch (planetOwnership) {
+	public void CreateShip(Ownership ownership) {
+        Debug.Log("creating ship for " + ownership);
+		switch (ownership) {
 		case Ownership.Player:
 			//Need to devise a check so that we cant create a second ship.
 			//if one already exits.
