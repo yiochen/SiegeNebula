@@ -73,7 +73,7 @@ GameObject:
   - 135: {fileID: 135000011565845782}
   - 114: {fileID: 114000014095526212}
   m_Layer: 0
-  m_Name: Planet
+  m_Name: NormalPlanet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -430,11 +430,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isContested: 0
-  type: 0
+  type: 3
   planetOwnership: 0
   shipPrefab: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
     type: 2}
   shipsContainer: {fileID: 0}
+  playerSoldiers:
+    soldierCount: 0
+    defense: 0
+    defenseMod: 0
+    attackMod: 0
+  enemySoldiers:
+    soldierCount: 0
+    defense: 0
+    defenseMod: 0
+    attackMod: 0
   playerEngineerCount: 0
   enemyEngineerCount: 0
   resourceCount: 1200
