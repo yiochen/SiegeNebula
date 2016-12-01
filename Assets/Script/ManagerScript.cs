@@ -30,7 +30,8 @@ public class ManagerScript : Singleton<ManagerScript> {
 	private int playerEngineers;
 	private PlanetScript[] planets;
 
-	public PlanetScript selectedPlanet;
+    
+	private PlanetScript selectedPlanet;
 
 
 	// Use this for initialization
@@ -63,12 +64,17 @@ public class ManagerScript : Singleton<ManagerScript> {
 
 	public void ChangeSelection(PlanetScript planet) {
 
-		for (int i = 0; i < selectedPlanet.adjacentPlanet.Length; i++) {
-			PlanetScript ps = selectedPlanet.adjacentPlanet [i];
-            //Deactivate star ranking for non-adjacent planets
+        if (selectedPlanet)
+        {
+            for (int i = 0; i < selectedPlanet.adjacentPlanet.Length; i++)
+            {
+                PlanetScript ps = selectedPlanet.adjacentPlanet[i];
+                //Deactivate star ranking for non-adjacent planets
 
-			ps.rankingScript.SetActive (false);
-		}
+                ps.rankingScript.SetActive(false);
+            }
+        }
+		
 
 
 		for (int i = 0; i < planet.adjacentPlanet.Length; i++) {

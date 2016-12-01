@@ -75,7 +75,7 @@ public class PlanetScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		isSelected = gameManager.GetSelectedPlanet().Equals (this);
+		isSelected = this.Equals(gameManager.GetSelectedPlanet());
 
 		PlanetStateChanges ();
 
