@@ -80,9 +80,14 @@ public class BasicEnemyAIScript : MonoBehaviour {
 	}
 
 	PlanetScript ChoosePlanet(PlanetScript planet) {
-		PlanetScript result;
-		//Returns the first adajacent planet
-		result = planet.adjacentPlanet [0];
+		PlanetScript result = null;
+		PlanetScript[] neighPlanets = planet.adjacentPlanet;
+		foreach (PlanetScript neighbor in neighPlanets) {
+			if (neighbor.planetOwnership != PlanetScript.Ownership.Enemy)
+				result = neighbor;
+		}
+		if(result == null)
+			result = planet.adjacentPlanet [0];
 
 		return result;
 	}

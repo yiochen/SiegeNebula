@@ -58,18 +58,7 @@ public class PlanetScript : MonoBehaviour {
         gameManager = ManagerScript.Instance;
 		timer = 0;
 
-		playerSoldiers.soldierCount = 0;
-		playerSoldiers.defense = 0;
-		playerSoldiers.defenseMod = 0;
-		playerSoldiers.attackMod = 0;
-
-		enemySoldiers.soldierCount = 0;
-		enemySoldiers.defense = 0;
-		enemySoldiers.defenseMod = 0;
-		enemySoldiers.attackMod = 0;
-
 		resourceCount = GamePlay.PLANET_RESOURCE_STD;
-
 
 		isSelected = false;
 		isTrainingSoldiers = false;
