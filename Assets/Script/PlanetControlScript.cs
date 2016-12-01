@@ -6,6 +6,7 @@ public class PlanetControlScript : MonoBehaviour {
     Vector3 mouseDownPosition;
     Vector3 launchingDirection;
     PlanetScript planetScript;
+	PlanetScript targetPlanet;
 
     public float minLaunchingDistance = 5.0f;
     public float pathChosingThreshold = 0.5f; // how far can player drop the ship away from the path
@@ -35,8 +36,8 @@ public class PlanetControlScript : MonoBehaviour {
 
     void PrepareLaunching()
     {
-        isLaunching = true;
-        mouseDownPosition = Input.mousePosition;
+		isLaunching = true;
+		mouseDownPosition = Input.mousePosition;
     }
 
     void ExitLaunching(Vector3 launchingPosition)
@@ -55,6 +56,14 @@ public class PlanetControlScript : MonoBehaviour {
             }
             if (chosenPath)
             {
+				foreach (PlanetScript neighbor in planetScript.adjacentPlanet) {
+					foreach (PathScript path in neighbor.adjacentPaths) {
+						if (path.Equals (chosenPath)) {
+							targetPlanet = neighbor;
+							break;
+						}
+					}
+				}
                 Launch(chosenPath);
             }
 
@@ -72,11 +81,10 @@ public class PlanetControlScript : MonoBehaviour {
 
     void Launch(PathScript path)
     {
-
-        // TODO currently default launching the first ship. Later change it to check if the ship is yours.
-        ShipScript ship = planetScript.ships[0];
-        ship.gameObject.SetActive(true);
-
-        ship.LaunchShipOnPath(path, transform);
+		if (planetScript.ships [Indices.SHIP_PLAYER]) {
+			ShipScript ship = planetScript.ships [Indices.SHIP_PLAYER];
+			ship.gameObject.SetActive (true);
+			ship.LaunchShipOnPath (path, transform, targetPlanet);
+		}
     }
 }

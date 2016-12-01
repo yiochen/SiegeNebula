@@ -27,6 +27,9 @@ public class PlanetScript : MonoBehaviour {
 	public PlanetType type;
 	public Ownership planetOwnership;
 
+	public ShipScript shipPrefab;
+	public GameObject shipsContainer;
+
 	public SoldierUnit playerSoldiers;
 	public SoldierUnit enemySoldiers;
 	public int playerEngineerCount;
@@ -36,15 +39,14 @@ public class PlanetScript : MonoBehaviour {
 	public PlanetScript[] adjacentPlanet;
     public PathScript[] adjacentPaths;
 
-
 	public ShipScript[] ships; // Two ship most right now, one for player, one for enermy
-	public ShipScript selectedShip;
 
 	public RankingBarScript rankingScript;
 
     private ManagerScript gameManager;
     private float timer;
 	private float changeTimer;
+
 
 	public bool isSelected;
 	private bool isTrainingSoldiers;
@@ -80,8 +82,6 @@ public class PlanetScript : MonoBehaviour {
 		isSelected = gameManager.GetSelectedPlanet().Equals (this);
 
 		PlanetStateChanges ();
-
-		ShipSelection ();
 
 		if(isSelected)
 			HandleKeyboardInput ();
@@ -128,19 +128,6 @@ public class PlanetScript : MonoBehaviour {
 		gameManager.ChangeSelection (this);
 	}
 
-	void ShipSelection() {
-		switch (planetOwnership) {
-		case Ownership.Player:
-			selectedShip = ships [Indices.SHIP_PLAYER];
-			break;
-		case Ownership.Enemy:
-			selectedShip = ships [Indices.SHIP_ENEMY];
-			break;
-		case Ownership.Neutral:
-			break;
-		}
-	}
-
 	void PlanetStateChanges() {
 		switch (planetOwnership) {
 		case Ownership.Enemy:
@@ -152,6 +139,7 @@ public class PlanetScript : MonoBehaviour {
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Neutral;
+					gameManager.CapturePlanet (Ownership.Enemy, this);
 					changeTimer = 0;
 				}
 			} else {
@@ -168,6 +156,7 @@ public class PlanetScript : MonoBehaviour {
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Enemy;
+					gameManager.CapturePlanet (Ownership.Neutral, this);
 					changeTimer = 0;
 				}
 			} else if (enemySoldiers.soldierCount == 0 && playerSoldiers.soldierCount > 0) {
@@ -175,6 +164,7 @@ public class PlanetScript : MonoBehaviour {
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Player;
+					gameManager.CapturePlanet (Ownership.Neutral, this);
 					changeTimer = 0;
 				}
 			} else {
@@ -191,6 +181,7 @@ public class PlanetScript : MonoBehaviour {
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Neutral;
+					gameManager.CapturePlanet (Ownership.Player, this);
 					changeTimer = 0;
 				}
 			} else {
@@ -230,18 +221,43 @@ public class PlanetScript : MonoBehaviour {
         Debug.Log("creating ship for " + ownership);
 		switch (ownership) {
 		case Ownership.Player:
-			//Need to devise a check so that we cant create a second ship.
-			//if one already exits.
 			if (ships [Indices.SHIP_PLAYER] == null) {
-
+				switch (planetOwnership) {
+				case Ownership.Player:
+					ShipInstantiation (Indices.SHIP_PLAYER);
+					break;
+				default:
+					if (playerSoldiers.soldierCount > 0) {
+						ShipInstantiation (Indices.SHIP_PLAYER);
+					}
+					break;
+				}
 			}
 			break;
 		case Ownership.Enemy:
-
+			if (ships [Indices.SHIP_ENEMY] == null) {
+				switch (planetOwnership) {
+				case Ownership.Enemy:
+					ShipInstantiation (Indices.SHIP_ENEMY);
+					break;
+				default:
+					if (enemySoldiers.soldierCount > 0) {
+						ShipInstantiation (Indices.SHIP_ENEMY);
+					}
+					break;
+				}
+			}
 			break;
-		case Ownership.Neutral:
+		case Ownership.Neutral: //This shouldn't happen
 			break;
 		}
+	}
+
+	//Helper function
+	void ShipInstantiation(int index) {
+		ships [index] = Instantiate (shipPrefab) as ShipScript;
+		ships [index].transform.SetParent (shipsContainer.transform);
+		ships [index].gameObject.SetActive (false);
 	}
 
 	public void TrainSoldiers(bool isTrue) {
@@ -264,24 +280,24 @@ public class PlanetScript : MonoBehaviour {
 		}
 	}
 
-	public void LoadSoldiersToShip() {
-		selectedShip.StartLoadingSoldiersToShip (this);
+	public void LoadSoldiersToShip(ShipScript ship) {
+		ship.StartLoadingSoldiersToShip (this);
 	}
 
-	public void StopLoadingSoldiersToShip() {
-		selectedShip.StopLoadingSoldiersToShip ();
+	public void StopLoadingSoldiersToShip(ShipScript ship) {
+		ship.StopLoadingSoldiersToShip ();
 	}
 
-	public void LoadEngineersToShip() {
-		selectedShip.StartLoadingEngineersToShip (this);
+	public void LoadEngineersToShip(ShipScript ship) {
+		ship.StartLoadingEngineersToShip (this);
 	}
 
-	public void StopLoadingEngineersToShip() {
-		selectedShip.StopLoadingEngineersToShip ();
+	public void StopLoadingEngineersToShip(ShipScript ship) {
+		ship.StopLoadingEngineersToShip ();
 	}
 
-	public void UnLoadUnitsFromShip() {
-		selectedShip.UnloadShip (this);
+	public void UnLoadUnitsFromShip(ShipScript ship) {
+		ship.UnloadShip (this);
 	}
 
 }

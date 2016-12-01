@@ -50,14 +50,14 @@ public class BasicEnemyAIScript : MonoBehaviour {
 		//Create ship
 		planet.CreateShip(PlanetScript.Ownership.Enemy);
 		//Load Units to ship
-		planet.LoadSoldiersToShip ();
+		planet.LoadSoldiersToShip (planet.ships[Indices.SHIP_ENEMY]);
 		//Load Soldiers Units until ship capacity is met
 		if (planet.enemySoldiers.soldierCount >= planet.ships [Indices.SHIP_ENEMY].soldierCapacity) {
 			//Send units to a neighboring planet
 			neighboringPlanet = ChoosePlanet(planet);
 			//Launch Ship to neighboring planet
 			launchingPosition = (neighboringPlanet.transform.position - planet.transform.position) / 2.0f + planet.transform.position;
-			LaunchShip (planet, planet.adjacentPaths, planet.ships [Indices.SHIP_ENEMY]);
+			LaunchShip (planet, neighboringPlanet, planet.adjacentPaths, planet.ships [Indices.SHIP_ENEMY]);
 		}
 	}
 
@@ -66,7 +66,7 @@ public class BasicEnemyAIScript : MonoBehaviour {
 		planet.TrainEngineers (true);
 	}
 
-	void LaunchShip(PlanetScript planet, PathScript[] paths, ShipScript ship) {
+	void LaunchShip(PlanetScript planet, PlanetScript target, PathScript[] paths, ShipScript ship) {
 		PathScript chosenPath = null;
 		foreach (PathScript path in paths)
 		{
@@ -75,7 +75,7 @@ public class BasicEnemyAIScript : MonoBehaviour {
 				chosenPath = path;
 			}
 		}
-		ship.LaunchShipOnPath (chosenPath, planet.transform);
+		ship.LaunchShipOnPath (chosenPath, planet.transform, target);
 	}
 
 	PlanetScript ChoosePlanet(PlanetScript planet) {

@@ -108,7 +108,8 @@ public class ShipScript : MonoBehaviour {
 		this.dockedPlanet = planet;
 	}
 
-	public void LaunchShipOnPath(PathScript path, Transform from) {
+	public void LaunchShipOnPath(PathScript path, Transform from, PlanetScript targetPlanet) {
+		this.targetPlanet = targetPlanet;
 		isShipMoving = true;
         this.travelPath = path.getDirectionStartingFrom(from);
 
@@ -201,7 +202,10 @@ public class ShipScript : MonoBehaviour {
 	}
 
 	void MoveShip() {
-        //TODO: Add implementation for moving to another planet
+		isSoldierLoading = false;
+		isEngineerLoading = false;
+		isUnloading = false;
+		this.gameObject.SetActive (true);
         if (traveledDistance <= sizeChangingDistance || remainingDistance <= sizeChangingDistance)
         {
             this.transform.localScale = Mathf.Min(traveledDistance, remainingDistance) / sizeChangingDistance * Vector3.one;
@@ -209,7 +213,9 @@ public class ShipScript : MonoBehaviour {
 
         if (remainingDistance < 0.05f)
         {
-            isShipMoving = false;
+			dockedPlanet = targetPlanet;
+			UnloadShip ();
+			Destroy (this.gameObject);
         }
         else
         {
