@@ -29,6 +29,6 @@ class GamePlay
 	public const int ENGINEER_COST = 3;
 
 	public const float PLANET_TICK = 1.5f;
-	public const float PLANET_CHANGE = 5.0f;
+	public const float PLANET_CHANGE = 1.0f;
 	public const int PLANET_RESOURCE_STD = 1200;
 }

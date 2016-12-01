@@ -52,7 +52,7 @@ public class BasicEnemyAIScript : MonoBehaviour {
 		//Load Units to ship
 		planet.LoadSoldiersToShip (planet.ships[Indices.SHIP_ENEMY]);
 		//Load Soldiers Units until ship capacity is met
-		if (planet.enemySoldiers.soldierCount >= planet.ships [Indices.SHIP_ENEMY].soldierCapacity) {
+		if (planet.ships[Indices.SHIP_ENEMY].soldiersOnBoard >= planet.ships [Indices.SHIP_ENEMY].soldierCapacity) {
 			//Send units to a neighboring planet
 			neighboringPlanet = ChoosePlanet(planet);
 			//Launch Ship to neighboring planet

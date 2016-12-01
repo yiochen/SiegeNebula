@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4377399, g: 0.48559374, b: 0.5658083, a: 1}
+  m_IndirectSpecularColor: {r: 0.43773988, g: 0.48559362, b: 0.5658083, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isContested: 0
   type: 2
-  planetOwnership: 0
+  planetOwnership: 2
   shipPrefab: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
     type: 2}
   shipsContainer: {fileID: 1469571261}
@@ -776,6 +776,46 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 06a77a60da8dd4b4fac8e2c0f44c4725, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1002896214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1002896216}
+  - 114: {fileID: 1002896215}
+  m_Layer: 0
+  m_Name: EnemyAI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1002896215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1002896214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40bd72053836bd542bc22c7d42236885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1002896216
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1002896214}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
 --- !u!1 &1012500432
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,8 +1167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isContested: 0
-  type: 3
-  planetOwnership: 0
+  type: 2
+  planetOwnership: 1
   shipPrefab: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
     type: 2}
   shipsContainer: {fileID: 1469571261}
@@ -1138,7 +1178,7 @@ MonoBehaviour:
     defenseMod: 0
     attackMod: 0
   enemySoldiers:
-    soldierCount: 0
+    soldierCount: 100
     defense: 0
     defenseMod: 0
     attackMod: 0
@@ -1428,13 +1468,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isContested: 0
-  type: 3
+  type: 2
   planetOwnership: 0
   shipPrefab: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
     type: 2}
   shipsContainer: {fileID: 1469571261}
   playerSoldiers:
-    soldierCount: 49
+    soldierCount: 150
     defense: 0
     defenseMod: 0
     attackMod: 0
@@ -1639,6 +1679,7 @@ GameObject:
   - 114: {fileID: 1423095000}
   - 114: {fileID: 2115940136}
   - 135: {fileID: 2115940135}
+  - 114: {fileID: 2115940134}
   m_Layer: 0
   m_Name: Planet (1)
   m_TagString: Untagged
@@ -1646,6 +1687,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2115940134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2115940133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5f2c4a002bcb54f8ff73c19c76aa47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &2115940135
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -264,7 +264,7 @@ public class PlanetScript : MonoBehaviour {
 			ships [index].shipOwnership = Ownership.Player;
 			break;
 		case Indices.SHIP_ENEMY:
-			ships [index].shipOwnership = Ownership.Player;
+			ships [index].shipOwnership = Ownership.Enemy;
 			break;
 		default:
 			break;
