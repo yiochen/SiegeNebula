@@ -259,6 +259,16 @@ public class PlanetScript : MonoBehaviour {
 	ShipScript ShipInstantiation(int index) {
 		ships [index] = Instantiate (shipPrefab) as ShipScript;
 		ships [index].gameObject.SetActive (true);
+		switch (index) {
+		case Indices.SHIP_PLAYER:
+			ships [index].shipOwnership = Ownership.Player;
+			break;
+		case Indices.SHIP_ENEMY:
+			ships [index].shipOwnership = Ownership.Player;
+			break;
+		default:
+			break;
+		}
 		ships [index].transform.SetParent (shipsContainer.transform);
 		ships [index].shipRenderer.enabled = false;
         return ships[index];

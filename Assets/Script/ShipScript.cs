@@ -12,6 +12,8 @@ using System.Collections;
 public class ShipScript : MonoBehaviour {
     [HideInInspector]
 	public Renderer shipRenderer; // get this using GetComponentInChildren
+	[HideInInspector]
+	public PlanetScript.Ownership shipOwnership;
 	public float movementSpeed = 5.0f;
 	public int soldierCapacity;
 	public int engineerCapacity;
@@ -132,7 +134,7 @@ public class ShipScript : MonoBehaviour {
 		} else {
 			timer += Time.deltaTime;
 			if (timer >= loadTimePerUnit) {
-				switch (dockedPlanet.planetOwnership) {
+				switch (shipOwnership) {
 				case PlanetScript.Ownership.Player:
 					if (dockedPlanet.playerSoldiers.soldierCount > 0) {
 						soldiersOnBoard++;
@@ -164,7 +166,7 @@ public class ShipScript : MonoBehaviour {
 		} else {
 			timer += Time.deltaTime;
 			if (timer >= loadTimePerUnit) {
-				switch (dockedPlanet.planetOwnership) {
+				switch (shipOwnership) {
 				case PlanetScript.Ownership.Player:
 					if (dockedPlanet.playerEngineerCount > 0) {
 						engineersOnBoard++;
@@ -190,7 +192,7 @@ public class ShipScript : MonoBehaviour {
 	}
 
 	void UnloadShip() {
-		switch (dockedPlanet.planetOwnership) {
+		switch (shipOwnership) {
 		case PlanetScript.Ownership.Player:
 			dockedPlanet.playerSoldiers.soldierCount += soldiersOnBoard;
 			dockedPlanet.playerEngineerCount += engineersOnBoard;
