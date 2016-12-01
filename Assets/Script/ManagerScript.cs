@@ -83,6 +83,42 @@ public class ManagerScript : Singleton<ManagerScript> {
 			return 1;
 		return 1;
 	}
+	/**
+	 * The planet variable should store the current post-capture "new" ownership
+	 **/
+	public void CapturePlanet(PlanetScript.Ownership previousOwner, PlanetScript planet) {
+		switch (planet.planetOwnership) {
+		case PlanetScript.Ownership.Player:
+			if (previousOwner == PlanetScript.Ownership.Enemy) {
+				enemyPlanets.Remove (planet);
+				playerPlanets.Add (planet);
+			} else if (previousOwner == PlanetScript.Ownership.Neutral) {
+				playerPlanets.Add (planet);
+			} else { //This condition shouldn't happen
+				if (!playerPlanets.Contains (planet))
+					playerPlanets.Add (planet);
+			}
+			break;
+		case PlanetScript.Ownership.Enemy:
+			if (previousOwner == PlanetScript.Ownership.Player) {
+				playerPlanets.Remove (planet);
+				enemyPlanets.Add (planet);
+			} else if (previousOwner == PlanetScript.Ownership.Neutral) {
+				enemyPlanets.Add (planet);
+			} else { //This condition shouldn't happen
+				if (!enemyPlanets.Contains (planet))
+					enemyPlanets.Add (planet);
+			}
+			break;
+		case PlanetScript.Ownership.Neutral: //This condition shouldn't happen
+			if (enemyPlanets.Contains (planet))
+				enemyPlanets.Remove (planet);
+
+			if (playerPlanets.Contains (planet))
+				playerPlanets.Remove (planet);
+			break;
+		}
+	}
 
 	public PlanetScript GetSelectedPlanet() {
 		return selectedPlanet;
