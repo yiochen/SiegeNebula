@@ -72,7 +72,6 @@ GameObject:
   - 114: {fileID: 114000013244661524}
   - 135: {fileID: 135000011565845782}
   - 114: {fileID: 114000014095526212}
-  - 114: {fileID: 114000011389579460}
   m_Layer: 0
   m_Name: Planet
   m_TagString: Untagged
@@ -446,21 +445,8 @@ MonoBehaviour:
   ships:
   - {fileID: 0}
   - {fileID: 0}
-  selectedShip: {fileID: 0}
   rankingScript: {fileID: 114000010270232938}
   isSelected: 0
---- !u!114 &114000011389579460
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011833804262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7673ac9af962ffb4184b91afd6577e7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 0}
 --- !u!114 &114000013244661524
 MonoBehaviour:
   m_ObjectHideFlags: 1
