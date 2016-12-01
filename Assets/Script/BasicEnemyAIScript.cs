@@ -50,7 +50,7 @@ public class BasicEnemyAIScript : MonoBehaviour {
 		//Create ship
 		planet.CreateShip(PlanetScript.Ownership.Enemy);
 		//Load Units to ship
-		planet.LoadSoldiersToShip ();
+		planet.LoadSoldiersToShip (planet.ships[Indices.SHIP_ENEMY]);
 		//Load Soldiers Units until ship capacity is met
 		if (planet.enemySoldiers.soldierCount >= planet.ships [Indices.SHIP_ENEMY].soldierCapacity) {
 			//Send units to a neighboring planet

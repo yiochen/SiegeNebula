@@ -39,9 +39,7 @@ public class PlanetScript : MonoBehaviour {
 	public PlanetScript[] adjacentPlanet;
     public PathScript[] adjacentPaths;
 
-
 	public ShipScript[] ships; // Two ship most right now, one for player, one for enermy
-	public ShipScript selectedShip;
 
 	public RankingBarScript rankingScript;
 
@@ -84,8 +82,6 @@ public class PlanetScript : MonoBehaviour {
 		isSelected = gameManager.GetSelectedPlanet().Equals (this);
 
 		PlanetStateChanges ();
-
-		ShipSelection ();
 
 		if(isSelected)
 			HandleKeyboardInput ();
@@ -130,19 +126,6 @@ public class PlanetScript : MonoBehaviour {
 	**/
 	void OnMouseDown() {
 		gameManager.ChangeSelection (this);
-	}
-
-	void ShipSelection() {
-		switch (planetOwnership) {
-		case Ownership.Player:
-			selectedShip = ships [Indices.SHIP_PLAYER];
-			break;
-		case Ownership.Enemy:
-			selectedShip = ships [Indices.SHIP_ENEMY];
-			break;
-		case Ownership.Neutral:
-			break;
-		}
 	}
 
 	void PlanetStateChanges() {
@@ -297,24 +280,24 @@ public class PlanetScript : MonoBehaviour {
 		}
 	}
 
-	public void LoadSoldiersToShip() {
-		selectedShip.StartLoadingSoldiersToShip (this);
+	public void LoadSoldiersToShip(ShipScript ship) {
+		ship.StartLoadingSoldiersToShip (this);
 	}
 
-	public void StopLoadingSoldiersToShip() {
-		selectedShip.StopLoadingSoldiersToShip ();
+	public void StopLoadingSoldiersToShip(ShipScript ship) {
+		ship.StopLoadingSoldiersToShip ();
 	}
 
-	public void LoadEngineersToShip() {
-		selectedShip.StartLoadingEngineersToShip (this);
+	public void LoadEngineersToShip(ShipScript ship) {
+		ship.StartLoadingEngineersToShip (this);
 	}
 
-	public void StopLoadingEngineersToShip() {
-		selectedShip.StopLoadingEngineersToShip ();
+	public void StopLoadingEngineersToShip(ShipScript ship) {
+		ship.StopLoadingEngineersToShip ();
 	}
 
-	public void UnLoadUnitsFromShip() {
-		selectedShip.UnloadShip (this);
+	public void UnLoadUnitsFromShip(ShipScript ship) {
+		ship.UnloadShip (this);
 	}
 
 }
