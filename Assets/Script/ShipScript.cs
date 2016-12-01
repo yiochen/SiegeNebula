@@ -11,6 +11,7 @@ using System.Collections;
 
 public class ShipScript : MonoBehaviour {
 
+	public Renderer shipRenderer;
 	public float movementSpeed = 5.0f;
 	public int soldierCapacity;
 	public int engineerCapacity;
@@ -64,6 +65,7 @@ public class ShipScript : MonoBehaviour {
 	void Start () {
 		timer = 0;
 		soldierCapacity = GamePlay.SHIP_CAPACITY;
+		shipRenderer = GetComponent<Renderer> ();
 	}
 
 	// Update is called once per frame
@@ -82,6 +84,12 @@ public class ShipScript : MonoBehaviour {
 		}
 
 
+	}
+
+	void Awake() {
+		timer = 0;
+		soldierCapacity = GamePlay.SHIP_CAPACITY;
+		shipRenderer = GetComponent<Renderer> ();
 	}
 
 	public void StartLoadingSoldiersToShip(PlanetScript planet) {
@@ -205,7 +213,7 @@ public class ShipScript : MonoBehaviour {
 		isSoldierLoading = false;
 		isEngineerLoading = false;
 		isUnloading = false;
-		this.gameObject.SetActive (true);
+		shipRenderer.enabled = true;
         if (traveledDistance <= sizeChangingDistance || remainingDistance <= sizeChangingDistance)
         {
             this.transform.localScale = Mathf.Min(traveledDistance, remainingDistance) / sizeChangingDistance * Vector3.one;
