@@ -119,6 +119,16 @@ public class ShipScript : MonoBehaviour {
 
 	public void LaunchShipOnPath(PathScript path, Transform from, PlanetScript targetPlanet) {
 		this.targetPlanet = targetPlanet;
+		switch (shipOwnership) {
+		case PlanetScript.Ownership.Player:
+			dockedPlanet.ships[Indices.SHIP_PLAYER] = null;
+			break;
+		case PlanetScript.Ownership.Enemy:
+			dockedPlanet.ships[Indices.SHIP_ENEMY] = null;
+			break;
+		case PlanetScript.Ownership.Neutral:
+			break;
+		}
 		isShipMoving = true;
         this.travelPath = path.getDirectionStartingFrom(from);
 

@@ -79,7 +79,6 @@ public class PlanetControlScript : MonoBehaviour {
             if (targetPlanet != null)
             {
                 ship.LaunchShipOnPath(path, transform, targetPlanet);
-                planetScript.ships[Indices.SHIP_PLAYER] = null;
             }
 
 		}
