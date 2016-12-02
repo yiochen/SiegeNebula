@@ -51,8 +51,10 @@ public class PlanetScript : MonoBehaviour {
 
 
 	public bool isSelected;
-	private bool isTrainingSoldiers;
-	private bool isTrainingEngineers;
+
+    // TODO: set to true for testing only, change to private later
+	public bool isTrainingSoldiers;
+	public bool isTrainingEngineers;
 
 
 	// Use this for initialization
@@ -279,7 +281,14 @@ public class PlanetScript : MonoBehaviour {
 		ships [index].shipRenderer.enabled = false;
         return ships[index];
 	}
-
+    public bool GetIsTrainingSoldiers ()
+    {
+        return isTrainingSoldiers;
+    }
+    public bool GetIsTransingEngineers ()
+    {
+        return isTrainingEngineers;
+    }
 	public void TrainSoldiers(bool isTrue) {
 		isTrainingSoldiers = isTrue;
 	}
