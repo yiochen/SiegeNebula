@@ -262,6 +262,11 @@ Prefab:
       propertyPath: selectedPlanet
       value: 
       objectReference: {fileID: 1570022040}
+    - target: {fileID: 114000013970308016, guid: d1271c03180123246bb6e3ac3665f65c,
+        type: 2}
+      propertyPath: slideManager
+      value: 
+      objectReference: {fileID: 1585346482}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1271c03180123246bb6e3ac3665f65c, type: 2}
   m_IsPrefabParent: 0
@@ -722,6 +727,58 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 954087789}
   m_Script: {fileID: 11500000, guid: bdbc77d4ae617e449af4e665b0eb35cd, type: 3}
+--- !u!1001 &1585346481
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000011250603192, guid: 09054bfa0184758449c36d00351b96d6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011250603192, guid: 09054bfa0184758449c36d00351b96d6, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011250603192, guid: 09054bfa0184758449c36d00351b96d6, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011250603192, guid: 09054bfa0184758449c36d00351b96d6, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011250603192, guid: 09054bfa0184758449c36d00351b96d6, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011250603192, guid: 09054bfa0184758449c36d00351b96d6, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011250603192, guid: 09054bfa0184758449c36d00351b96d6, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000011250603192, guid: 09054bfa0184758449c36d00351b96d6, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000014198208116, guid: 09054bfa0184758449c36d00351b96d6, type: 2}
+      propertyPath: m_Name
+      value: SlideContainer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 09054bfa0184758449c36d00351b96d6, type: 2}
+  m_IsPrefabParent: 0
+--- !u!114 &1585346482 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000013113656990, guid: 09054bfa0184758449c36d00351b96d6,
+    type: 2}
+  m_PrefabInternal: {fileID: 1585346481}
+  m_Script: {fileID: 11500000, guid: bd77ede52fbe8c64488c6ef1e3b1a2fc, type: 3}
 --- !u!1001 &1614352931
 Prefab:
   m_ObjectHideFlags: 0
