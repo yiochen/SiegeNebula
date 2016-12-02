@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -32,7 +33,7 @@ public class ManagerScript : Singleton<ManagerScript> {
 	private int enemyEngineers;
 	private int playerEngineers;
 	private PlanetScript[] planets;
-
+	private Text[] textBoxes;
     
 	private PlanetScript selectedPlanet;
 
@@ -43,24 +44,65 @@ public class ManagerScript : Singleton<ManagerScript> {
 		playerPlanets.Capacity = planets.Length;
 		enemyPlanets.Capacity = planets.Length;
 		PlanetAssignment ();
+		textBoxes = slideManager.GetComponentsInChildren<Text> ();
+		UpdateUIStats ();
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (playerPlanets.Count == 0 || enemyPlanets.Count == 0) {
-			slideManager.Next ();
-			Text[] text = slideManager.GetComponentsInChildren<Text> ();
-			foreach (Text t in text) {
-				if (t.name == "Condition") {
-					if (playerPlanets.Count == 0)
-						t.text = "You Lost!";
-					else
-						t.text = "You Won!";
-					break;
-				}
+		UpdateUIStats ();
+	}
+
+	void UpdateUIStats() {
+		for (int i = 0; i < textBoxes.Length; i++) {
+			Text t = textBoxes [i];
+			if (t.name == "Condition") {
+				if (playerPlanets.Count == 0 || enemyPlanets.Count == 0) GameEnd (t);
+			} else if (t.name == "PlayerStats") {
+				textBoxes[i].text = UpdatePlayerStats(t.text.Split ('\n'));
+			} else if (t.name == "EnemyStats") {
+				textBoxes[i].text = UpdateEnemyStats(t.text.Split ('\n'));
 			}
-			StartCoroutine (SceneChange ());
 		}
+	}
+
+	string UpdatePlayerStats(string[] stats) {
+		StringBuilder sb = new StringBuilder ();
+		//Title
+		sb.Append (stats [0]);
+		sb.AppendLine ();
+		//Resources
+		sb.Append (updateStat(stats [1], playerResources));
+		sb.AppendLine ();
+		//Planets
+		sb.Append (updateStat(stats [2], playerPlanets.Count));
+		return sb.ToString ();
+	}
+
+	string UpdateEnemyStats(string[] stats) {
+		StringBuilder sb = new StringBuilder ();
+		//Title
+		sb.Append (stats [0]);
+		sb.AppendLine ();
+		//Planets
+		sb.Append (updateStat(stats [1], enemyPlanets.Count));
+		return sb.ToString ();
+	}
+
+	string updateStat(string str, int stat) {
+		int startPos = str.IndexOf (":") + 1;
+		string deleted = str.Remove (startPos);
+		string inserted = deleted.Insert (startPos, " " + stat);
+		return inserted;
+	}
+
+	void GameEnd(Text t) {
+		slideManager.Next ();
+		if (playerPlanets.Count == 0)
+			t.text = "You Lost!";
+		else
+			t.text = "You Won!";
+		StartCoroutine (SceneChange ());
 	}
 
 	IEnumerator SceneChange() {
