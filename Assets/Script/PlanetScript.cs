@@ -149,6 +149,8 @@ public class PlanetScript : MonoBehaviour {
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Neutral;
 					gameManager.CapturePlanet (Ownership.Enemy, this);
+					isTrainingEngineers = false;
+					isTrainingSoldiers = false;
 					changeTimer = 0;
 				}
 			} else {
@@ -166,6 +168,8 @@ public class PlanetScript : MonoBehaviour {
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Enemy;
 					gameManager.CapturePlanet (Ownership.Neutral, this);
+					isTrainingEngineers = false;
+					isTrainingSoldiers = false;
 					changeTimer = 0;
 				}
 			} else if (enemySoldiers.soldierCount == 0 && playerSoldiers.soldierCount > 0) {
@@ -174,6 +178,8 @@ public class PlanetScript : MonoBehaviour {
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Player;
 					gameManager.CapturePlanet (Ownership.Neutral, this);
+					isTrainingEngineers = false;
+					isTrainingSoldiers = false;
 					changeTimer = 0;
 				}
 			} else {
@@ -191,6 +197,8 @@ public class PlanetScript : MonoBehaviour {
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Neutral;
 					gameManager.CapturePlanet (Ownership.Player, this);
+					isTrainingEngineers = false;
+					isTrainingSoldiers = false;
 					changeTimer = 0;
 				}
 			} else {
