@@ -21,6 +21,10 @@ class Indices {
 	public const int SHIP_ENEMY = 1;
 }
 
+class Prefs {
+	public const string PREV_SCENE = "PREV_SCENE";
+}
+
 class GamePlay 
 {
 	public const int LOAD_UNITS = 5;

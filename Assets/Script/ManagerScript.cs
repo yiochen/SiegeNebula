@@ -65,8 +65,10 @@ public class ManagerScript : Singleton<ManagerScript> {
 
 	IEnumerator SceneChange() {
 		yield return new WaitForSeconds (2.0f);
+		//Store this scenes Index
+		PlayerPrefs.SetInt(Prefs.PREV_SCENE, SceneManager.GetActiveScene().buildIndex);
 		//Need to create a next scene
-		//SceneManager.LoadScene ("next");
+		SceneManager.LoadScene (0, LoadSceneMode.Single);
 	}
 
 	void PlanetAssignment() {
