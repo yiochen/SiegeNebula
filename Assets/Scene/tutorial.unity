@@ -565,7 +565,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011221673116, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
         type: 2}
@@ -920,6 +920,96 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 86fe32da507d33843b5a7c6e2d7cb1d2, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1657327430
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1782795643}
+    m_Modifications:
+    - target: {fileID: 4000012936812068, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012936812068, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012936812068, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012936812068, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012936812068, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012936812068, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012936812068, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012936812068, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011221673116, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
+      propertyPath: m_Name
+      value: TutorialSlide (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013955426226, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
+        type: 2}
+      propertyPath: m_Text
+      value: Your Objective? Take over all the planets!
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: -15.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010765760950, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: -20.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011058811088, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
+        type: 2}
+      propertyPath: clearScreen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011221673116, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 252eb8474a75e9f439b7ab3a61f3f93c, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &1657327431 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4000012936812068, guid: 252eb8474a75e9f439b7ab3a61f3f93c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1657327430}
 --- !u!1001 &1690285652
 Prefab:
   m_ObjectHideFlags: 0
@@ -1092,6 +1182,7 @@ Transform:
   - {fileID: 419759898}
   - {fileID: 869165263}
   - {fileID: 937467546}
+  - {fileID: 1657327431}
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!1001 &1849713071
