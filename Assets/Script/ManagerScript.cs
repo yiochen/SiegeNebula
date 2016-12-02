@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /**
  * This class managers the global operations of the game.
@@ -17,6 +19,7 @@ public class ManagerScript : Singleton<ManagerScript> {
 	public GameObject planetContainer;
     public GameObject shipContainer;
     public PathManagerScript pathManager;
+	public SlideManagerScript slideManager;
 
 	public List<PlanetScript> playerPlanets;
 	public List<PlanetScript> enemyPlanets;
@@ -44,7 +47,26 @@ public class ManagerScript : Singleton<ManagerScript> {
 
 	// Update is called once per frame
 	void Update () {
+		if (playerPlanets.Count == 0 || enemyPlanets.Count == 0) {
+			slideManager.Next ();
+			Text[] text = slideManager.GetComponentsInChildren<Text> ();
+			foreach (Text t in text) {
+				if (t.name == "Condition") {
+					if (playerPlanets.Count == 0)
+						t.text = "You Lost!";
+					else
+						t.text = "You Won!";
+					break;
+				}
+			}
+			StartCoroutine (SceneChange ());
+		}
+	}
 
+	IEnumerator SceneChange() {
+		yield return new WaitForSeconds (2.0f);
+		//Need to create a next scene
+		//SceneManager.LoadScene ("next");
 	}
 
 	void PlanetAssignment() {
