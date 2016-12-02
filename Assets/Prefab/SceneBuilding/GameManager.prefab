@@ -51,14 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf0d98bcc0d28c4fa148a05f4ccbac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planetContainer: {fileID: 1000013033593726, guid: f5ffa66bab3ba154d947e0ce6a5d5390,
-    type: 2}
-  shipContainer: {fileID: 1000011599744670, guid: 7659b549496a5b5478f0f76c0e417f34,
-    type: 2}
-  pathManager: {fileID: 114000010039953894, guid: e507d740e882029438a18fe2b81fe8f4,
-    type: 2}
-  slideManager: {fileID: 114000013113656990, guid: 09054bfa0184758449c36d00351b96d6,
-    type: 2}
+  planetContainer: {fileID: 0}
+  shipContainer: {fileID: 0}
+  pathManager: {fileID: 0}
+  slideManager: {fileID: 0}
   playerPlanets: []
   enemyPlanets: []
   playerResources: 0
@@ -73,4 +69,3 @@ MonoBehaviour:
     defense: 0
     defenseMod: 0
     attackMod: 0
-  selectedPlanet: {fileID: 0}
