@@ -43,7 +43,7 @@ public class ShipScript : MonoBehaviour {
 	private float timer;
 	public float loadTimePerUnit = 0.25f;
 
-	private PlanetScript dockedPlanet;
+	public PlanetScript dockedPlanet;
 	private PlanetScript targetPlanet;
 
     private DirectionalPath travelPath;

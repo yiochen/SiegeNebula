@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4377399, g: 0.48559374, b: 0.5658083, a: 1}
+  m_IndirectSpecularColor: {r: 0.43773964, g: 0.48559332, b: 0.5658078, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -237,6 +237,11 @@ Prefab:
       propertyPath: soldiersOnBoard
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
+        type: 2}
+      propertyPath: dockedPlanet
+      value: 
+      objectReference: {fileID: 1675131715}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e64c078d047535e40bbe8c039639d61e, type: 2}
   m_IsPrefabParent: 0
@@ -728,6 +733,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 340941352}
   m_Script: {fileID: 11500000, guid: a14ddbb4bebe4f442bf42b94d22dc388, type: 3}
+--- !u!114 &1675131715 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
+    type: 2}
+  m_PrefabInternal: {fileID: 502748140}
+  m_Script: {fileID: 11500000, guid: bdbc77d4ae617e449af4e665b0eb35cd, type: 3}
 --- !u!114 &1711396814 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000010039953894, guid: e507d740e882029438a18fe2b81fe8f4,
