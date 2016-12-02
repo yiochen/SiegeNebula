@@ -124,14 +124,25 @@ public class PlanetScript : MonoBehaviour {
 		gameManager.ChangeSelection (this);
 	}
 
+    void SetContested(bool value)
+    {
+        isContested = value;
+        if (isContested)
+        {
+            ParticleManagerScript.Instance.Play(ParticleList.FIGHTING, transform);
+        } else
+        {
+            ParticleManagerScript.Instance.Stop(transform);
+        }
+    }
 	void PlanetStateChanges() {
 		switch (planetOwnership) {
 		case Ownership.Enemy:
 			if (playerSoldiers.soldierCount > 0 && enemySoldiers.soldierCount > 0) {
 				changeTimer = 0;
-				isContested = true;
+				SetContested(true);
 			} else if (enemySoldiers.soldierCount == 0 && playerSoldiers.soldierCount > 0) {
-				isContested = false;
+				SetContested(false);
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Neutral;
@@ -139,16 +150,16 @@ public class PlanetScript : MonoBehaviour {
 					changeTimer = 0;
 				}
 			} else {
-				isContested = false;
+				SetContested(false);
 				changeTimer = 0;
 			}
 			break;
 		case Ownership.Neutral:
 			if (playerSoldiers.soldierCount > 0 && enemySoldiers.soldierCount > 0) {
 				changeTimer = 0;
-				isContested = true;
+				SetContested(true);
 			} else if (playerSoldiers.soldierCount == 0 && enemySoldiers.soldierCount > 0) {
-				isContested = false;
+				SetContested(false);
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Enemy;
@@ -156,7 +167,7 @@ public class PlanetScript : MonoBehaviour {
 					changeTimer = 0;
 				}
 			} else if (enemySoldiers.soldierCount == 0 && playerSoldiers.soldierCount > 0) {
-				isContested = false;
+				SetContested(false);
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Player;
@@ -164,16 +175,16 @@ public class PlanetScript : MonoBehaviour {
 					changeTimer = 0;
 				}
 			} else {
-				isContested = false;
+				SetContested(false);
 				changeTimer = 0;
 			}
 			break;
 		case Ownership.Player:
 			if (playerSoldiers.soldierCount > 0 && enemySoldiers.soldierCount > 0) {
 				changeTimer = 0;
-				isContested = true;
+				SetContested(true);
 			} else if (playerSoldiers.soldierCount == 0 && enemySoldiers.soldierCount > 0) {
-				isContested = false;
+				SetContested(false);
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Neutral;
@@ -181,7 +192,7 @@ public class PlanetScript : MonoBehaviour {
 					changeTimer = 0;
 				}
 			} else {
-				isContested = false;
+				SetContested(false);
 				changeTimer = 0;
 			}
 			break;

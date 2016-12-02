@@ -29,7 +29,6 @@ public class RankingBarScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         RankUnit rank;
-        bool isOdd = (maxRank % 2 == 1);
         for (int i = 0; i < maxRank; i++)
         {
             rank = AddRank();
