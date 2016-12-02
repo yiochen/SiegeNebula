@@ -225,16 +225,16 @@ public class ManagerScript : Singleton<ManagerScript> {
 		switch (planet.planetOwnership) {
 		case PlanetScript.Ownership.Player:
 			if (playerResources >= GamePlay.SOLDIER_COST) {
-				playerSoldiers.soldierCount++;
+				playerSoldiers.soldierCount += GamePlay.SOLDIER_UNIT;
 				playerResources -= GamePlay.SOLDIER_COST;
-				planet.playerSoldiers.soldierCount++;
+				planet.playerSoldiers.soldierCount += GamePlay.SOLDIER_UNIT;
 			}
 			break;
 		case PlanetScript.Ownership.Enemy:
 			if (enemyResources >= GamePlay.SOLDIER_COST) {
-				enemySoldiers.soldierCount++;
+				enemySoldiers.soldierCount += GamePlay.SOLDIER_UNIT;
 				enemyResources -= GamePlay.SOLDIER_COST;
-				planet.enemySoldiers.soldierCount++;
+				planet.enemySoldiers.soldierCount += GamePlay.SOLDIER_UNIT;
 			}
 			break;
 		case PlanetScript.Ownership.Neutral:
