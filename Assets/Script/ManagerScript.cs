@@ -164,9 +164,9 @@ public class ManagerScript : Singleton<ManagerScript> {
 	}
 
 	public int RelativePlanetStrength(PlanetScript basePlanet, PlanetScript comparePlanet) {
-		int soldierDiff = comparePlanet.playerSoldiers.soldierCount - basePlanet.playerSoldiers.soldierCount;
+		int soldierDiff = comparePlanet.enemySoldiers.soldierCount - basePlanet.playerSoldiers.soldierCount;
 
-		float percDiff = basePlanet.playerSoldiers.soldierCount == 0 ? 0 : soldierDiff / (float)Mathf.Max(basePlanet.playerSoldiers.soldierCount, comparePlanet.playerSoldiers.soldierCount);
+		float percDiff = basePlanet.playerSoldiers.soldierCount == 0 ? 0 : soldierDiff / (float)Mathf.Max(basePlanet.playerSoldiers.soldierCount, comparePlanet.enemySoldiers.soldierCount);
 
 		if (percDiff >= 0.3f)
 			return 5;
