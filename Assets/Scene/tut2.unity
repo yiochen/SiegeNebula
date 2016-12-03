@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4377399, g: 0.48559374, b: 0.5658083, a: 1}
+  m_IndirectSpecularColor: {r: 0.43773964, g: 0.48559332, b: 0.5658078, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -564,6 +564,11 @@ Prefab:
       propertyPath: slideManager
       value: 
       objectReference: {fileID: 357404031}
+    - target: {fileID: 114000013970308016, guid: d1271c03180123246bb6e3ac3665f65c,
+        type: 2}
+      propertyPath: spotlight
+      value: 
+      objectReference: {fileID: 1070979543}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1271c03180123246bb6e3ac3665f65c, type: 2}
   m_IsPrefabParent: 0
@@ -757,6 +762,8 @@ MonoBehaviour:
   - {fileID: 0}
   rankingScript: {fileID: 995286371}
   isSelected: 0
+  isTrainingSoldiers: 0
+  isTrainingEngineers: 0
 --- !u!1 &417897257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1213,6 +1220,8 @@ MonoBehaviour:
   - {fileID: 0}
   rankingScript: {fileID: 1159254267}
   isSelected: 0
+  isTrainingSoldiers: 0
+  isTrainingEngineers: 0
 --- !u!1 &995286369
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,6 +1477,54 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1040895897}
+--- !u!1001 &1070979542
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000013879773878, guid: 90ccd984eeddd4f468e68c8762071412, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013879773878, guid: 90ccd984eeddd4f468e68c8762071412, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013879773878, guid: 90ccd984eeddd4f468e68c8762071412, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013879773878, guid: 90ccd984eeddd4f468e68c8762071412, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013879773878, guid: 90ccd984eeddd4f468e68c8762071412, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013879773878, guid: 90ccd984eeddd4f468e68c8762071412, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013879773878, guid: 90ccd984eeddd4f468e68c8762071412, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013879773878, guid: 90ccd984eeddd4f468e68c8762071412, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 90ccd984eeddd4f468e68c8762071412, type: 2}
+  m_IsPrefabParent: 0
+--- !u!114 &1070979543 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000011222106084, guid: 90ccd984eeddd4f468e68c8762071412,
+    type: 2}
+  m_PrefabInternal: {fileID: 1070979542}
+  m_Script: {fileID: 11500000, guid: 3e918a052ccf90048bf508b7a5342d97, type: 3}
 --- !u!114 &1121504154 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000010039953894, guid: e507d740e882029438a18fe2b81fe8f4,
@@ -2214,6 +2271,8 @@ MonoBehaviour:
   - {fileID: 0}
   rankingScript: {fileID: 900085619}
   isSelected: 0
+  isTrainingSoldiers: 0
+  isTrainingEngineers: 0
 --- !u!1001 &1942035125
 Prefab:
   m_ObjectHideFlags: 0
