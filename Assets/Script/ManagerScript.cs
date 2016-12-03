@@ -30,8 +30,6 @@ public class ManagerScript : Singleton<ManagerScript> {
 	public SoldierUnit playerSoldiers;
 	public SoldierUnit enemySoldiers;
 
-    public SpotlightScript spotlight;
-
 	private int enemyEngineers;
 	private int playerEngineers;
 	private PlanetScript[] planets;
@@ -163,7 +161,6 @@ public class ManagerScript : Singleton<ManagerScript> {
 		this.selectedPlanet = planet;
 
         ContextualMenuManagerScript.Instance.ActivateForPlanet(planet);
-        spotlight.TurnOnFor(planet.transform);
 	}
 
 	public int RelativePlanetStrength(PlanetScript basePlanet, PlanetScript comparePlanet) {
