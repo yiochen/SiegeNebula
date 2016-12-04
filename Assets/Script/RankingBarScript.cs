@@ -81,9 +81,6 @@ public class RankingBarScript : MonoBehaviour {
     }
 
 	public void SetActive(bool active) {
-		for (int i = 0; i < maxRank; i++) {
-			GameObject go = ranks [i].sprite;
-			go.SetActive (active);
-		}
+        gameObject.SetActive(active);
 	}
 }
