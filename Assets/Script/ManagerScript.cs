@@ -45,11 +45,13 @@ public class ManagerScript : Singleton<ManagerScript> {
 		enemyPlanets.Capacity = planets.Length;
 		PlanetAssignment ();
 		textBoxes = slideManager.GetComponentsInChildren<Text> ();
+		SetPlanetStarRanking ();
 		UpdateUIStats ();
 	}
 
 	// Update is called once per frame
 	void Update () {
+		SetPlanetStarRanking ();
 		UpdateUIStats ();
 	}
 
@@ -72,10 +74,10 @@ public class ManagerScript : Singleton<ManagerScript> {
 		sb.Append (stats [0]);
 		sb.AppendLine ();
 		//Resources
-		sb.Append (updateStat(stats [1], playerResources));
+		sb.Append (UpdateStat(stats [1], playerResources));
 		sb.AppendLine ();
 		//Planets
-		sb.Append (updateStat(stats [2], playerPlanets.Count));
+		sb.Append (UpdateStat(stats [2], playerPlanets.Count));
 		return sb.ToString ();
 	}
 
@@ -85,11 +87,11 @@ public class ManagerScript : Singleton<ManagerScript> {
 		sb.Append (stats [0]);
 		sb.AppendLine ();
 		//Planets
-		sb.Append (updateStat(stats [1], enemyPlanets.Count));
+		sb.Append (UpdateStat(stats [1], enemyPlanets.Count));
 		return sb.ToString ();
 	}
 
-	string updateStat(string str, int stat) {
+	string UpdateStat(string str, int stat) {
 		int startPos = str.IndexOf (":") + 1;
 		string deleted = str.Remove (startPos);
 		string inserted = deleted.Insert (startPos, " " + stat);
@@ -129,56 +131,55 @@ public class ManagerScript : Singleton<ManagerScript> {
 	}
 
 	public void ChangeSelection(PlanetScript planet) {
-
-        if (selectedPlanet)
-        {
-            for (int i = 0; i < selectedPlanet.adjacentPlanet.Length; i++)
-            {
-                PlanetScript ps = selectedPlanet.adjacentPlanet[i];
-                //Deactivate star ranking for non-adjacent planets
-
-                ps.rankingScript.SetActive(false);
-            }
-        }
-		
-
-
-		for (int i = 0; i < planet.adjacentPlanet.Length; i++) {
-			PlanetScript ps = planet.adjacentPlanet [i];
-
-			//Activate star ranking for adjacent planets
-			ps.rankingScript.SetActive (true);
-
-			//Determine Relative Soldier Strength
-			ps.rankingScript.currentRank = RelativePlanetStrength (planet, ps);
-		}
-        if (planet.rankingScript)
-        {
-            planet.rankingScript.SetActive(false);
-        }
-
-
 		this.selectedPlanet = planet;
 
         ContextualMenuManagerScript.Instance.ActivateForPlanet(planet);
 	}
 
-	public int RelativePlanetStrength(PlanetScript basePlanet, PlanetScript comparePlanet) {
-		int soldierDiff = comparePlanet.enemySoldiers.soldierCount - basePlanet.playerSoldiers.soldierCount;
+	void SetPlanetStarRanking() {
+		int numPlanets = planets.Length;
+		for (int i = 0; i < numPlanets; i++) {
+			PlanetScript ps = planets[i];
+			//Turn off ranking stars if there is no ownership
+			if (ps.planetOwnership == PlanetScript.Ownership.Neutral) {
+				ps.rankingScript.SetActive (false);
+				continue;
+			} else
+				ps.rankingScript.SetActive (true);
+			//Determine Soldier Strength
+			int skulls = AbsolutePlanetStrength(ps);
+			ps.rankingScript.currentRank = Mathf.Min (skulls, 5);
+			//Determine star color
+			ps.rankingScript.activeColor = SkullColor(ps.planetOwnership, skulls);
+		}
+	}
 
-		float percDiff = basePlanet.playerSoldiers.soldierCount == 0 ? 0 : soldierDiff / (float)Mathf.Max(basePlanet.playerSoldiers.soldierCount, comparePlanet.enemySoldiers.soldierCount);
+	int AbsolutePlanetStrength(PlanetScript ps) {
+		int skulls = 0;
+		switch (ps.planetOwnership) {
+		case PlanetScript.Ownership.Player:
+			skulls = ps.playerSoldiers.soldierCount / GamePlay.SOLDIERS_PER_SKULL;
+			return (ps.playerSoldiers.soldierCount == 0 ? 0 : skulls + 1);
+		case PlanetScript.Ownership.Enemy:
+			skulls = ps.enemySoldiers.soldierCount / GamePlay.SOLDIERS_PER_SKULL;
+			return (ps.enemySoldiers.soldierCount == 0 ? 0 : skulls + 1);
+		default:
+			return 0;
+		}
+	}
 
-		if (percDiff >= 0.3f)
-			return 5;
-		else if (percDiff > 0.1f)
-			return 4;
-		else if (percDiff >= -0.1f && percDiff <= 0.1f)
-			return 3;
-		else if (percDiff < -0.1f)
-			return 2;
-		else if (percDiff <= -0.3f)
-			return 1;
-		return 1;
+	Color SkullColor(PlanetScript.Ownership ownership, int skulls) {
+		if (skulls > 5)
+			return Color.magenta;
+
+		switch (ownership) {
+		case PlanetScript.Ownership.Player:
+			return Color.yellow;
+		case PlanetScript.Ownership.Enemy:
+			return Color.blue;
+		default:
+			return Color.white; //Shouldn't happen
+		}
 	}
 	/**
 	 * The planet variable should store the current post-capture "new" ownership
