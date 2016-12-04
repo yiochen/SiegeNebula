@@ -10,6 +10,7 @@ public class PlanetControlScript : MonoBehaviour {
     public float minLaunchingDistance = 5.0f;
     public float pathChosingThreshold = 0.5f; // how far can player drop the ship away from the path
 
+    private PathScript potentialPath = null;
 	// Use this for initialization
 	void Start () {
         planetScript = GetComponent<PlanetScript>();
@@ -17,15 +18,34 @@ public class PlanetControlScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        PathScript potentialPath = null;
         if (isLaunching)
         {
             UpdateLaunching();
+
+            potentialPath = GetPotentiallyQualifiedPath(EventManagerScript.GetMouseInWorldPosition());
+     
+            if (potentialPath != null)
+            {
+                potentialPath.DisplayVisualHint(transform);
+            }
         }
+
+        if (this.potentialPath != null && this.potentialPath != potentialPath)
+        {
+            this.potentialPath.StopVisualHint();
+        }
+
+        this.potentialPath = potentialPath;
+
 	}
 
     void OnMouseDown()
     {
-        PrepareLaunching();
+        if (planetScript.ships[Indices.SHIP_PLAYER] != null)
+        {
+            PrepareLaunching();
+        }
     }
 
     void OnMouseUp()
@@ -39,28 +59,30 @@ public class PlanetControlScript : MonoBehaviour {
 		mouseDownPosition = Input.mousePosition;
     }
 
+    PathScript GetPotentiallyQualifiedPath(Vector3 launchingPosition)
+    {
+        // iterate over all paths, find the one that is most close to mouse point (launchingPosition)
+        PathScript[] paths = planetScript.adjacentPaths;
+        PathScript chosenPath = null;
+        foreach (PathScript path in paths)
+        {
+            if (path.IsQualifiedForLaunching(launchingPosition))
+            {
+                chosenPath = path;
+            }
+        }
+        return chosenPath;
+    }
+
     void ExitLaunching(Vector3 launchingPosition)
     {
         if (launchingDirection.magnitude > minLaunchingDistance)
         {
-            // iterate over all paths, find the one that is most close to mouse point (launchingPosition)
-            PathScript[] paths = planetScript.adjacentPaths;
-            PathScript chosenPath = null;
-            foreach (PathScript path in paths)
+            if (potentialPath != null && planetScript.ships[Indices.SHIP_PLAYER] != null)
             {
-                if (path.IsQualifiedForLaunching(launchingPosition))
-                {
-                    chosenPath = path;
-                }
-            }
-            if (chosenPath)
-            {
-                Launch(chosenPath);
+                Launch(potentialPath);
             }
 
-        } else
-        {
-            Debug.Log("Not far enough");
         }
         isLaunching = false;
     }
@@ -72,15 +94,13 @@ public class PlanetControlScript : MonoBehaviour {
 
     void Launch(PathScript path)
     {
-		if (planetScript.ships [Indices.SHIP_PLAYER]) {
-			ShipScript ship = planetScript.ships [Indices.SHIP_PLAYER];
-			ship.gameObject.SetActive (true);
-            PlanetScript targetPlanet = path.getDirectionStartingFrom(transform).end.gameObject.GetComponent<PlanetScript>();
-            if (targetPlanet != null)
-            {
-                ship.LaunchShipOnPath(path, transform, targetPlanet);
-            }
+		ShipScript ship = planetScript.ships [Indices.SHIP_PLAYER];
+		ship.gameObject.SetActive (true);
+        PlanetScript targetPlanet = path.getDirectionStartingFrom(transform).end.gameObject.GetComponent<PlanetScript>();
+        if (targetPlanet != null)
+        {
+            ship.LaunchShipOnPath(path, transform, targetPlanet);
+        }
 
-		}
     }
 }

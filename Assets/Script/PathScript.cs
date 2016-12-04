@@ -17,6 +17,11 @@ public struct DirectionalPath
         this.shipStart = shipStart;
         this.shipEnd = shipEnd;
     }
+
+    public Vector3 GetDirectionVector()
+    {
+        return this.end.position - this.start.position;
+    }
 }
 public class PathScript : MonoBehaviour {
 
@@ -26,6 +31,8 @@ public class PathScript : MonoBehaviour {
     public float paddingStart = 1.0f;
     public float paddingEnd = 1.0f;
 
+    public GameObject hint;
+    private GameObject hintInstance;
     private Vector3 direction;
     private Vector3 shipStartPosition;
     private Vector3 shipEndPosition;
@@ -39,6 +46,9 @@ public class PathScript : MonoBehaviour {
             lineRenderer.SetPosition(0, start.position);
             lineRenderer.SetPosition(1, end.position);
         }
+        hintInstance = Instantiate(hint);
+        hintInstance.SetActive(false);
+        
         direction = (end.position - start.position).normalized;
         this.shipStartPosition = start.position + direction * paddingStart;
         this.shipEndPosition = end.position - direction * paddingEnd;
@@ -78,4 +88,22 @@ public class PathScript : MonoBehaviour {
         return isCloseToPath && isBetweenStartAndEnd;
     }
 
+    // Display an arrow at the start of the path
+    public void DisplayVisualHint(Transform start)
+    {
+        DirectionalPath path = getDirectionStartingFrom(start);
+        Vector3 direction = path.GetDirectionVector();
+        Quaternion rotation= hintInstance.transform.rotation;
+        rotation.SetLookRotation(direction);
+        hintInstance.transform.rotation = rotation;
+        hintInstance.transform.position = path.shipStart;
+        hintInstance.SetActive(true);
+
+    }
+
+    public void StopVisualHint()
+    {
+        hintInstance.SetActive(false);
+        
+    }
 }

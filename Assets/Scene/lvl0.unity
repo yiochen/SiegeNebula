@@ -200,6 +200,16 @@ Prefab:
       propertyPath: planetOwnership
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 224000011267396132, guid: 6864e36bc87280f478ab854adaebe88d,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011267396132, guid: 6864e36bc87280f478ab854adaebe88d,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6864e36bc87280f478ab854adaebe88d, type: 2}
   m_IsPrefabParent: 0
@@ -376,6 +386,16 @@ Prefab:
         type: 2}
       propertyPath: playerSoldiers.soldierCount
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000014156908642, guid: 23dafaa4f0193f645b0d02d56be9f690,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000014156908642, guid: 23dafaa4f0193f645b0d02d56be9f690,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23dafaa4f0193f645b0d02d56be9f690, type: 2}
@@ -709,6 +729,16 @@ Prefab:
       propertyPath: enemySoldiers.soldierCount
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 224000014156908642, guid: 23dafaa4f0193f645b0d02d56be9f690,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000014156908642, guid: 23dafaa4f0193f645b0d02d56be9f690,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23dafaa4f0193f645b0d02d56be9f690, type: 2}
   m_IsPrefabParent: 0
@@ -916,6 +946,16 @@ Prefab:
         type: 2}
       propertyPath: planetOwnership
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011267396132, guid: 6864e36bc87280f478ab854adaebe88d,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011267396132, guid: 6864e36bc87280f478ab854adaebe88d,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6864e36bc87280f478ab854adaebe88d, type: 2}
