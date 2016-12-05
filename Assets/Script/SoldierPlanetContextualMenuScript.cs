@@ -5,10 +5,10 @@ using UnityEngine.UI;
 public class SoldierPlanetContextualMenuScript : AbstractPanel {
     public Toggle soldierToggle;
 
-    private PlanetScript planetScript;
+    private AbstractPlanet planetScript;
     protected override void OnActivate()
     {
-        planetScript = targetGameObject.GetComponent<PlanetScript>();
+        planetScript = targetGameObject.GetComponent<AbstractPlanet>();
         CheckForUpdate();
     }
 

@@ -8,7 +8,7 @@ public class SpotlightManagerScript : Singleton<SpotlightManagerScript> {
 
 	// Update is called once per frame
 	void Update () {
-        PlanetScript selectedPlanet = ManagerScript.Instance.GetSelectedPlanet();
+        AbstractPlanet selectedPlanet = ManagerScript.Instance.GetSelectedPlanet();
 
 	    if (selectedPlanet)
         {

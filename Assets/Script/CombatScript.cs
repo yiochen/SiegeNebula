@@ -10,7 +10,7 @@ using System.Collections;
 
 public class CombatScript : MonoBehaviour {
 
-	private PlanetScript planet;
+	private AbstractPlanet planet;
 	private SoldierUnit playerSoldiers;
 	private SoldierUnit enemySoldiers;
 	private float timer;
@@ -26,11 +26,11 @@ public class CombatScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		planet = GetComponent<PlanetScript> ();
+		planet = GetComponent<AbstractPlanet> ();
 		this.playerSoldiers = planet.playerSoldiers;
 		this.enemySoldiers = planet.enemySoldiers;
 		timer = 0.0f;
-		isPlayerAttacker = (planet.planetOwnership == PlanetScript.Ownership.Enemy);
+		isPlayerAttacker = (planet.planetOwnership == AbstractPlanet.Ownership.Enemy);
 	}
 	
 	// Update is called once per frame

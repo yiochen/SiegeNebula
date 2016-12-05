@@ -38,10 +38,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011619903582}
-  - 114: {fileID: 114000010714650518}
   - 114: {fileID: 114000013244661524}
   - 135: {fileID: 135000011565845782}
   - 114: {fileID: 114000014095526212}
+  - 114: {fileID: 114000013673539930}
   m_Layer: 0
   m_Name: ResourcePlanet
   m_TagString: Untagged
@@ -365,44 +365,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114000010714650518
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011833804262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdbc77d4ae617e449af4e665b0eb35cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isContested: 0
-  type: 3
-  planetOwnership: 0
-  shipPrefab: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
-    type: 2}
-  playerSoldiers:
-    soldierCount: 0
-    defense: 0
-    defenseMod: 0
-    attackMod: 0
-  enemySoldiers:
-    soldierCount: 0
-    defense: 0
-    defenseMod: 0
-    attackMod: 0
-  playerEngineerCount: 0
-  enemyEngineerCount: 0
-  resourceCount: 1200
-  adjacentPlanet: []
-  adjacentPaths: []
-  ships:
-  - {fileID: 0}
-  - {fileID: 0}
-  rankingScript: {fileID: 114000013657720470}
-  isSelected: 0
-  isTrainingSoldiers: 0
-  isTrainingEngineers: 0
 --- !u!114 &114000011190827734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -550,6 +512,40 @@ MonoBehaviour:
   unitSprite: {fileID: 1000010881327284, guid: 1f0cc93e62dcca443b9457fb2bc2b83c, type: 2}
   activeColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   shadowColor: {r: 1, g: 1, b: 1, a: 0.281}
+--- !u!114 &114000013673539930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011833804262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24fef5439e03b054591716828927c68c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isContested: 0
+  planetOwnership: 0
+  shipPrefab: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
+    type: 2}
+  playerSoldiers:
+    soldierCount: 0
+    defense: 0
+    defenseMod: 0
+    attackMod: 0
+  enemySoldiers:
+    soldierCount: 0
+    defense: 0
+    defenseMod: 0
+    attackMod: 0
+  adjacentPlanet: []
+  adjacentPaths: []
+  ships:
+  - {fileID: 0}
+  - {fileID: 0}
+  rankingScript: {fileID: 114000010476336604, guid: 06a77a60da8dd4b4fac8e2c0f44c4725,
+    type: 2}
+  isSelected: 0
+  isTrainingSoldiers: 0
 --- !u!114 &114000013813816296
 MonoBehaviour:
   m_ObjectHideFlags: 1

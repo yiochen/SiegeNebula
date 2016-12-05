@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43773964, g: 0.48559332, b: 0.5658078, a: 1}
+  m_IndirectSpecularColor: {r: 0.43773988, g: 0.48559362, b: 0.5658083, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -195,20 +195,24 @@ Prefab:
       propertyPath: m_Name
       value: SoldierPlanet (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 114000010714650518, guid: 6864e36bc87280f478ab854adaebe88d,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: planetOwnership
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224000011267396132, guid: 6864e36bc87280f478ab854adaebe88d,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000011267396132, guid: 6864e36bc87280f478ab854adaebe88d,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012237042112, guid: 6864e36bc87280f478ab854adaebe88d,
+        type: 2}
+      propertyPath: planetOwnership
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6864e36bc87280f478ab854adaebe88d, type: 2}
@@ -271,7 +275,7 @@ Prefab:
         type: 2}
       propertyPath: selectedPlanet
       value: 
-      objectReference: {fileID: 1570022040}
+      objectReference: {fileID: 0}
     - target: {fileID: 114000013970308016, guid: d1271c03180123246bb6e3ac3665f65c,
         type: 2}
       propertyPath: slideManager
@@ -381,11 +385,6 @@ Prefab:
     - target: {fileID: 4000011619903582, guid: 23dafaa4f0193f645b0d02d56be9f690, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010714650518, guid: 23dafaa4f0193f645b0d02d56be9f690,
-        type: 2}
-      propertyPath: playerSoldiers.soldierCount
-      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 224000014156908642, guid: 23dafaa4f0193f645b0d02d56be9f690,
         type: 2}
@@ -719,13 +718,11 @@ Prefab:
       propertyPath: m_Name
       value: HybridPlanet (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 114000010714650518, guid: 23dafaa4f0193f645b0d02d56be9f690,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: planetOwnership
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114000010714650518, guid: 23dafaa4f0193f645b0d02d56be9f690,
-        type: 2}
+    - target: {fileID: 0}
       propertyPath: enemySoldiers.soldierCount
       value: 100
       objectReference: {fileID: 0}
@@ -737,6 +734,11 @@ Prefab:
     - target: {fileID: 224000014156908642, guid: 23dafaa4f0193f645b0d02d56be9f690,
         type: 2}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013064032460, guid: 23dafaa4f0193f645b0d02d56be9f690,
+        type: 2}
+      propertyPath: planetOwnership
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -803,12 +805,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4000011619903582, guid: 23dafaa4f0193f645b0d02d56be9f690,
     type: 2}
   m_PrefabInternal: {fileID: 954087789}
---- !u!114 &1570022040 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000010714650518, guid: 23dafaa4f0193f645b0d02d56be9f690,
-    type: 2}
-  m_PrefabInternal: {fileID: 954087789}
-  m_Script: {fileID: 11500000, guid: bdbc77d4ae617e449af4e665b0eb35cd, type: 3}
 --- !u!1001 &1585346481
 Prefab:
   m_ObjectHideFlags: 0
@@ -942,20 +938,20 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114000010714650518, guid: 6864e36bc87280f478ab854adaebe88d,
-        type: 2}
-      propertyPath: planetOwnership
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 224000011267396132, guid: 6864e36bc87280f478ab854adaebe88d,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000011267396132, guid: 6864e36bc87280f478ab854adaebe88d,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012237042112, guid: 6864e36bc87280f478ab854adaebe88d,
+        type: 2}
+      propertyPath: planetOwnership
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6864e36bc87280f478ab854adaebe88d, type: 2}

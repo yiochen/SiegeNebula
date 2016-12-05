@@ -8,7 +8,7 @@ public class PlanetGUIScript : MonoBehaviour {
 	public Slider combatBar;
 
 	private Light spotLight;
-	private PlanetScript planet;
+	private AbstractPlanet planet;
 
 	private float flickerTimer = 0f;
 	private const float FLICKER = 0.25f;
@@ -16,7 +16,7 @@ public class PlanetGUIScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        planet = transform.parent.gameObject.GetComponent<PlanetScript>();
+        planet = transform.parent.gameObject.GetComponent<AbstractPlanet>();
 		spotLight = combatBar.gameObject.GetComponentInChildren<Light> ();
 		spotLight.type = LightType.Spot;
 		spotLight.intensity = 0;
@@ -27,10 +27,10 @@ public class PlanetGUIScript : MonoBehaviour {
 	void Update () {
         switch (planet.planetOwnership)
         {
-            case PlanetScript.Ownership.Enemy:
+            case AbstractPlanet.Ownership.Enemy:
                 OwnershipImage.color = Color.blue;
                 break;
-            case PlanetScript.Ownership.Player:
+            case AbstractPlanet.Ownership.Player:
                 OwnershipImage.color = Color.yellow;
                 break;
             default:

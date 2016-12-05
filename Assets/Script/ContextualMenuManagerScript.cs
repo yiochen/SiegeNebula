@@ -6,14 +6,14 @@ using System;
 [Serializable]
 public struct ContextualMenuPair
 {
-    public PlanetScript.PlanetType planetType;
+    public AbstractPlanet.PlanetType planetType;
     public GameObject contextualMenu;
 }
 public class ContextualMenuManagerScript : Singleton<ContextualMenuManagerScript> {
     // use for inspector only
     public ContextualMenuPair[] contextualMenuMapping;
 
-    private Dictionary<PlanetScript.PlanetType, GameObject> contextualMenuMap;
+    private Dictionary<AbstractPlanet.PlanetType, GameObject> contextualMenuMap;
 
     private GameObject selectedPlanet;
     private GameObject activatedPanel;
@@ -22,7 +22,7 @@ public class ContextualMenuManagerScript : Singleton<ContextualMenuManagerScript
 	// Use this for initialization
 	void Start () {
         Debug.Log("contextual menu manager created");
-        contextualMenuMap = new Dictionary<PlanetScript.PlanetType, GameObject>();
+        contextualMenuMap = new Dictionary<AbstractPlanet.PlanetType, GameObject>();
         foreach (ContextualMenuPair pair in contextualMenuMapping)
         {
             contextualMenuMap.Add(pair.planetType, pair.contextualMenu);
@@ -52,11 +52,11 @@ public class ContextualMenuManagerScript : Singleton<ContextualMenuManagerScript
         activatedPanel = null;
     }
 
-    public void ActivateForPlanet(PlanetScript planet)
+    public void ActivateForPlanet(AbstractPlanet planet)
     {
         Deactivate();
         selectedPlanet = planet.gameObject;
-        activatedPanel = contextualMenuMap[planet.type];
+		activatedPanel = contextualMenuMap[planet.GetPlanetType()];
         activatedPanel.SetActive(true);
         panelScripts = activatedPanel.GetComponents<AbstractPanel>();
         foreach (AbstractPanel panelScript in panelScripts)

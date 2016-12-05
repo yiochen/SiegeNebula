@@ -22,23 +22,23 @@ public class ManagerScript : Singleton<ManagerScript> {
     public PathManagerScript pathManager;
 	public SlideManagerScript slideManager;
 
-	public List<PlanetScript> playerPlanets;
-	public List<PlanetScript> enemyPlanets;
+	public List<AbstractPlanet> playerPlanets;
+	public List<AbstractPlanet> enemyPlanets;
 	public int playerResources;
 	public int enemyResources;
 
 	public SoldierUnit playerSoldiers;
 	public SoldierUnit enemySoldiers;
 
-	private PlanetScript[] planets;
+	private AbstractPlanet[] planets;
 	private Text[] textBoxes;
     
-	private PlanetScript selectedPlanet;
+	private AbstractPlanet selectedPlanet;
 
 
 	// Use this for initialization
 	void Start () {
-		planets = planetContainer.GetComponentsInChildren<PlanetScript>();
+		planets = planetContainer.GetComponentsInChildren<AbstractPlanet>();
 		playerPlanets.Capacity = planets.Length;
 		enemyPlanets.Capacity = planets.Length;
 		PlanetAssignment ();
@@ -114,21 +114,21 @@ public class ManagerScript : Singleton<ManagerScript> {
 	}
 
 	void PlanetAssignment() {
-		foreach (PlanetScript planet in planets) {
+		foreach (AbstractPlanet planet in planets) {
 			switch (planet.planetOwnership) {
-			case PlanetScript.Ownership.Player:
+			case AbstractPlanet.Ownership.Player:
 				playerPlanets.Add (planet);
 				break;
-			case PlanetScript.Ownership.Enemy:
+			case AbstractPlanet.Ownership.Enemy:
 				enemyPlanets.Add (planet);
 				break;
-			case PlanetScript.Ownership.Neutral:
+			case AbstractPlanet.Ownership.Neutral:
 				break;
 			}
 		}
 	}
 
-	public void ChangeSelection(PlanetScript planet) {
+	public void ChangeSelection(AbstractPlanet planet) {
 		this.selectedPlanet = planet;
 
         ContextualMenuManagerScript.Instance.ActivateForPlanet(planet);
@@ -137,9 +137,9 @@ public class ManagerScript : Singleton<ManagerScript> {
 	void SetPlanetStarRanking() {
 		int numPlanets = planets.Length;
 		for (int i = 0; i < numPlanets; i++) {
-			PlanetScript ps = planets[i];
+			AbstractPlanet ps = planets[i];
 			//Turn off ranking stars if there is no ownership
-			if (ps.planetOwnership == PlanetScript.Ownership.Neutral) {
+			if (ps.planetOwnership == AbstractPlanet.Ownership.Neutral) {
 				ps.rankingScript.SetActive (false);
 				continue;
 			} else
@@ -152,13 +152,13 @@ public class ManagerScript : Singleton<ManagerScript> {
 		}
 	}
 
-	int AbsolutePlanetStrength(PlanetScript ps) {
+	int AbsolutePlanetStrength(AbstractPlanet ps) {
 		int skulls = 0;
 		switch (ps.planetOwnership) {
-		case PlanetScript.Ownership.Player:
+		case AbstractPlanet.Ownership.Player:
 			skulls = ps.playerSoldiers.soldierCount / GamePlay.SOLDIERS_PER_SKULL;
 			return (ps.playerSoldiers.soldierCount == 0 ? 0 : skulls + 1);
-		case PlanetScript.Ownership.Enemy:
+		case AbstractPlanet.Ownership.Enemy:
 			skulls = ps.enemySoldiers.soldierCount / GamePlay.SOLDIERS_PER_SKULL;
 			return (ps.enemySoldiers.soldierCount == 0 ? 0 : skulls + 1);
 		default:
@@ -166,14 +166,14 @@ public class ManagerScript : Singleton<ManagerScript> {
 		}
 	}
 
-	Color SkullColor(PlanetScript.Ownership ownership, int skulls) {
+	Color SkullColor(AbstractPlanet.Ownership ownership, int skulls) {
 		if (skulls > 5)
 			return Color.magenta;
 
 		switch (ownership) {
-		case PlanetScript.Ownership.Player:
+		case AbstractPlanet.Ownership.Player:
 			return Color.yellow;
-		case PlanetScript.Ownership.Enemy:
+		case AbstractPlanet.Ownership.Enemy:
 			return Color.blue;
 		default:
 			return Color.white; //Shouldn't happen
@@ -182,31 +182,31 @@ public class ManagerScript : Singleton<ManagerScript> {
 	/**
 	 * The planet variable should store the current post-capture "new" ownership
 	 **/
-	public void CapturePlanet(PlanetScript.Ownership previousOwner, PlanetScript planet) {
+	public void CapturePlanet(AbstractPlanet.Ownership previousOwner, AbstractPlanet planet) {
 		switch (planet.planetOwnership) {
-		case PlanetScript.Ownership.Player:
-			if (previousOwner == PlanetScript.Ownership.Enemy) {
+		case AbstractPlanet.Ownership.Player:
+			if (previousOwner == AbstractPlanet.Ownership.Enemy) {
 				enemyPlanets.Remove (planet);
 				playerPlanets.Add (planet);
-			} else if (previousOwner == PlanetScript.Ownership.Neutral) {
+			} else if (previousOwner == AbstractPlanet.Ownership.Neutral) {
 				playerPlanets.Add (planet);
 			} else { //This condition shouldn't happen
 				if (!playerPlanets.Contains (planet))
 					playerPlanets.Add (planet);
 			}
 			break;
-		case PlanetScript.Ownership.Enemy:
-			if (previousOwner == PlanetScript.Ownership.Player) {
+		case AbstractPlanet.Ownership.Enemy:
+			if (previousOwner == AbstractPlanet.Ownership.Player) {
 				playerPlanets.Remove (planet);
 				enemyPlanets.Add (planet);
-			} else if (previousOwner == PlanetScript.Ownership.Neutral) {
+			} else if (previousOwner == AbstractPlanet.Ownership.Neutral) {
 				enemyPlanets.Add (planet);
 			} else { //This condition shouldn't happen
 				if (!enemyPlanets.Contains (planet))
 					enemyPlanets.Add (planet);
 			}
 			break;
-		case PlanetScript.Ownership.Neutral: //This condition shouldn't happen
+		case AbstractPlanet.Ownership.Neutral: //This condition shouldn't happen
 			if (enemyPlanets.Contains (planet))
 				enemyPlanets.Remove (planet);
 
@@ -216,40 +216,40 @@ public class ManagerScript : Singleton<ManagerScript> {
 		}
 	}
 
-	public PlanetScript GetSelectedPlanet() {
+	public AbstractPlanet GetSelectedPlanet() {
 		return selectedPlanet;
 	}
 
-	public void TrainSoldier(PlanetScript planet) {
+	public void TrainSoldier(AbstractPlanet planet) {
 		switch (planet.planetOwnership) {
-		case PlanetScript.Ownership.Player:
+		case AbstractPlanet.Ownership.Player:
 			if (playerResources >= GamePlay.SOLDIER_COST) {
 				playerSoldiers.soldierCount += GamePlay.SOLDIER_UNIT;
 				playerResources -= GamePlay.SOLDIER_COST;
 				planet.playerSoldiers.soldierCount += GamePlay.SOLDIER_UNIT;
 			}
 			break;
-		case PlanetScript.Ownership.Enemy:
+		case AbstractPlanet.Ownership.Enemy:
 			if (enemyResources >= GamePlay.SOLDIER_COST) {
 				enemySoldiers.soldierCount += GamePlay.SOLDIER_UNIT;
 				enemyResources -= GamePlay.SOLDIER_COST;
 				planet.enemySoldiers.soldierCount += GamePlay.SOLDIER_UNIT;
 			}
 			break;
-		case PlanetScript.Ownership.Neutral:
+		case AbstractPlanet.Ownership.Neutral:
 			break;
 		}
 	}
 
-	public void MineResources (PlanetScript.Ownership owner) {
+	public void MineResources (AbstractPlanet.Ownership owner) {
 		switch (owner) {
-		case PlanetScript.Ownership.Player:
+		case AbstractPlanet.Ownership.Player:
 			playerResources += GamePlay.RESOURCE_RATE;
 			break;
-		case PlanetScript.Ownership.Enemy:
+		case AbstractPlanet.Ownership.Enemy:
 			enemyResources += GamePlay.RESOURCE_RATE;
 			break;
-		case PlanetScript.Ownership.Neutral:
+		case AbstractPlanet.Ownership.Neutral:
 			break;
 
 		}

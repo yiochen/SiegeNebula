@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class NormalPanetContextualMenuScript : AbstractPanel {
 
-    PlanetScript planetScript;
+    AbstractPlanet planetScript;
     public StatLabelScript figherLabel;
     public StatLabelScript engineerLabel;
     public Button shipButton;
@@ -13,7 +13,7 @@ public class NormalPanetContextualMenuScript : AbstractPanel {
 
     protected override void OnActivate()
     {
-        planetScript = targetGameObject.GetComponent<PlanetScript>();
+        planetScript = targetGameObject.GetComponent<AbstractPlanet>();
         CheckForUpdate();
     }
     protected override void CheckForUpdate()
@@ -21,7 +21,7 @@ public class NormalPanetContextualMenuScript : AbstractPanel {
         if (planetScript)
         {
             figherLabel.SetValue("" + planetScript.playerSoldiers.soldierCount);
-            if (planetScript.ships[Indices.SHIP_PLAYER]  || planetScript.planetOwnership.Equals(PlanetScript.Ownership.Player))
+            if (planetScript.ships[Indices.SHIP_PLAYER]  || planetScript.planetOwnership.Equals(AbstractPlanet.Ownership.Player))
             {
                 shipButton.gameObject.SetActive(true);
             }
@@ -50,7 +50,7 @@ public class NormalPanetContextualMenuScript : AbstractPanel {
     public void PlayerCreateShip()
     {
         Debug.Log("create ship for player");
-        ShipScript ship = planetScript.CreateShip(PlanetScript.Ownership.Player);
+        ShipScript ship = planetScript.CreateShip(AbstractPlanet.Ownership.Player);
         if (ship != null) {
             planetScript.LoadSoldiersToShip(ship);
         }

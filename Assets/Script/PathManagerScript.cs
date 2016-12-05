@@ -15,7 +15,7 @@ public class PathManagerScript : MonoBehaviour {
 
 	}
 
-	public PathScript[] GetAdjacentPaths(PlanetScript planet)
+	public PathScript[] GetAdjacentPaths(AbstractPlanet planet)
     {
 
         List<PathScript> paths = new List<PathScript>();
@@ -32,17 +32,17 @@ public class PathManagerScript : MonoBehaviour {
         return paths.ToArray();
     }
 
-    public PlanetScript[] GetAdjacentPlanets(PlanetScript planet)
+    public AbstractPlanet[] GetAdjacentPlanets(AbstractPlanet planet)
     {
-        List<PlanetScript> planets = new List<PlanetScript>();
+        List<AbstractPlanet> planets = new List<AbstractPlanet>();
         foreach (PathScript path in this.pathList)
         {
             if (path.start == planet.transform)
             {
-                planets.Add(path.end.gameObject.GetComponent<PlanetScript>());
+                planets.Add(path.end.gameObject.GetComponent<AbstractPlanet>());
             } else if (path.end == planet.transform)
             {
-                planets.Add(path.start.gameObject.GetComponent<PlanetScript>());
+                planets.Add(path.start.gameObject.GetComponent<AbstractPlanet>());
             }
         }
         return planets.ToArray();

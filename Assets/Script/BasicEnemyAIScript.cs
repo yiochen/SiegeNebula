@@ -11,10 +11,10 @@ using System.Collections.Generic;
  **/
 public class BasicEnemyAIScript : MonoBehaviour {
 
-	private List<PlanetScript> planets;
+	private List<AbstractPlanet> planets;
 	private ManagerScript gameManager;
 	private float thinkTimer;
-	private PlanetScript neighboringPlanet;
+	private AbstractPlanet neighboringPlanet;
 	private Vector3 launchingPosition;
 
 	// Use this for initialization
@@ -43,12 +43,12 @@ public class BasicEnemyAIScript : MonoBehaviour {
 		planets = gameManager.enemyPlanets;
 	}
 
-	void PlanetActions(PlanetScript planet) {
+	void PlanetActions(AbstractPlanet planet) {
 		//Always create units
 		CreateUnits(planet);
 		//Always send units to neighboring planets once ship capacity is met
 		//Create ship
-		planet.CreateShip(PlanetScript.Ownership.Enemy);
+		planet.CreateShip(AbstractPlanet.Ownership.Enemy);
 		//Load Units to ship
 		planet.LoadSoldiersToShip (planet.ships[Indices.SHIP_ENEMY]);
 		//Load Soldiers Units until ship capacity is met
@@ -62,11 +62,11 @@ public class BasicEnemyAIScript : MonoBehaviour {
 		}
 	}
 
-	void CreateUnits(PlanetScript planet) {
+	void CreateUnits(AbstractPlanet planet) {
 		planet.TrainSoldiers (true);
 	}
 
-	void LaunchShip(PlanetScript planet, PlanetScript target, PathScript[] paths, ShipScript ship) {
+	void LaunchShip(AbstractPlanet planet, AbstractPlanet target, PathScript[] paths, ShipScript ship) {
 		PathScript chosenPath = null;
 		foreach (PathScript path in paths)
 		{
@@ -79,11 +79,11 @@ public class BasicEnemyAIScript : MonoBehaviour {
         //TODO remove reference in planetScript to enemyShip
 	}
 
-	PlanetScript ChoosePlanet(PlanetScript planet) {
-		PlanetScript result = null;
-		PlanetScript[] neighPlanets = planet.adjacentPlanet;
-		foreach (PlanetScript neighbor in neighPlanets) {
-			if (neighbor.planetOwnership != PlanetScript.Ownership.Enemy)
+	AbstractPlanet ChoosePlanet(AbstractPlanet planet) {
+		AbstractPlanet result = null;
+		AbstractPlanet[] neighPlanets = planet.adjacentPlanet;
+		foreach (AbstractPlanet neighbor in neighPlanets) {
+			if (neighbor.planetOwnership != AbstractPlanet.Ownership.Enemy)
 				result = neighbor;
 		}
 		if(result == null)
