@@ -32,11 +32,10 @@ class GamePlay
 	public const int SHIP_CAPACITY = 100;
 	public const int SOLDIER_UNIT = 5;
 	public const int SOLDIER_COST = 10;
-	public const int ENGINEER_COST = 3;
 
 	public const float PLANET_TICK = 1.5f;
 	public const float PLANET_CHANGE = 1.0f;
-	public const int PLANET_RESOURCE_STD = 1200;
+	public const int RESOURCE_RATE = 5;
 	public const int SOLDIERS_PER_SKULL = 50;
 
 	public const string PLAYER_WIN = "You Won!";

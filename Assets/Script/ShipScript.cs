@@ -10,20 +10,13 @@ using System.Collections;
 **/
 
 public class ShipScript : MonoBehaviour {
-    [HideInInspector]
-	public Renderer shipRenderer; // get this using GetComponentInChildren
+	
 	[HideInInspector]
 	public PlanetScript.Ownership shipOwnership;
 	public float movementSpeed = 5.0f;
 	public int soldierCapacity;
-	public int engineerCapacity;
 	public int soldiersOnBoard;
     public float sizeChangingDistance = 1.0f;
-	private int engineersOnBoard;
-	private bool isEngineerLoading;
-	private bool isSoldierLoading;
-	private bool isUnloading;
-	private bool isShipMoving;
     public float filledPercentage
     {
         get
@@ -32,10 +25,6 @@ public class ShipScript : MonoBehaviour {
             if (soldierCapacity > 0)
             {
                 totalPercent += (float)soldiersOnBoard / (float)soldierCapacity;
-            }
-            if (engineerCapacity > 0)
-            {
-                totalPercent += (float)engineersOnBoard / (float)engineerCapacity;
             }
             return totalPercent;
         }
@@ -47,6 +36,10 @@ public class ShipScript : MonoBehaviour {
 	private PlanetScript targetPlanet;
 
     private DirectionalPath travelPath;
+	private Renderer shipRenderer;
+	private bool isSoldierLoading;
+	private bool isUnloading;
+	private bool isShipMoving;
 
     private float remainingDistance
     {
@@ -67,7 +60,7 @@ public class ShipScript : MonoBehaviour {
 	void Start () {
 		timer = 0;
 		soldierCapacity = GamePlay.SHIP_CAPACITY;
-
+		shipRenderer = GetComponentInChildren<Renderer> ();
 	}
 
 	// Update is called once per frame
@@ -79,8 +72,6 @@ public class ShipScript : MonoBehaviour {
 
 		if (isSoldierLoading) {
 			LoadSoldiersToShip ();
-		} else if (isEngineerLoading) {
-			LoadEngineersToShip ();
 		} else if (isUnloading) {
 			UnloadShip ();
 		}
@@ -103,18 +94,13 @@ public class ShipScript : MonoBehaviour {
 		isSoldierLoading = false;
 	}
 
-	public void StartLoadingEngineersToShip(PlanetScript planet) {
-		isEngineerLoading = true;
-		this.dockedPlanet = planet;
-	}
-
-	public void StopLoadingEngineersToShip() {
-		isEngineerLoading = false;
-	}
-
 	public void UnloadShip(PlanetScript planet) {
 		isUnloading = true;
 		this.dockedPlanet = planet;
+	}
+
+	public Renderer GetShipRenderer() {
+		return shipRenderer;
 	}
 
 	public void LaunchShipOnPath(PathScript path, Transform from, PlanetScript targetPlanet) {
@@ -179,60 +165,24 @@ public class ShipScript : MonoBehaviour {
 		}
 	}
 
-	void LoadEngineersToShip() {
-		if (engineersOnBoard >= engineerCapacity) {
-			engineersOnBoard = engineerCapacity;
-			isEngineerLoading = false;
-		} else {
-			timer += Time.deltaTime;
-			if (timer >= loadTimePerUnit) {
-				switch (shipOwnership) {
-				case PlanetScript.Ownership.Player:
-					if (dockedPlanet.playerEngineerCount > 0) {
-						engineersOnBoard++;
-						dockedPlanet.playerEngineerCount--;
-					} else {
-						isEngineerLoading = false;
-					}
-					break;
-				case PlanetScript.Ownership.Enemy:
-					if (dockedPlanet.enemyEngineerCount > 0) {
-						engineersOnBoard++;
-						dockedPlanet.enemyEngineerCount--;
-					} else {
-						isEngineerLoading = false;
-					}
-					break;
-				case PlanetScript.Ownership.Neutral:
-					break;
-				}
-				timer = 0;
-			}
-		}
-	}
-
 	void UnloadShip() {
 		switch (shipOwnership) {
 		case PlanetScript.Ownership.Player:
 			dockedPlanet.playerSoldiers.soldierCount += soldiersOnBoard;
-			dockedPlanet.playerEngineerCount += engineersOnBoard;
 			break;
 		case PlanetScript.Ownership.Enemy:
 			dockedPlanet.enemySoldiers.soldierCount += soldiersOnBoard;
-			dockedPlanet.enemyEngineerCount += engineersOnBoard;
 			break;
 		case PlanetScript.Ownership.Neutral:
 			break;
 		}
 
 		soldiersOnBoard = 0;
-		engineersOnBoard = 0;
 		isUnloading = false;
 	}
 
 	void MoveShip() {
 		isSoldierLoading = false;
-		isEngineerLoading = false;
 		isUnloading = false;
 		shipRenderer.enabled = true;
         if (traveledDistance <= sizeChangingDistance || remainingDistance <= sizeChangingDistance)

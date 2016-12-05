@@ -64,7 +64,6 @@ public class BasicEnemyAIScript : MonoBehaviour {
 
 	void CreateUnits(PlanetScript planet) {
 		planet.TrainSoldiers (true);
-		planet.TrainEngineers (true);
 	}
 
 	void LaunchShip(PlanetScript planet, PlanetScript target, PathScript[] paths, ShipScript ship) {

@@ -30,8 +30,6 @@ public class ManagerScript : Singleton<ManagerScript> {
 	public SoldierUnit playerSoldiers;
 	public SoldierUnit enemySoldiers;
 
-	private int enemyEngineers;
-	private int playerEngineers;
 	private PlanetScript[] planets;
 	private Text[] textBoxes;
     
@@ -243,35 +241,13 @@ public class ManagerScript : Singleton<ManagerScript> {
 		}
 	}
 
-	public void TrainEngineer(PlanetScript planet) {
-		switch (planet.planetOwnership) {
-		case PlanetScript.Ownership.Player:
-			if (playerResources >= GamePlay.ENGINEER_COST) {
-				playerEngineers++;
-				playerResources -= GamePlay.ENGINEER_COST;
-				planet.playerEngineerCount++;
-			}
-			break;
-		case PlanetScript.Ownership.Enemy:
-			if (enemyResources >= GamePlay.ENGINEER_COST) {
-				enemyEngineers++;
-				enemyResources -= GamePlay.ENGINEER_COST;
-				planet.enemyEngineerCount++;
-			}
-			break;
-		case PlanetScript.Ownership.Neutral:
-			break;
-		}
-
-	}
-
-	public void AddToResourceCount (int val, PlanetScript.Ownership owner) {
+	public void MineResources (PlanetScript.Ownership owner) {
 		switch (owner) {
 		case PlanetScript.Ownership.Player:
-			playerResources += val;
+			playerResources += GamePlay.RESOURCE_RATE;
 			break;
 		case PlanetScript.Ownership.Enemy:
-			enemyResources += val;
+			enemyResources += GamePlay.RESOURCE_RATE;
 			break;
 		case PlanetScript.Ownership.Neutral:
 			break;
@@ -284,20 +260,12 @@ public class ManagerScript : Singleton<ManagerScript> {
 		return playerSoldiers.soldierCount;
 	}
 
-	public int GetPlayerEngineerCount() {
-		return playerEngineers;
-	}
-
 	public int GetPlayerResourceCount() {
 		return playerResources;
 	}
 
 	public int GetEnemySoldierCount() {
 		return enemySoldiers.soldierCount;
-	}
-
-	public int GetEnemyEngineerCount() {
-		return enemyEngineers;
 	}
 
 	public int GetEnemyResourceCount() {

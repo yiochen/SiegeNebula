@@ -32,10 +32,6 @@ public class PlanetScript : MonoBehaviour {
 
 	public SoldierUnit playerSoldiers;
 	public SoldierUnit enemySoldiers;
-	public int playerEngineerCount;
-	public int enemyEngineerCount;
-
-	public int resourceCount;
 
 	public PlanetScript[] adjacentPlanet;
 
@@ -54,7 +50,6 @@ public class PlanetScript : MonoBehaviour {
 
     // TODO: set to true for testing only, change to private later
 	public bool isTrainingSoldiers;
-	public bool isTrainingEngineers;
 
 
 	// Use this for initialization
@@ -62,11 +57,8 @@ public class PlanetScript : MonoBehaviour {
         gameManager = ManagerScript.Instance;
 		timer = 0;
 
-		resourceCount = GamePlay.PLANET_RESOURCE_STD;
-
 		isSelected = false;
 		isTrainingSoldiers = false;
-		isTrainingEngineers = false;
 
         shipsContainer = gameManager.shipContainer;
 
@@ -81,16 +73,12 @@ public class PlanetScript : MonoBehaviour {
 
 		PlanetStateChanges ();
 
-		if(isSelected)
-			HandleKeyboardInput ();
-
 		timer += Time.deltaTime;
 		if (timer >= GamePlay.PLANET_TICK) {
 			switch (type) {
 			case PlanetType.Hybrid:
 				MineResources ();
 				CreateSoldiers ();
-				CreateEngineers ();
 				break;
 			case PlanetType.Normal:
 				break;
@@ -99,25 +87,12 @@ public class PlanetScript : MonoBehaviour {
 				break;
 			case PlanetType.Soldier:
 				CreateSoldiers ();
-				CreateEngineers ();
 				break;
 			}
 			timer = 0;
 		}
     }
-	/**
-	 * This is mostly for testing.
-	 * S produces soldiers
-	 * E produces engineers
-	 * we want to have visual buttons for creating soldiers/engineers
-	**/
-	void HandleKeyboardInput() {
-		if (Input.GetKeyDown(KeyCode.S)) {
-			isTrainingSoldiers = !isTrainingSoldiers;
-		} else if (Input.GetKeyDown(KeyCode.E)) {
-			isTrainingEngineers = !isTrainingEngineers;
-		}
-	}
+
 	/**
 	 * Selections need to be managed by the GameManager.
 	 * We should see visual indication of a selection.
@@ -149,7 +124,6 @@ public class PlanetScript : MonoBehaviour {
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Neutral;
 					gameManager.CapturePlanet (Ownership.Enemy, this);
-					isTrainingEngineers = false;
 					isTrainingSoldiers = false;
 					changeTimer = 0;
 				}
@@ -168,7 +142,6 @@ public class PlanetScript : MonoBehaviour {
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Enemy;
 					gameManager.CapturePlanet (Ownership.Neutral, this);
-					isTrainingEngineers = false;
 					isTrainingSoldiers = false;
 					changeTimer = 0;
 				}
@@ -178,7 +151,6 @@ public class PlanetScript : MonoBehaviour {
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Player;
 					gameManager.CapturePlanet (Ownership.Neutral, this);
-					isTrainingEngineers = false;
 					isTrainingSoldiers = false;
 					changeTimer = 0;
 				}
@@ -197,7 +169,6 @@ public class PlanetScript : MonoBehaviour {
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					planetOwnership = Ownership.Neutral;
 					gameManager.CapturePlanet (Ownership.Player, this);
-					isTrainingEngineers = false;
 					isTrainingSoldiers = false;
 					changeTimer = 0;
 				}
@@ -210,28 +181,7 @@ public class PlanetScript : MonoBehaviour {
 	}
 
 	void MineResources() {
-		switch (planetOwnership) {
-		case Ownership.Player:
-			if (resourceCount > playerEngineerCount) {
-				resourceCount -= playerEngineerCount;
-				gameManager.AddToResourceCount (playerEngineerCount, planetOwnership);
-			} else if(resourceCount > 0 && resourceCount < playerEngineerCount) {
-				gameManager.AddToResourceCount (resourceCount, planetOwnership);
-				resourceCount = 0;
-			}
-			break;
-		case Ownership.Enemy:
-			if (resourceCount > enemyEngineerCount) {
-				resourceCount -= enemyEngineerCount;
-				gameManager.AddToResourceCount (enemyEngineerCount, planetOwnership);
-			} else if(resourceCount > 0 && resourceCount < enemyEngineerCount) {
-				gameManager.AddToResourceCount (resourceCount, planetOwnership);
-				resourceCount = 0;
-			}
-			break;
-		case Ownership.Neutral:
-			break;
-		}
+		gameManager.MineResources (planetOwnership);	
 	}
 
 	public ShipScript CreateShip(Ownership ownership) {
@@ -286,34 +236,22 @@ public class PlanetScript : MonoBehaviour {
 			break;
 		}
 		ships [index].transform.SetParent (shipsContainer.transform);
-		ships [index].shipRenderer.enabled = false;
+		ships [index].GetShipRenderer().enabled = false;
         return ships[index];
 	}
+
     public bool GetIsTrainingSoldiers ()
     {
         return isTrainingSoldiers;
     }
-    public bool GetIsTransingEngineers ()
-    {
-        return isTrainingEngineers;
-    }
+
 	public void TrainSoldiers(bool isTrue) {
 		isTrainingSoldiers = isTrue;
-	}
-
-	public void TrainEngineers(bool isTrue) {
-		isTrainingEngineers = isTrue;
 	}
 
 	void CreateSoldiers() {
 		if (isTrainingSoldiers) {
 			gameManager.TrainSoldier (this);
-		}
-	}
-
-	void CreateEngineers() {
-		if (isTrainingEngineers) {
-			gameManager.TrainEngineer (this);
 		}
 	}
 
@@ -323,14 +261,6 @@ public class PlanetScript : MonoBehaviour {
 
 	public void StopLoadingSoldiersToShip(ShipScript ship) {
 		ship.StopLoadingSoldiersToShip ();
-	}
-
-	public void LoadEngineersToShip(ShipScript ship) {
-		ship.StartLoadingEngineersToShip (this);
-	}
-
-	public void StopLoadingEngineersToShip(ShipScript ship) {
-		ship.StopLoadingEngineersToShip ();
 	}
 
 	public void UnLoadUnitsFromShip(ShipScript ship) {
