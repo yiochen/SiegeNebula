@@ -236,7 +236,7 @@ MonoBehaviour:
   maxRank: 5
   hideShadow: 0
   unitSprite: {fileID: 1000010881327284, guid: 1f0cc93e62dcca443b9457fb2bc2b83c, type: 2}
-  activeColor: {r: 0, g: 0, b: 1, a: 1}
+  activeColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   shadowColor: {r: 1, g: 1, b: 1, a: 0.281}
 --- !u!114 &114000010598899618
 MonoBehaviour:

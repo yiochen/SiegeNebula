@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isContested: 0
-  planetOwnership: 0
+  planetOwnership: 2
   shipPrefab: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
     type: 2}
   playerSoldiers:
@@ -487,8 +487,7 @@ MonoBehaviour:
   ships:
   - {fileID: 0}
   - {fileID: 0}
-  rankingScript: {fileID: 114000010476336604, guid: 06a77a60da8dd4b4fac8e2c0f44c4725,
-    type: 2}
+  rankingScript: {fileID: 114000012196560366}
   isSelected: 0
   isTrainingSoldiers: 0
 --- !u!114 &114000013244661524

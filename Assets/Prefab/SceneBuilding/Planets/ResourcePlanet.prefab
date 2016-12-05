@@ -542,8 +542,7 @@ MonoBehaviour:
   ships:
   - {fileID: 0}
   - {fileID: 0}
-  rankingScript: {fileID: 114000010476336604, guid: 06a77a60da8dd4b4fac8e2c0f44c4725,
-    type: 2}
+  rankingScript: {fileID: 114000013657720470}
   isSelected: 0
   isTrainingSoldiers: 0
 --- !u!114 &114000013813816296
