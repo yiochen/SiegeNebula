@@ -143,6 +143,21 @@ Prefab:
       propertyPath: planetOwnership
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 224000011052910994, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011052910994, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014282717094, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: planetOwnership
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41e7353571eb3064488a7ba8472c9d38, type: 2}
   m_IsPrefabParent: 0
@@ -241,7 +256,7 @@ Prefab:
         type: 2}
       propertyPath: dockedPlanet
       value: 
-      objectReference: {fileID: 1675131715}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e64c078d047535e40bbe8c039639d61e, type: 2}
   m_IsPrefabParent: 0
@@ -295,6 +310,16 @@ Prefab:
       propertyPath: ships.Array.data[0]
       value: 
       objectReference: {fileID: 1535011320}
+    - target: {fileID: 224000011052910994, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000011052910994, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41e7353571eb3064488a7ba8472c9d38, type: 2}
   m_IsPrefabParent: 0
@@ -744,12 +769,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 340941352}
   m_Script: {fileID: 11500000, guid: a14ddbb4bebe4f442bf42b94d22dc388, type: 3}
---- !u!114 &1675131715 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000010714650518, guid: 41e7353571eb3064488a7ba8472c9d38,
-    type: 2}
-  m_PrefabInternal: {fileID: 502748140}
-  m_Script: {fileID: 11500000, guid: bdbc77d4ae617e449af4e665b0eb35cd, type: 3}
 --- !u!114 &1711396814 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000010039953894, guid: e507d740e882029438a18fe2b81fe8f4,
