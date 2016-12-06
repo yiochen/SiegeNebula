@@ -44,11 +44,4 @@ public class SlideManagerScript : MonoBehaviour {
             return false;
         }
     }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Next();
-        }
-    }
 }
