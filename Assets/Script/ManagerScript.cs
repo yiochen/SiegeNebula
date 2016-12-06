@@ -20,6 +20,7 @@ public class ManagerScript : Singleton<ManagerScript> {
 	public GameObject planetContainer;
     public GameObject shipContainer;
     public PathManagerScript pathManager;
+	public AudioManager audioManager;
 
 	public List<AbstractPlanet> playerPlanets;
 	public List<AbstractPlanet> enemyPlanets;

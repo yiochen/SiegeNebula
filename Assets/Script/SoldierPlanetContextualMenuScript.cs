@@ -29,6 +29,7 @@ public class SoldierPlanetContextualMenuScript : AbstractPanel {
     public void CreateSoldiers(bool value)
     {
         Debug.Log("create soldier " + value);
+		ManagerScript.Instance.audioManager.PlaySound ("ButtonClick");
         planetScript.TrainSoldiers(value);
     }
 

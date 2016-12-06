@@ -57,6 +57,7 @@ public class NormalPanetContextualMenuScript : AbstractPanel {
         Debug.Log("create ship for player");
         ShipScript ship = planetScript.CreateShip(AbstractPlanet.Ownership.Player);
         if (ship != null) {
+			ManagerScript.Instance.audioManager.PlaySound ("ButtonClick");
             planetScript.LoadSoldiersToShip(ship);
         }
     }
