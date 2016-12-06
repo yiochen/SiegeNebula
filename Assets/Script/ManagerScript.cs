@@ -141,9 +141,9 @@ public class ManagerScript : Singleton<ManagerScript> {
 		yield return new WaitForSeconds (0.5f);
         //Store this scenes Index
         PlayerPrefs.SetInt(Prefs.GAME_RESULT, playerWon ? 1 : 0);
-		PlayerPrefs.SetInt(Prefs.PREV_SCENE, SceneManager.GetActiveScene().buildIndex);
+		PlayerPrefs.SetString(Prefs.PREV_SCENE, SceneManager.GetActiveScene().name);
 		//Need to create a next scene
-		SceneManager.LoadScene (0, LoadSceneMode.Single);
+		SceneManager.LoadScene (GameStageHelper.NEXT_SCENE, LoadSceneMode.Single);
 	}
 
 	void PlanetAssignment() {

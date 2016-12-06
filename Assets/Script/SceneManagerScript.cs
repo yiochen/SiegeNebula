@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class SceneManagerScript : MonoBehaviour {
 
-	private int prevScene;
-	private int nextScene;
+	private string prevScene;
+	private string nextScene;
     public Text resultText;
     
 	void Start() {
-		prevScene = PlayerPrefs.GetInt (Prefs.PREV_SCENE);
+		prevScene = PlayerPrefs.GetString (Prefs.PREV_SCENE);
         if (PlayerPrefs.GetInt(Prefs.GAME_RESULT) == 1)
         {
             resultText.text = "You Won!";
@@ -18,17 +18,21 @@ public class SceneManagerScript : MonoBehaviour {
         {
             resultText.text = "You Lost!";
         }
-		if (SceneManager.sceneCount - 1 == prevScene)
-			nextScene = prevScene;
-		else
-			nextScene = prevScene + 1;
+        nextScene = GameStageHelper.GetNextScene(prevScene);
 	}
 
 	public void NextScene() {
-		SceneManager.LoadScene (nextScene, LoadSceneMode.Single);
+        if (nextScene != null)
+        {
+            SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
+        }
+		
 	}
 
 	public void RetryScene() {
-		SceneManager.LoadScene (prevScene, LoadSceneMode.Single);
+        if (prevScene != null)
+        {
+            SceneManager.LoadScene(prevScene, LoadSceneMode.Single);
+        }
 	}
 }
