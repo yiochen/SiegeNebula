@@ -330,6 +330,11 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013673539930, guid: 288753881e87c64419001ca9b780b9f3,
+        type: 2}
+      propertyPath: planetOwnership
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 288753881e87c64419001ca9b780b9f3, type: 2}
   m_IsPrefabParent: 0
@@ -399,6 +404,11 @@ Prefab:
     - target: {fileID: 224000014156908642, guid: 23dafaa4f0193f645b0d02d56be9f690,
         type: 2}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013064032460, guid: 23dafaa4f0193f645b0d02d56be9f690,
+        type: 2}
+      propertyPath: planetOwnership
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1171,7 +1181,7 @@ Prefab:
         type: 2}
       propertyPath: selectedPlanet
       value: 
-      objectReference: {fileID: 2093260211}
+      objectReference: {fileID: 0}
     - target: {fileID: 114000013970308016, guid: d1271c03180123246bb6e3ac3665f65c,
         type: 2}
       propertyPath: slideManager
@@ -1395,6 +1405,11 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000014282717094, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: planetOwnership
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41e7353571eb3064488a7ba8472c9d38, type: 2}
   m_IsPrefabParent: 0
@@ -1498,6 +1513,11 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013673539930, guid: 288753881e87c64419001ca9b780b9f3,
+        type: 2}
+      propertyPath: planetOwnership
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 288753881e87c64419001ca9b780b9f3, type: 2}
@@ -1634,9 +1654,3 @@ Transform:
   m_PrefabParentObject: {fileID: 4000011619903582, guid: 41e7353571eb3064488a7ba8472c9d38,
     type: 2}
   m_PrefabInternal: {fileID: 1799596399}
---- !u!114 &2093260211 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000010714650518, guid: 23dafaa4f0193f645b0d02d56be9f690,
-    type: 2}
-  m_PrefabInternal: {fileID: 1771388208}
-  m_Script: {fileID: 11500000, guid: bdbc77d4ae617e449af4e665b0eb35cd, type: 3}
