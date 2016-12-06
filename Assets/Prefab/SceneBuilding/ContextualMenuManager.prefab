@@ -1354,7 +1354,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Engineer: 200'
+  m_Text: 'Fighter: 0'
 --- !u!114 &114000010862602228
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1495,7 +1495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990ec0f31a8a47443985f0145c7d668d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  figherLabel: {fileID: 114000010451406218}
+  soldierLabel: {fileID: 114000010451406218}
   engineerLabel: {fileID: 114000011667608254}
   shipButton: {fileID: 114000012657469900}
   shipButtonSlider: {fileID: 114000013349143798}
@@ -1614,7 +1614,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Engineer: 200'
+  m_Text: 'Engineer: 0'
 --- !u!114 &114000011350321324
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2036,7 +2036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990ec0f31a8a47443985f0145c7d668d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  figherLabel: {fileID: 114000012961013146}
+  soldierLabel: {fileID: 114000010258721058}
   engineerLabel: {fileID: 114000010452891590}
   shipButton: {fileID: 114000012244347284}
   shipButtonSlider: {fileID: 114000012312067688}
@@ -2644,7 +2644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990ec0f31a8a47443985f0145c7d668d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  figherLabel: {fileID: 114000013099161834}
+  soldierLabel: {fileID: 114000013099161834}
   engineerLabel: {fileID: 114000010208303770}
   shipButton: {fileID: 114000010619420384}
   shipButtonSlider: {fileID: 114000014023964268}
@@ -2782,7 +2782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990ec0f31a8a47443985f0145c7d668d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  figherLabel: {fileID: 114000010258721058}
+  soldierLabel: {fileID: 114000010258721058}
   engineerLabel: {fileID: 114000012230231394}
   shipButton: {fileID: 114000013548739786}
   shipButtonSlider: {fileID: 114000014168181924}

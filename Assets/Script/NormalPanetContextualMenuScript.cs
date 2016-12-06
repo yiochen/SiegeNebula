@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class NormalPanetContextualMenuScript : AbstractPanel {
 
     AbstractPlanet planetScript;
-    public StatLabelScript figherLabel;
+    public StatLabelScript soldierLabel;
     public StatLabelScript engineerLabel;
     public Button shipButton;
     public Slider shipButtonSlider;
@@ -20,20 +20,24 @@ public class NormalPanetContextualMenuScript : AbstractPanel {
     {
         if (planetScript)
         {
-            figherLabel.SetValue("" + planetScript.playerSoldiers.soldierCount);
+            soldierLabel.SetValue("" + planetScript.playerSoldiers.soldierCount);
             if (planetScript.ships[Indices.SHIP_PLAYER]  || planetScript.planetOwnership.Equals(AbstractPlanet.Ownership.Player))
             {
-                shipButton.gameObject.SetActive(true);
+                shipButton.interactable = true;
+            } else
+            {
+                shipButton.interactable = false;
             }
 
             if (planetScript.ships[Indices.SHIP_PLAYER])
             {
                 // if there is already a ship
                 shipButtonSlider.value = planetScript.ships[Indices.SHIP_PLAYER].filledPercentage;
-                if (shipButtonSlider.value > 0)
+                
+                if (planetScript.ships[Indices.SHIP_PLAYER].GetIsLoading())
                 {
                     shipButton.GetComponent<Image>().color = Color.yellow;
-                } else
+                }else
                 {
                     shipButton.GetComponent<Image>().color = Color.white;
                 }
@@ -41,6 +45,7 @@ public class NormalPanetContextualMenuScript : AbstractPanel {
             else
             {
                 shipButtonSlider.value = 0;
+                shipButton.GetComponent<Image>().color = Color.white;
             }
         }
 

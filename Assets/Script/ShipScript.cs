@@ -123,6 +123,11 @@ public class ShipScript : MonoBehaviour {
         this.transform.localScale = Vector3.zero;
 	}
 
+    public bool GetIsLoading()
+    {
+        return isSoldierLoading;
+    }
+
 	void LoadSoldiersToShip() {
 		if (soldiersOnBoard >= soldierCapacity) {
 			soldiersOnBoard = soldierCapacity;
