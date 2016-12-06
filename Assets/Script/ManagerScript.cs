@@ -20,7 +20,6 @@ public class ManagerScript : Singleton<ManagerScript> {
 	public GameObject planetContainer;
     public GameObject shipContainer;
     public PathManagerScript pathManager;
-	public SlideManagerScript slideManager;
 
 	public List<AbstractPlanet> playerPlanets;
 	public List<AbstractPlanet> enemyPlanets;
@@ -31,6 +30,12 @@ public class ManagerScript : Singleton<ManagerScript> {
 	//For Testing
 	[SerializeField]
 	private int playerSoldierCount;
+
+    public int GetPlayerSoliderCount()
+    {
+        return playerSoldierCount;
+    }
+
 	[SerializeField]
 	private int enemySoldierCount;
 	[SerializeField]
@@ -53,10 +58,9 @@ public class ManagerScript : Singleton<ManagerScript> {
 		playerPlanets.Capacity = planets.Length;
 		enemyPlanets.Capacity = planets.Length;
 		PlanetAssignment ();
-		textBoxes = slideManager.GetComponentsInChildren<Text> ();
 		QuerySoldiers ();
 		SetPlanetStarRanking ();
-		UpdateUIStats ();
+		CheckGameOver ();
 
 		SetStats (ref globalPlayerSoldiersStats, playerLevel);
 		SetStats (ref globalEnemySoldiersStats, enemyLevel);
@@ -65,7 +69,7 @@ public class ManagerScript : Singleton<ManagerScript> {
 	// Update is called once per frame
 	void Update () {
 		SetPlanetStarRanking ();
-		UpdateUIStats ();
+		CheckGameOver ();
 	}
 
 	void QuerySoldiers() {
@@ -92,17 +96,8 @@ public class ManagerScript : Singleton<ManagerScript> {
 		enemySoldierCount = eSold;
 	}
 
-	void UpdateUIStats() {
-		for (int i = 0; i < textBoxes.Length; i++) {
-			Text t = textBoxes [i];
-			if (t.name == "Condition") {
-				if (playerPlanets.Count == 0 || enemyPlanets.Count == 0) GameEnd (t);
-			} else if (t.name == "PlayerStats") {
-				textBoxes[i].text = UpdatePlayerStats(t.text.Split ('\n'));
-			} else if (t.name == "EnemyStats") {
-				textBoxes[i].text = UpdateEnemyStats(t.text.Split ('\n'));
-			}
-		}
+	void CheckGameOver() {
+        if (playerPlanets.Count == 0 || enemyPlanets.Count == 0) GameEnd();
 	}
 
 	string UpdatePlayerStats(string[] stats) {
@@ -135,18 +130,17 @@ public class ManagerScript : Singleton<ManagerScript> {
 		return inserted;
 	}
 
-	void GameEnd(Text t) {
-		slideManager.Next ();
-		if (playerPlanets.Count == 0)
-			t.text = "You Lost!";
-		else
-			t.text = "You Won!";
-		StartCoroutine (SceneChange ());
+	void GameEnd() {
+        if (playerPlanets.Count == 0)
+            StartCoroutine(SceneChange(false));
+        else
+            StartCoroutine(SceneChange(true));
 	}
 
-	IEnumerator SceneChange() {
-		yield return new WaitForSeconds (2.0f);
-		//Store this scenes Index
+	IEnumerator SceneChange(bool playerWon) {
+		yield return new WaitForSeconds (0.5f);
+        //Store this scenes Index
+        PlayerPrefs.SetInt(Prefs.GAME_RESULT, playerWon ? 1 : 0);
 		PlayerPrefs.SetInt(Prefs.PREV_SCENE, SceneManager.GetActiveScene().buildIndex);
 		//Need to create a next scene
 		SceneManager.LoadScene (0, LoadSceneMode.Single);

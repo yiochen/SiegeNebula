@@ -23,6 +23,7 @@ class Indices {
 
 class Prefs {
 	public const string PREV_SCENE = "PREV_SCENE";
+    public const string GAME_RESULT = "GAME_RESULT";
 }
 
 class GamePlay 
