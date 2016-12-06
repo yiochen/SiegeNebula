@@ -6,8 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scene/next.unity
-  - enabled: 1
     path: Assets/Scene/tutorial.unity
   - enabled: 1
     path: Assets/Scene/tut1.unity
@@ -17,3 +15,5 @@ EditorBuildSettings:
     path: Assets/Scene/lvl0.unity
   - enabled: 1
     path: Assets/Scene/lvl1.unity
+  - enabled: 1
+    path: Assets/Scene/next.unity
