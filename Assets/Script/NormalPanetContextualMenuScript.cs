@@ -20,7 +20,7 @@ public class NormalPanetContextualMenuScript : AbstractPanel {
     {
         if (planetScript)
         {
-            figherLabel.SetValue("" + planetScript.playerSoldiers.soldierCount);
+            figherLabel.SetValue("" + planetScript.playerSoldiers);
             if (planetScript.ships[Indices.SHIP_PLAYER]  || planetScript.planetOwnership.Equals(AbstractPlanet.Ownership.Player))
             {
                 shipButton.gameObject.SetActive(true);

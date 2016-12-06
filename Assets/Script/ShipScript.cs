@@ -134,26 +134,26 @@ public class ShipScript : MonoBehaviour {
 				int unitRemain = 0;
 				switch (shipOwnership) {
 				case AbstractPlanet.Ownership.Player:
-					unitsToLoad = Mathf.Min (GamePlay.LOAD_UNITS, dockedPlanet.playerSoldiers.soldierCount);
+					unitsToLoad = Mathf.Min (GamePlay.LOAD_UNITS, dockedPlanet.playerSoldiers);
 					unitRemain = soldierCapacity - soldiersOnBoard;
 					if (unitsToLoad <= unitRemain) {
 						soldiersOnBoard += unitsToLoad;
-						dockedPlanet.playerSoldiers.soldierCount -= unitsToLoad;
+						dockedPlanet.playerSoldiers -= unitsToLoad;
 					} else {
 						soldiersOnBoard += unitRemain;
-						dockedPlanet.playerSoldiers.soldierCount -= unitRemain;
+						dockedPlanet.playerSoldiers -= unitRemain;
 						isSoldierLoading = false;
 					}
 					break;
 				case AbstractPlanet.Ownership.Enemy:
-					unitsToLoad = Mathf.Min (GamePlay.LOAD_UNITS, dockedPlanet.enemySoldiers.soldierCount);
+					unitsToLoad = Mathf.Min (GamePlay.LOAD_UNITS, dockedPlanet.enemySoldiers);
 					unitRemain = soldierCapacity - soldiersOnBoard;
 					if (unitsToLoad <= unitRemain) {
 						soldiersOnBoard += unitsToLoad;
-						dockedPlanet.enemySoldiers.soldierCount -= unitsToLoad;
+						dockedPlanet.enemySoldiers -= unitsToLoad;
 					} else {
 						soldiersOnBoard += unitRemain;
-						dockedPlanet.enemySoldiers.soldierCount -= unitRemain;
+						dockedPlanet.enemySoldiers -= unitRemain;
 						isSoldierLoading = false;
 					}
 					break;
@@ -168,10 +168,10 @@ public class ShipScript : MonoBehaviour {
 	void UnloadShip() {
 		switch (shipOwnership) {
 		case AbstractPlanet.Ownership.Player:
-			dockedPlanet.playerSoldiers.soldierCount += soldiersOnBoard;
+			dockedPlanet.playerSoldiers += soldiersOnBoard;
 			break;
 		case AbstractPlanet.Ownership.Enemy:
-			dockedPlanet.enemySoldiers.soldierCount += soldiersOnBoard;
+			dockedPlanet.enemySoldiers += soldiersOnBoard;
 			break;
 		case AbstractPlanet.Ownership.Neutral:
 			break;
