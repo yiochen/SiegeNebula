@@ -27,12 +27,23 @@ public class ManagerScript : Singleton<ManagerScript> {
 	public int playerResources;
 	public int enemyResources;
 
-	public SoldierUnit playerSoldiers;
-	public SoldierUnit enemySoldiers;
+
+	//For Testing
+	[SerializeField]
+	private int playerSoldierCount;
+	[SerializeField]
+	private int enemySoldierCount;
+	[SerializeField]
+	private SoldierStats globalPlayerSoldiersStats;
+	[SerializeField]
+	private SoldierStats globalEnemySoldiersStats;
+	[SerializeField]
+	private int playerLevel;
+	[SerializeField]
+	private int enemyLevel;
 
 	private AbstractPlanet[] planets;
 	private Text[] textBoxes;
-    
 	private AbstractPlanet selectedPlanet;
 
 
@@ -43,14 +54,42 @@ public class ManagerScript : Singleton<ManagerScript> {
 		enemyPlanets.Capacity = planets.Length;
 		PlanetAssignment ();
 		textBoxes = slideManager.GetComponentsInChildren<Text> ();
+		QuerySoldiers ();
 		SetPlanetStarRanking ();
 		UpdateUIStats ();
+
+		SetStats (ref globalPlayerSoldiersStats, playerLevel);
+		SetStats (ref globalEnemySoldiersStats, enemyLevel);
 	}
 
 	// Update is called once per frame
 	void Update () {
 		SetPlanetStarRanking ();
 		UpdateUIStats ();
+	}
+
+	void QuerySoldiers() {
+		ShipScript[] ships = shipContainer.GetComponentsInChildren<ShipScript> ();
+		int pSold = 0;
+		int eSold = 0;
+		foreach (AbstractPlanet ap in planets) {
+			eSold += ap.enemySoldiers;
+			pSold += ap.playerSoldiers;
+		}
+		foreach (ShipScript ship in ships) {
+			switch (ship.shipOwnership) {
+			case AbstractPlanet.Ownership.Player:
+				pSold += ship.soldiersOnBoard;
+				break;
+			case AbstractPlanet.Ownership.Enemy:
+				eSold += ship.soldiersOnBoard;
+				break;
+			case AbstractPlanet.Ownership.Neutral:
+				break;
+			}
+		}
+		playerSoldierCount = pSold;
+		enemySoldierCount = eSold;
 	}
 
 	void UpdateUIStats() {
@@ -156,11 +195,11 @@ public class ManagerScript : Singleton<ManagerScript> {
 		int skulls = 0;
 		switch (ps.planetOwnership) {
 		case AbstractPlanet.Ownership.Player:
-			skulls = ps.playerSoldiers.soldierCount / GamePlay.SOLDIERS_PER_SKULL;
-			return (ps.playerSoldiers.soldierCount == 0 ? 0 : skulls + 1);
+			skulls = ps.playerSoldiers / GamePlay.SOLDIERS_PER_SKULL;
+			return (ps.playerSoldiers == 0 ? 0 : skulls + 1);
 		case AbstractPlanet.Ownership.Enemy:
-			skulls = ps.enemySoldiers.soldierCount / GamePlay.SOLDIERS_PER_SKULL;
-			return (ps.enemySoldiers.soldierCount == 0 ? 0 : skulls + 1);
+			skulls = ps.enemySoldiers / GamePlay.SOLDIERS_PER_SKULL;
+			return (ps.enemySoldiers == 0 ? 0 : skulls + 1);
 		default:
 			return 0;
 		}
@@ -220,20 +259,75 @@ public class ManagerScript : Singleton<ManagerScript> {
 		return selectedPlanet;
 	}
 
+	public SoldierStats GetPlayerStats() {
+		return globalPlayerSoldiersStats;
+	}
+
+	public SoldierStats GetEnemyStats() {
+		return globalEnemySoldiersStats;
+	}
+
+	public void LevelPlayer() {
+		if(playerLevel <= 2)
+			playerLevel++;
+
+		SetStats (ref globalPlayerSoldiersStats, playerLevel);
+	}
+
+	public void LevelEnemy() {
+		if (enemyLevel <= 2)
+			enemyLevel++;
+
+		SetStats (ref globalEnemySoldiersStats, enemyLevel);
+	}
+
+	void SetStats(ref SoldierStats stats, int level) {
+		switch (level) {
+		case 0:
+			stats.defense = 2;
+			stats.defenseMod = 0;
+			stats.attackMod = 0;
+			break;
+		case 1:
+			stats.defense = 2;
+			stats.defenseMod = 1;
+			stats.attackMod = 0;
+			break;
+		case 2:
+			stats.defense = 2;
+			stats.defenseMod = 2;
+			stats.attackMod = 0;
+			break;
+		default:
+			stats.defense = 2;
+			stats.defenseMod = 3;
+			stats.attackMod = 1;
+			break;
+		}
+	}
+
+	public void PlayerTakeDamage(int damage) {
+		playerSoldierCount -= damage;
+	}
+
+	public void EnemyTakeDamage(int damage) {
+		enemySoldierCount -= damage;
+	}
+
 	public void TrainSoldier(AbstractPlanet planet) {
 		switch (planet.planetOwnership) {
 		case AbstractPlanet.Ownership.Player:
 			if (playerResources >= GamePlay.SOLDIER_COST) {
-				playerSoldiers.soldierCount += GamePlay.SOLDIER_UNIT;
+				playerSoldierCount += GamePlay.SOLDIER_UNIT;
 				playerResources -= GamePlay.SOLDIER_COST;
-				planet.playerSoldiers.soldierCount += GamePlay.SOLDIER_UNIT;
+				planet.playerSoldiers += GamePlay.SOLDIER_UNIT;
 			}
 			break;
 		case AbstractPlanet.Ownership.Enemy:
 			if (enemyResources >= GamePlay.SOLDIER_COST) {
-				enemySoldiers.soldierCount += GamePlay.SOLDIER_UNIT;
+				enemySoldierCount += GamePlay.SOLDIER_UNIT;
 				enemyResources -= GamePlay.SOLDIER_COST;
-				planet.enemySoldiers.soldierCount += GamePlay.SOLDIER_UNIT;
+				planet.enemySoldiers += GamePlay.SOLDIER_UNIT;
 			}
 			break;
 		case AbstractPlanet.Ownership.Neutral:
@@ -255,22 +349,4 @@ public class ManagerScript : Singleton<ManagerScript> {
 		}
 
 	}
-
-	public int GetPlayerSoldierCount() {
-		return playerSoldiers.soldierCount;
-	}
-
-	public int GetPlayerResourceCount() {
-		return playerResources;
-	}
-
-	public int GetEnemySoldierCount() {
-		return enemySoldiers.soldierCount;
-	}
-
-	public int GetEnemyResourceCount() {
-		return enemyResources;
-	}
-
-
 }

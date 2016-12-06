@@ -30,8 +30,8 @@ public abstract class AbstractPlanet : MonoBehaviour {
 	public ShipScript shipPrefab;
 	private GameObject shipsContainer;
 
-	public SoldierUnit playerSoldiers;
-	public SoldierUnit enemySoldiers;
+	public int playerSoldiers;
+	public int enemySoldiers;
 
 	public AbstractPlanet[] adjacentPlanet;
 
@@ -106,10 +106,10 @@ public abstract class AbstractPlanet : MonoBehaviour {
 	void PlanetStateChanges() {
 		switch (planetOwnership) {
 		case Ownership.Enemy:
-			if (playerSoldiers.soldierCount > 0 && enemySoldiers.soldierCount > 0) {
+			if (playerSoldiers > 0 && enemySoldiers > 0) {
 				changeTimer = 0;
 				SetContested(true);
-			} else if (enemySoldiers.soldierCount == 0 && playerSoldiers.soldierCount > 0) {
+			} else if (enemySoldiers == 0 && playerSoldiers > 0) {
 				SetContested(false);
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
@@ -121,16 +121,16 @@ public abstract class AbstractPlanet : MonoBehaviour {
 			}
 			break;
 		case Ownership.Neutral:
-			if (playerSoldiers.soldierCount > 0 && enemySoldiers.soldierCount > 0) {
+			if (playerSoldiers > 0 && enemySoldiers > 0) {
 				changeTimer = 0;
 				SetContested(true);
-			} else if (playerSoldiers.soldierCount == 0 && enemySoldiers.soldierCount > 0) {
+			} else if (playerSoldiers == 0 && enemySoldiers > 0) {
 				SetContested(false);
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					ChangePlanetOwnership (Ownership.Neutral, Ownership.Enemy);
 				}
-			} else if (enemySoldiers.soldierCount == 0 && playerSoldiers.soldierCount > 0) {
+			} else if (enemySoldiers == 0 && playerSoldiers > 0) {
 				SetContested(false);
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
@@ -142,10 +142,10 @@ public abstract class AbstractPlanet : MonoBehaviour {
 			}
 			break;
 		case Ownership.Player:
-			if (playerSoldiers.soldierCount > 0 && enemySoldiers.soldierCount > 0) {
+			if (playerSoldiers > 0 && enemySoldiers > 0) {
 				changeTimer = 0;
 				SetContested(true);
-			} else if (playerSoldiers.soldierCount == 0 && enemySoldiers.soldierCount > 0) {
+			} else if (playerSoldiers == 0 && enemySoldiers > 0) {
 				SetContested(false);
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
@@ -180,7 +180,7 @@ public abstract class AbstractPlanet : MonoBehaviour {
 					ship = ShipInstantiation (Indices.SHIP_PLAYER);
 					break;
 				default:
-					if (playerSoldiers.soldierCount > 0) {
+					if (playerSoldiers > 0) {
 						ship = ShipInstantiation (Indices.SHIP_PLAYER);
 					}
 					break;
@@ -194,7 +194,7 @@ public abstract class AbstractPlanet : MonoBehaviour {
 					ship = ShipInstantiation (Indices.SHIP_ENEMY);
 					break;
 				default:
-					if (enemySoldiers.soldierCount > 0) {
+					if (enemySoldiers > 0) {
 						ship = ShipInstantiation (Indices.SHIP_ENEMY);
 					}
 					break;
@@ -239,6 +239,24 @@ public abstract class AbstractPlanet : MonoBehaviour {
 		if (isTrainingSoldiers) {
 			gameManager.TrainSoldier (this);
 		}
+	}
+
+	public void PlayerTakeDamage(int damage) {
+		int oldSolders = playerSoldiers;
+		playerSoldiers -= damage;
+		if (playerSoldiers < 0)
+			playerSoldiers = 0;
+		int damageTaken = oldSolders - playerSoldiers;
+		gameManager.PlayerTakeDamage (damageTaken);
+	}
+
+	public void EnemyTakeDamage(int damage) {
+		int oldSolders = enemySoldiers;
+		enemySoldiers -= damage;
+		if (enemySoldiers < 0)
+			enemySoldiers = 0;
+		int damageTaken = oldSolders - enemySoldiers;
+		gameManager.EnemyTakeDamage (damageTaken);
 	}
 
 	public void LoadSoldiersToShip(ShipScript ship) {

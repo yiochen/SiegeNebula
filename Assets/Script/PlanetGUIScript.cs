@@ -53,8 +53,8 @@ public class PlanetGUIScript : MonoBehaviour {
 		if (planet.isContested) {
 			combatBar.gameObject.SetActive (true);
 
-			float totalUnits = planet.enemySoldiers.soldierCount + planet.playerSoldiers.soldierCount;
-			combatBar.value = planet.playerSoldiers.soldierCount / totalUnits;
+			float totalUnits = planet.enemySoldiers + planet.playerSoldiers;
+			combatBar.value = planet.playerSoldiers / totalUnits;
 
 			if (combatBar.normalizedValue <= 0.3f) {
 				spotLight.intensity = (1.0f - combatBar.normalizedValue) * 8;
