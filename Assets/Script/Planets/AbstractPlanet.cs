@@ -16,7 +16,7 @@ using System.Collections.Generic;
 public abstract class AbstractPlanet : MonoBehaviour {
 
 	public enum PlanetType {
-		Hybrid, Resource, Soldier, Normal
+		Hybrid, Resource, Soldier, Normal, Reactor
 	};
 
 	public enum Ownership {
