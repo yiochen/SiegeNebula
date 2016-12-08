@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43773988, g: 0.48559362, b: 0.5658083, a: 1}
+  m_IndirectSpecularColor: {r: 0.43773964, g: 0.48559332, b: 0.5658078, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -734,6 +734,11 @@ Prefab:
     - target: {fileID: 114000014282717094, guid: 41e7353571eb3064488a7ba8472c9d38,
         type: 2}
       propertyPath: playerSoldiers.soldierCount
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014282717094, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: playerSoldiers
       value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []

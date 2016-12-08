@@ -345,17 +345,26 @@ Prefab:
     - target: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
         type: 2}
       propertyPath: soldierCapacity
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
         type: 2}
       propertyPath: soldiersOnBoard
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
         type: 2}
       propertyPath: dockedPlanet
       value: 
+      objectReference: {fileID: 1488447495}
+    - target: {fileID: 1000012697122658, guid: e64c078d047535e40bbe8c039639d61e, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23000012637487908, guid: e64c078d047535e40bbe8c039639d61e,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e64c078d047535e40bbe8c039639d61e, type: 2}
@@ -414,6 +423,11 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000014282717094, guid: 41e7353571eb3064488a7ba8472c9d38,
+        type: 2}
+      propertyPath: ships.Array.data[0]
+      value: 
+      objectReference: {fileID: 1535011320}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 41e7353571eb3064488a7ba8472c9d38, type: 2}
   m_IsPrefabParent: 0
@@ -848,6 +862,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1950049689}
   m_Script: {fileID: 11500000, guid: 3e918a052ccf90048bf508b7a5342d97, type: 3}
+--- !u!114 &1488447495 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000014282717094, guid: 41e7353571eb3064488a7ba8472c9d38,
+    type: 2}
+  m_PrefabInternal: {fileID: 502748140}
+  m_Script: {fileID: 11500000, guid: 056d03556ccac504bb73a702aece38cf, type: 3}
 --- !u!1001 &1515203294
 Prefab:
   m_ObjectHideFlags: 0
