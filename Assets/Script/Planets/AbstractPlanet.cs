@@ -27,7 +27,6 @@ public abstract class AbstractPlanet : MonoBehaviour {
 	protected PlanetType type;
 	public Ownership planetOwnership;
 
-	public ShipScript shipPrefab;
 	private GameObject shipsContainer;
 
 	public int playerSoldiers;
@@ -209,20 +208,16 @@ public abstract class AbstractPlanet : MonoBehaviour {
 
 	//Helper function
 	ShipScript ShipInstantiation(int index) {
-		ships [index] = Instantiate (shipPrefab) as ShipScript;
-		ships [index].gameObject.SetActive (true);
 		switch (index) {
 		case Indices.SHIP_PLAYER:
-			ships [index].shipOwnership = Ownership.Player;
+			ships [index] = ShipManagerScript.Instance.CreatePlayerShip();
 			break;
 		case Indices.SHIP_ENEMY:
-			ships [index].shipOwnership = Ownership.Enemy;
+			ships [index] = ShipManagerScript.Instance.CreateEnemyShip();
 			break;
 		default:
 			break;
 		}
-		ships [index].transform.SetParent (shipsContainer.transform);
-		ships [index].GetShipRenderer().enabled = false;
         return ships[index];
 	}
 

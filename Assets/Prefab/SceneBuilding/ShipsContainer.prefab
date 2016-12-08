@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000013405059454}
+  - 114: {fileID: 114000012936362066}
   m_Layer: 0
   m_Name: ShipsContainer
   m_TagString: Untagged
@@ -39,3 +40,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &114000012936362066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011599744670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6156dad054c40614ebf2fec567798271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerShipPrefab: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
+    type: 2}
+  enemyShipPrefab: {fileID: 114000013276589322, guid: 062fdc21275bd1c42be4650efe2870ec,
+    type: 2}
