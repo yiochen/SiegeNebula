@@ -169,6 +169,11 @@ public abstract class AbstractPlanet : MonoBehaviour {
 		gameManager.MineResources (planetOwnership);	
 	}
 
+    public bool isMiningResources ()
+    {
+        return this.planetOwnership != Ownership.Neutral;
+    }
+
 	public ShipScript CreateShip(Ownership ownership) {
         ShipScript ship = null;
 		switch (ownership) {

@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class SoldierPlanetScript : AbstractPlanet {
+    public ParticleSystem particle;
 
 	// Use this for initialization
 	void Start () {
@@ -11,6 +12,13 @@ public class SoldierPlanetScript : AbstractPlanet {
 
 	override protected void PlanetUpdates () {
 		CreateSoldiers ();
+        if (isTrainingSoldiers)
+        {
+            particle.Play();
+        } else
+        {
+            particle.Stop();
+        }
 	}
 
 }

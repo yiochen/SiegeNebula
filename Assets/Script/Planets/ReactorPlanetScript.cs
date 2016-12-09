@@ -4,6 +4,7 @@ using System;
 
 public class ReactorPlanetScript : AbstractPlanet {
 
+    public ParticleSystem particle;
     void Start()
     {
         base.OnActivate();
@@ -11,6 +12,6 @@ public class ReactorPlanetScript : AbstractPlanet {
     }
     protected override void PlanetUpdates()
     {
-        
+        particle.Play();
     }
 }

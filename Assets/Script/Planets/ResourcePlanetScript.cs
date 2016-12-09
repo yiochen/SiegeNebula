@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class ResourcePlanetScript : AbstractPlanet {
-
+    public ParticleSystem particle; 
 	// Use this for initialization
 	void Start () {
 		base.OnActivate ();
@@ -11,5 +11,12 @@ public class ResourcePlanetScript : AbstractPlanet {
 
 	override protected void PlanetUpdates () {
 		MineResources ();
+        if (isMiningResources())
+        {
+            particle.Play();
+        } else
+        {
+            particle.Stop();
+        }
 	}
 }
