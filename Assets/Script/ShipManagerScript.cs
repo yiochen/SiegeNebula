@@ -15,17 +15,19 @@ public class ShipManagerScript : Singleton<ShipManagerScript> {
         ship.GetShipRenderer().enabled = false;
         return ship;
     }
-	public ShipScript CreatePlayerShip()
+	public ShipScript CreatePlayerShip(AbstractPlanet planet)
     {
         ShipScript ship = CreateShip(playerShipPrefab);
         ship.shipOwnership = AbstractPlanet.Ownership.Player;
+		ship.dockedPlanet = planet;
         return ship;
     }
 
-    public ShipScript CreateEnemyShip()
+	public ShipScript CreateEnemyShip(AbstractPlanet planet)
     {
         ShipScript ship = CreateShip(enemyShipPrefab);
         ship.shipOwnership = AbstractPlanet.Ownership.Enemy;
+		ship.dockedPlanet = planet;
         return ship;
     }
 }

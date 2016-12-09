@@ -13,7 +13,10 @@
 }
 
 class AI {
-	public const float THINK_TIME_EASY = 3.0f;
+	public const float THINK_TIME_VERY_HARD = 4.5f;
+	public const float THINK_TIME_HARD = 7.5f;
+	public const float THINK_TIME_MED = 9.5f;
+	public const float THINK_TIME_EASY = 11.5f;
 }
 
 class Indices {

@@ -50,12 +50,18 @@ public abstract class AbstractPlanet : MonoBehaviour {
     // TODO: set to true for testing only, change to private later
 	public bool isTrainingSoldiers;
 
+	//FOR AI ONLY
+	public bool isRequestingSoldiers;
+	public bool isFeeding;
+
 	protected void OnActivate() {
 		gameManager = ManagerScript.Instance;
 		timer = 0;
 
 		isSelected = false;
 		isTrainingSoldiers = false;
+		isRequestingSoldiers = false;
+		isFeeding = false;
 
 		shipsContainer = gameManager.shipContainer;
 
@@ -189,7 +195,8 @@ public abstract class AbstractPlanet : MonoBehaviour {
 					}
 					break;
 				}
-			}
+			} else
+				return ships [Indices.SHIP_PLAYER];
 			break;
 		case Ownership.Enemy:
 			if (ships [Indices.SHIP_ENEMY] == null) {
@@ -203,7 +210,8 @@ public abstract class AbstractPlanet : MonoBehaviour {
 					}
 					break;
 				}
-			}
+			} else
+				return ships [Indices.SHIP_ENEMY];
 			break;
 		case Ownership.Neutral: //This shouldn't happen
 			break;
@@ -215,10 +223,10 @@ public abstract class AbstractPlanet : MonoBehaviour {
 	ShipScript ShipInstantiation(int index) {
 		switch (index) {
 		case Indices.SHIP_PLAYER:
-			ships [index] = ShipManagerScript.Instance.CreatePlayerShip();
+			ships [index] = ShipManagerScript.Instance.CreatePlayerShip (this);
 			break;
 		case Indices.SHIP_ENEMY:
-			ships [index] = ShipManagerScript.Instance.CreateEnemyShip();
+			ships [index] = ShipManagerScript.Instance.CreateEnemyShip(this);
 			break;
 		default:
 			break;

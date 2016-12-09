@@ -12,7 +12,7 @@ public class RankingBarScript : MonoBehaviour {
 
     private RankUnit[] ranks = new RankUnit[10]; // maximum 10 ranks
     private int count = 0;
-    private int _currentRank = 3;
+    private int _currentRank = 0;
 
     public int maxRank = 5;
     public int currentRank {
