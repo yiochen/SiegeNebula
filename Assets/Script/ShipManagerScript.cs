@@ -3,8 +3,9 @@ using System.Collections;
 
 public class ShipManagerScript : Singleton<ShipManagerScript> {
 
-    public ShipScript playerShipPrefab;
-    public ShipScript enemyShipPrefab;
+    public ShipScript[] playerShipPrefabs;
+    public ShipScript[] enemyShipPrefabs;
+
 
 
     private ShipScript CreateShip(ShipScript prefab)
@@ -15,19 +16,27 @@ public class ShipManagerScript : Singleton<ShipManagerScript> {
         ship.GetShipRenderer().enabled = false;
         return ship;
     }
-	public ShipScript CreatePlayerShip(AbstractPlanet planet)
+    private bool HasLevel(ShipScript[] shipPrefabs, int level)
     {
-        ShipScript ship = CreateShip(playerShipPrefab);
-        ship.shipOwnership = AbstractPlanet.Ownership.Player;
-		ship.dockedPlanet = planet;
-        return ship;
+        return level >= 0 && level < shipPrefabs.Length;
     }
-
-	public ShipScript CreateEnemyShip(AbstractPlanet planet)
+    public ShipScript CreateShip(AbstractPlanet planet, int level)
     {
-        ShipScript ship = CreateShip(enemyShipPrefab);
-        ship.shipOwnership = AbstractPlanet.Ownership.Enemy;
-		ship.dockedPlanet = planet;
+        ShipScript ship = null;
+        AbstractPlanet.Ownership ownership = planet.planetOwnership;
+        if (ownership == AbstractPlanet.Ownership.Player && HasLevel(playerShipPrefabs, level))
+        {
+            ship = CreateShip(playerShipPrefabs[level]);
+            ship.shipOwnership = AbstractPlanet.Ownership.Player;
+        }
+
+        if (ownership == AbstractPlanet.Ownership.Enemy && HasLevel(enemyShipPrefabs, level))
+        {
+            ship = CreateShip(enemyShipPrefabs[level]);
+            ship.shipOwnership = AbstractPlanet.Ownership.Enemy;
+        }
+
+        ship.dockedPlanet = planet;
         return ship;
     }
 }

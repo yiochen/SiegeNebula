@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011599744670}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 375.07944, y: 151.24367, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -51,7 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6156dad054c40614ebf2fec567798271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerShipPrefab: {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e,
-    type: 2}
-  enemyShipPrefab: {fileID: 114000013276589322, guid: 062fdc21275bd1c42be4650efe2870ec,
-    type: 2}
+  playerShipPrefabs:
+  - {fileID: 114000013276589322, guid: e64c078d047535e40bbe8c039639d61e, type: 2}
+  - {fileID: 114000012909989226, guid: 9a6ccf369ec43f24abe436c4cd6cd7f5, type: 2}
+  - {fileID: 114000011446237472, guid: 0601e5e6801fddf4a888493fd3b9e22f, type: 2}
+  enemyShipPrefabs:
+  - {fileID: 114000013276589322, guid: 062fdc21275bd1c42be4650efe2870ec, type: 2}
+  - {fileID: 114000012434791752, guid: bd6c92d736a74594584055ca5439dbdb, type: 2}
+  - {fileID: 114000013625443572, guid: c025d61ba2046e54fb4e8daf6921e4e3, type: 2}
