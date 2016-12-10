@@ -8,6 +8,7 @@ public class StrongAI : MonoBehaviour {
 	private ManagerScript gameManager;
 	private AbstractPlanet neighboringPlanet;
 	private Vector3 launchingPosition;
+	private List<AbstractPlanet> searched = new List<AbstractPlanet> ();
 
 	private float thinkTimer;
 	private int action;
@@ -136,16 +137,12 @@ public class StrongAI : MonoBehaviour {
 	}
 
 	bool PlanetInPath(AbstractPlanet planet, AbstractPlanet target) {
-		memo.Clear ();
 		searched.Clear ();
 		int val = RecursivePlanetFind (null, planet, target);
 		if (val > 0)
 			return true;
 		return false;
 	}
-
-	private Dictionary<AbstractPlanet, int> memo = new Dictionary<AbstractPlanet, int>();
-	private List<AbstractPlanet> searched = new List<AbstractPlanet> ();
 
 	int RecursivePlanetFind(AbstractPlanet prevPlanet, AbstractPlanet currentPlanet, AbstractPlanet target) {
 		int sum = 0;
@@ -156,26 +153,18 @@ public class StrongAI : MonoBehaviour {
 		}
 		
 		if (currentPlanet == target) {
-			memo[currentPlanet] = 1;
 			return 1;
-		} else if (currentPlanet.planetOwnership != AbstractPlanet.Ownership.Enemy) {
-			memo[currentPlanet] = 0;
-			return 0;
 		} else if (currentPlanet.adjacentPlanet.Length == 1) {
-			memo[currentPlanet] = 0;
 			return 0;
 		} else if (currentPlanet == prevPlanet) {
-			memo[currentPlanet] = 0;
 			return 0;
 		} else if (!currentPlanet.isFeeding) {
-			memo[currentPlanet] = 0;
 			return 0;
-		} else if (memo.TryGetValue (currentPlanet, out sum)) {
-			return sum;
-		} else {
+		}
+		else {
 			for (int i = 0; i < currentPlanet.adjacentPlanet.Length; i++) {
 				int val = RecursivePlanetFind (currentPlanet, currentPlanet.adjacentPlanet [i], target);
-				memo[currentPlanet.adjacentPlanet [i]] = val;
+				//memo[currentPlanet.adjacentPlanet [i]] = val;
 				sum += val;
 				if (sum > 0)
 					return sum;
