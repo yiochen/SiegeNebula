@@ -66,7 +66,7 @@ public class PathScript : MonoBehaviour {
         }
     }
 
-    public DirectionalPath getDirectionStartingFrom(Transform start) {
+    public DirectionalPath GetDirectionStartingFrom(Transform start) {
         if (start.position == this.start.position) return getDirectionalPath(false);
         if (start.position == this.end.position) return getDirectionalPath(true);
         if (Vector3.Distance(start.position, this.start.position)<Vector3.Distance(start.position, this.end.position))
@@ -77,13 +77,13 @@ public class PathScript : MonoBehaviour {
             return getDirectionalPath(true);
         }
     }
-    public bool isMouseCloseEnough(Vector3 mousePosition, Transform startPlanet)
+    public bool IsMouseCloseEnough(Vector3 mousePosition, Transform startPlanet)
     {
         Vector3 startToPos = mousePosition - startPlanet.position;
-        Vector3 pathDirection = getDirectionStartingFrom(startPlanet).GetDirectionVector();
+        Vector3 pathDirection = GetDirectionStartingFrom(startPlanet).GetDirectionVector();
         return Mathf.Abs(Vector3.Angle(startToPos, pathDirection)) < pathChosingThreshold;
     }
-
+    // deprecated, to be removed.
     public bool IsQualifiedForLaunching(Vector3 launchingPosition)
     {
         bool isCloseToPath = MathHelper.DistanceToLine(launchingPosition, start.position, end.position) < pathChosingThreshold;
@@ -97,7 +97,7 @@ public class PathScript : MonoBehaviour {
     // Display an arrow at the start of the path
     public void DisplayVisualHint(Transform start)
     {
-        DirectionalPath path = getDirectionStartingFrom(start);
+        DirectionalPath path = GetDirectionStartingFrom(start);
         Vector3 direction = path.GetDirectionVector();
         Quaternion rotation= hintInstance.transform.rotation;
         rotation.SetLookRotation(direction);

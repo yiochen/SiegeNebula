@@ -117,7 +117,7 @@ public class ShipScript : MonoBehaviour {
 			break;
 		}
 		isShipMoving = true;
-        this.travelPath = path.getDirectionStartingFrom(from);
+        this.travelPath = path.GetDirectionStartingFrom(from);
 
         this.transform.position = travelPath.shipStart;
         this.transform.rotation = Quaternion.LookRotation(travelPath.shipEnd - travelPath.shipStart);

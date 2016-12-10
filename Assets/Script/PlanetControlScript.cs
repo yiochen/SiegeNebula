@@ -41,7 +41,6 @@ public class PlanetControlScript : MonoBehaviour {
 
     void OnMouseDown()
     {
-        Debug.Log("mouse down");
         if (planetScript.ships[Indices.SHIP_PLAYER] != null)
         {
             PrepareLaunching();
@@ -66,7 +65,7 @@ public class PlanetControlScript : MonoBehaviour {
         PathScript chosenPath = null;
         foreach (PathScript path in paths)
         {
-            if (path.isMouseCloseEnough(launchingPosition, transform))
+            if (path.IsMouseCloseEnough(launchingPosition, transform))
             {
                 chosenPath = path;
             }
@@ -96,7 +95,7 @@ public class PlanetControlScript : MonoBehaviour {
     {
 		ShipScript ship = planetScript.ships [Indices.SHIP_PLAYER];
 		ship.gameObject.SetActive (true);
-        AbstractPlanet targetPlanet = path.getDirectionStartingFrom(transform).end.gameObject.GetComponent<AbstractPlanet>();
+        AbstractPlanet targetPlanet = path.GetDirectionStartingFrom(transform).end.gameObject.GetComponent<AbstractPlanet>();
         if (targetPlanet != null)
         {
             ship.LaunchShipOnPath(path, transform, targetPlanet);
