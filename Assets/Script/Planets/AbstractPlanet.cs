@@ -140,6 +140,7 @@ public abstract class AbstractPlanet : MonoBehaviour {
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					ChangePlanetOwnership (Ownership.Neutral, Ownership.Player);
+					gameManager.audioManager.PlaySound ("planetCapture");
 				}
 			} else {
 				SetContested(false);
@@ -155,6 +156,7 @@ public abstract class AbstractPlanet : MonoBehaviour {
 				changeTimer += Time.deltaTime;
 				if (changeTimer >= GamePlay.PLANET_CHANGE) {
 					ChangePlanetOwnership (Ownership.Player, Ownership.Neutral);
+					gameManager.audioManager.PlaySound ("planetLoss");
 				}
 			} else {
 				SetContested(false);

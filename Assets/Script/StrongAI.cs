@@ -12,9 +12,12 @@ public class StrongAI : MonoBehaviour {
 	private float thinkTimer;
 	private int action;
 	private bool actionHappened;
-	private const int ACTIONS_LIMIT = 4;
 	private ShipScript ship;
 
+	[Range(1, 6)]
+	public int actionsLimit = 4;
+	[Range(3.0f, 15.0f)]
+	public float thinkTime = AI.THINK_TIME_EASY;
 
 	// Use this for initialization
 	void Start () {
@@ -28,12 +31,12 @@ public class StrongAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		thinkTimer += Time.deltaTime;
-		if (thinkTimer >= AI.THINK_TIME_EASY) {
+		if (thinkTimer >= thinkTime) {
 			for(int i = 0; i < planets.Count; i++) {
 				AbstractPlanet planet = planets [i];
 				actionHappened = false;
 				//Do nothing else if you have no more actions
-				if (action > ACTIONS_LIMIT)
+				if (action > actionsLimit)
 					continue;
 				//Am I being attacked
 				BeingAttackedAction(ref planet);
@@ -87,7 +90,7 @@ public class StrongAI : MonoBehaviour {
 			if (neigh.planetOwnership == AbstractPlanet.Ownership.Neutral && neigh.isContested == false) {
 				planet.TrainSoldiers (true);
 				ship = planet.CreateShip (AbstractPlanet.Ownership.Enemy);
-				if (ship.soldiersOnBoard >= ship.soldierCapacity * 0.1f ||
+				if (ship.soldiersOnBoard >= ship.soldierCapacity * 0.05f ||
 					(!CanNewUnitsBeCreated () && ship.soldiersOnBoard > 0)) {
 					LaunchShip (planet, neigh, planet.adjacentPaths, ship);
 					planet.TrainSoldiers (false);
@@ -164,11 +167,11 @@ public class StrongAI : MonoBehaviour {
 					} else if (!ship.GetIsLoading ()) {
 						ship.StartLoadingSoldiersToShip (planet);
 					}
+					action++;
+					actionHappened = true;
 				} else {
 					ship.StopLoadingSoldiersToShip ();
 				}
-				action++;
-				actionHappened = true;
 			}
 		}
 	}

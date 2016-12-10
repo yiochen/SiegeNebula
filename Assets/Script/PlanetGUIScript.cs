@@ -13,6 +13,7 @@ public class PlanetGUIScript : MonoBehaviour {
 	private float flickerTimer = 0f;
 	private const float FLICKER = 0.25f;
 	private bool isWhite = false;
+	private bool isSoundPlaying = false;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +22,7 @@ public class PlanetGUIScript : MonoBehaviour {
 		spotLight.type = LightType.Spot;
 		spotLight.intensity = 0;
 		combatBar.gameObject.SetActive (false);
+		isSoundPlaying = false;
 	}
 
 	// Update is called once per frame
@@ -57,6 +59,7 @@ public class PlanetGUIScript : MonoBehaviour {
 			combatBar.value = planet.playerSoldiers / totalUnits;
 
 			if (combatBar.normalizedValue <= 0.3f) {
+				PlaySound ();
 				spotLight.intensity = (1.0f - combatBar.normalizedValue) * 8;
 				flickerTimer += Time.deltaTime;
 				if (flickerTimer >= FLICKER) {
@@ -69,19 +72,36 @@ public class PlanetGUIScript : MonoBehaviour {
 					flickerTimer = 0;
 				}
 			} else {
+				StopSound ();
 				ResetLight ();
-				flickerTimer = 0;
 			}
 		} else {
+			StopSound ();
 			ResetLight ();
-			flickerTimer = 0;
 			combatBar.gameObject.SetActive (false);
 		}
 	}
 
 	void ResetLight() {
 		spotLight.intensity = 0;
+		flickerTimer = 0;
 		spotLight.color = Color.red;
 		isWhite = false;
+	}
+
+	void PlaySound() {
+		if (!isSoundPlaying) {
+			Debug.Log ("Play Sound");
+			isSoundPlaying = true;
+			ManagerScript.Instance.audioManager.PlaySound ("planetLosing");
+		}
+	}
+
+	void StopSound() {
+		if (isSoundPlaying) {
+			Debug.Log ("Stop Sound");
+			ManagerScript.Instance.audioManager.StopSound ("planetLosing");
+			isSoundPlaying = false;
+		}
 	}
 }
