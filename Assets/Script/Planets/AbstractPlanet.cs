@@ -53,6 +53,7 @@ public abstract class AbstractPlanet : MonoBehaviour {
 	//FOR AI ONLY
 	public bool isRequestingSoldiers;
 	public bool isFeeding;
+	public AbstractPlanet planetRequesting;
 
 	protected void OnActivate() {
 		gameManager = ManagerScript.Instance;

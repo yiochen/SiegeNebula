@@ -90,7 +90,7 @@ public class StrongAI : MonoBehaviour {
 			if (neigh.planetOwnership == AbstractPlanet.Ownership.Neutral && neigh.isContested == false) {
 				planet.TrainSoldiers (true);
 				ship = planet.CreateShip (AbstractPlanet.Ownership.Enemy);
-				if (ship.soldiersOnBoard >= ship.soldierCapacity * 0.05f ||
+				if (ship.soldiersOnBoard >= 1 ||
 					(!CanNewUnitsBeCreated () && ship.soldiersOnBoard > 0)) {
 					LaunchShip (planet, neigh, planet.adjacentPaths, ship);
 					planet.TrainSoldiers (false);
@@ -107,15 +107,25 @@ public class StrongAI : MonoBehaviour {
 		foreach (AbstractPlanet neigh in planet.adjacentPlanet) {
 			if (actionHappened)
 				continue;
-
-			if (neigh.planetOwnership == AbstractPlanet.Ownership.Enemy && IsPlanetRequestingSoldiers(neigh)) {
+			AbstractPlanet target = null;
+			if (neigh.planetOwnership == AbstractPlanet.Ownership.Enemy && neigh.isRequestingSoldiers) {
 				planet.TrainSoldiers (true);
 				planet.isFeeding = true;
-
+				planet.planetRequesting = neigh;
+				target = neigh;
+			} else if (neigh.planetOwnership == AbstractPlanet.Ownership.Enemy && neigh.isFeeding) {
+				if (PlanetInPath (neigh, neigh.planetRequesting)) {
+					planet.TrainSoldiers (true);
+					planet.isFeeding = true;
+					planet.planetRequesting = neigh.planetRequesting;
+					target = neigh;				
+				}
+			}
+			if (target) {
 				ship = planet.CreateShip (AbstractPlanet.Ownership.Enemy);
 				if (ship.soldiersOnBoard >= ship.soldierCapacity * 0.1f || 
 					(!CanNewUnitsBeCreated () && ship.soldiersOnBoard > 0)) {
-					LaunchShip (planet, neigh, planet.adjacentPaths, ship);
+					LaunchShip (planet, target, planet.adjacentPaths, ship);
 				} else if (!ship.GetIsLoading ()) {
 					ship.StartLoadingSoldiersToShip (planet);
 				}
@@ -124,6 +134,57 @@ public class StrongAI : MonoBehaviour {
 			}
 		}
 	}
+
+	bool PlanetInPath(AbstractPlanet planet, AbstractPlanet target) {
+		memo.Clear ();
+		searched.Clear ();
+		int val = RecursivePlanetFind (null, planet, target);
+		if (val > 0)
+			return true;
+		return false;
+	}
+
+	private Dictionary<AbstractPlanet, int> memo = new Dictionary<AbstractPlanet, int>();
+	private List<AbstractPlanet> searched = new List<AbstractPlanet> ();
+
+	int RecursivePlanetFind(AbstractPlanet prevPlanet, AbstractPlanet currentPlanet, AbstractPlanet target) {
+		int sum = 0;
+		if (searched.Contains (currentPlanet)) {
+			return 0;
+		} else {
+			searched.Add (currentPlanet);
+		}
+		
+		if (currentPlanet == target) {
+			memo[currentPlanet] = 1;
+			return 1;
+		} else if (currentPlanet.planetOwnership != AbstractPlanet.Ownership.Enemy) {
+			memo[currentPlanet] = 0;
+			return 0;
+		} else if (currentPlanet.adjacentPlanet.Length == 1) {
+			memo[currentPlanet] = 0;
+			return 0;
+		} else if (currentPlanet == prevPlanet) {
+			memo[currentPlanet] = 0;
+			return 0;
+		} else if (!currentPlanet.isFeeding) {
+			memo[currentPlanet] = 0;
+			return 0;
+		} else if (memo.TryGetValue (currentPlanet, out sum)) {
+			return sum;
+		} else {
+			for (int i = 0; i < currentPlanet.adjacentPlanet.Length; i++) {
+				int val = RecursivePlanetFind (currentPlanet, currentPlanet.adjacentPlanet [i], target);
+				memo[currentPlanet.adjacentPlanet [i]] = val;
+				sum += val;
+				if (sum > 0)
+					return sum;
+			}
+			return sum;
+		}
+			
+	}
+
 
 	void NeighborAttackedAction(ref AbstractPlanet planet) {
 		foreach (AbstractPlanet neigh in planet.adjacentPlanet) {
@@ -167,11 +228,11 @@ public class StrongAI : MonoBehaviour {
 					} else if (!ship.GetIsLoading ()) {
 						ship.StartLoadingSoldiersToShip (planet);
 					}
-					action++;
-					actionHappened = true;
 				} else {
 					ship.StopLoadingSoldiersToShip ();
 				}
+				action++;
+				actionHappened = true;
 			}
 		}
 	}
@@ -220,10 +281,6 @@ public class StrongAI : MonoBehaviour {
 		else
 			return false;
 			
-	}
-
-	bool IsPlanetRequestingSoldiers(AbstractPlanet planet) {
-		return planet.isFeeding || planet.isRequestingSoldiers;
 	}
 
 	void UpdatePlanetList() {
