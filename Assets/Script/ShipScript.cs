@@ -105,6 +105,7 @@ public class ShipScript : MonoBehaviour {
 
 	public void LaunchShipOnPath(PathScript path, Transform from, AbstractPlanet targetPlanet) {
 		this.targetPlanet = targetPlanet;
+		ManagerScript.Instance.audioManager.PlaySound ("shipMove");
 		switch (shipOwnership) {
 		case AbstractPlanet.Ownership.Player:
 			dockedPlanet.ships[Indices.SHIP_PLAYER] = null;

@@ -32,6 +32,10 @@ public class Sound {
 		this.source.loop = isLoop;
 	}
 
+	public bool IsPlaying() {
+		return source.isPlaying;
+	}
+
 	public void Play() {
 		source.volume = volume * (1 + Random.Range (-randomVolume / 2f, randomVolume / 2f));
 		source.pitch = pitch * (1 + Random.Range (-randomPitch / 2f, randomPitch / 2f));
@@ -81,9 +85,9 @@ public class AudioManager : MonoBehaviour {
 
 	public void PlaySound(string clipName) {
 		Sound soundClip;
-		if (soundMap.TryGetValue (clipName, out soundClip))
+		if (soundMap.TryGetValue (clipName, out soundClip)) {
 			soundClip.Play ();
-		else
+		} else
 			Debug.Log ("Clip: "+ clipName+ " was not found!");
 	}
 
