@@ -66,10 +66,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 0}
   end: {fileID: 0}
-  pathChosingThreshold: 0.5
+  pathChosingThreshold: 20
   paddingStart: 1
   paddingEnd: 1
-  hint: {fileID: 1000010112952410, guid: 239c4024ceb4d6e48b78108572aa9aa5, type: 2}
 --- !u!120 &120000013140467564
 LineRenderer:
   m_ObjectHideFlags: 1

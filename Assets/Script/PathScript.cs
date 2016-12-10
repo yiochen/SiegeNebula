@@ -27,17 +27,17 @@ public class PathScript : MonoBehaviour {
 
     public Transform start;
     public Transform end;
-    public float pathChosingThreshold = 0.5f;
+    public float pathChosingThreshold = 10.0f;
     public float paddingStart = 1.0f;
     public float paddingEnd = 1.0f;
 
-    public GameObject hint;
-    private GameObject hintInstance;
     private Vector3 direction;
     private Vector3 shipStartPosition;
     private Vector3 shipEndPosition;
 
     LineRenderer lineRenderer;
+
+    private GameObject hintInstance;
 
 	void Start () {
         lineRenderer = GetComponent<LineRenderer>();
@@ -46,9 +46,9 @@ public class PathScript : MonoBehaviour {
             lineRenderer.SetPosition(0, start.position);
             lineRenderer.SetPosition(1, end.position);
         }
-        hintInstance = Instantiate(hint);
-        hintInstance.SetActive(false);
-        
+
+        hintInstance = PathManagerScript.Instance.pathArrow;
+
         direction = (end.position - start.position).normalized;
         this.shipStartPosition = start.position + direction * paddingStart;
         this.shipEndPosition = end.position - direction * paddingEnd;
@@ -77,6 +77,12 @@ public class PathScript : MonoBehaviour {
             return getDirectionalPath(true);
         }
     }
+    public bool isMouseCloseEnough(Vector3 mousePosition, Transform startPlanet)
+    {
+        Vector3 startToPos = mousePosition - startPlanet.position;
+        Vector3 pathDirection = getDirectionStartingFrom(startPlanet).GetDirectionVector();
+        return Mathf.Abs(Vector3.Angle(startToPos, pathDirection)) < pathChosingThreshold;
+    }
 
     public bool IsQualifiedForLaunching(Vector3 launchingPosition)
     {
@@ -95,6 +101,7 @@ public class PathScript : MonoBehaviour {
         Vector3 direction = path.GetDirectionVector();
         Quaternion rotation= hintInstance.transform.rotation;
         rotation.SetLookRotation(direction);
+
         hintInstance.transform.rotation = rotation;
         hintInstance.transform.position = path.shipStart;
         hintInstance.SetActive(true);

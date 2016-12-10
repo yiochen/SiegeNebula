@@ -2,14 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PathManagerScript : MonoBehaviour {
+public class PathManagerScript : Singleton<PathManagerScript> {
 
     public List<PathScript> pathList = new List<PathScript>();
     public PathScript[] pathsInInspector;
+    public GameObject pathArrow;
+
 	// Use this for initialization
 	void Awake () {
 	    foreach (Transform child in transform) {
-            pathList.Add(child.GetComponent<PathScript>());
+            PathScript path = child.GetComponent<PathScript>();
+            if (path != null)
+            pathList.Add(path);
         }
         pathsInInspector = pathList.ToArray();
 
