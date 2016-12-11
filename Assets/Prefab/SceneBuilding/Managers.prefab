@@ -2280,7 +2280,7 @@ MonoBehaviour:
   playerPlanets: []
   enemyPlanets: []
   playerResources: 0
-  enemyResources: 0
+  enemyResources: 20
   playerSoldierCount: 0
   enemySoldierCount: 0
   globalPlayerSoldiersStats:
@@ -4500,7 +4500,7 @@ MonoBehaviour:
     pitch: 1
     randomVolume: 0
     randomPitch: 0
-    isLoop: 1
+    isLoop: 0
     fadeOutTime: 0
     isFading: 0
 --- !u!222 &222000010216738204

@@ -16,10 +16,9 @@ public class HUDScript : MonoBehaviour {
         playerResource.text = FormatNumber(manager.playerResources);
         playerPlanet.text = FormatNumber(manager.playerPlanets.Count);
         playerSoldier.text = FormatNumber(manager.GetPlayerSoliderCount());
-
+		playerLevel.text = FormatNumber (manager.GetPlayerLevel ());
         enemyPlanet.text = FormatNumber(manager.enemyPlanets.Count);
-
-        
+		enemyLevel.text = FormatNumber (manager.GetEnemyLevel ());
 	}
 
     string FormatNumber (int value)

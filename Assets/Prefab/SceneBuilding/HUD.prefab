@@ -355,8 +355,8 @@ MonoBehaviour:
   playerSoldier: {fileID: 114000013099484240}
   playerPlanet: {fileID: 114000013048783352}
   enemyPlanet: {fileID: 114000010654272312}
-  playerLevel: {fileID: 0}
-  enemyLevel: {fileID: 0}
+  playerLevel: {fileID: 114000011073157824}
+  enemyLevel: {fileID: 114000014287133200}
 --- !u!114 &114000010654272312
 MonoBehaviour:
   m_ObjectHideFlags: 1
