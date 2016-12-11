@@ -46,6 +46,7 @@ public class ReactorPlanetScript : AbstractPlanet {
 					case Ownership.Neutral:
 						break;
 					}
+					PlayLevelUpFinishEffect ();
 					gameManager.audioManager.PlaySound ("upgradeComplete");
 					upgradeTimer = 0;
 					Debug.Log ("ReactorPlanetScript: Finished upgrading");
