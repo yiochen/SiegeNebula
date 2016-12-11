@@ -83,17 +83,6 @@ public class PathScript : MonoBehaviour {
         Vector3 pathDirection = GetDirectionStartingFrom(startPlanet).GetDirectionVector();
         return Mathf.Abs(Vector3.Angle(startToPos, pathDirection)) < pathChosingThreshold;
     }
-    // deprecated, to be removed.
-    public bool IsQualifiedForLaunching(Vector3 launchingPosition)
-    {
-        bool isCloseToPath = MathHelper.DistanceToLine(launchingPosition, start.position, end.position) < pathChosingThreshold;
-        Vector3 startToPos = launchingPosition - start.position;
-        Vector3 posToEnd = end.position - launchingPosition;
-        bool isBetweenStartAndEnd = Vector3.Dot(startToPos, direction) > 0 && Vector3.Dot(posToEnd, direction) > 0;
-
-        return isCloseToPath && isBetweenStartAndEnd;
-    }
-
     // Display an arrow at the start of the path
     public void DisplayVisualHint(Transform start)
     {

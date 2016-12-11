@@ -7,7 +7,6 @@ public class StrongAI : MonoBehaviour {
 	private List<AbstractPlanet> planets;
 	private ManagerScript gameManager;
 	private AbstractPlanet neighboringPlanet;
-	private Vector3 launchingPosition;
 	private List<AbstractPlanet> searched = new List<AbstractPlanet> ();
 
 	private float thinkTimer;
@@ -154,17 +153,12 @@ public class StrongAI : MonoBehaviour {
 		
 		if (currentPlanet == target) {
 			return 1;
-		} else if (currentPlanet.adjacentPlanet.Length == 1) {
-			return 0;
-		} else if (currentPlanet == prevPlanet) {
-			return 0;
 		} else if (!currentPlanet.isFeeding) {
 			return 0;
 		}
 		else {
 			for (int i = 0; i < currentPlanet.adjacentPlanet.Length; i++) {
 				int val = RecursivePlanetFind (currentPlanet, currentPlanet.adjacentPlanet [i], target);
-				//memo[currentPlanet.adjacentPlanet [i]] = val;
 				sum += val;
 				if (sum > 0)
 					return sum;
@@ -277,14 +271,15 @@ public class StrongAI : MonoBehaviour {
 	}
 
 	void LaunchShip(AbstractPlanet planet, AbstractPlanet target, PathScript[] paths, ShipScript ship) {
-		launchingPosition = (target.transform.position - planet.transform.position) / 2.0f + planet.transform.position;
 		PathScript chosenPath = null;
 		foreach (PathScript path in paths)
 		{
-			if (path.IsQualifiedForLaunching(launchingPosition))
-			{
+			if ((path.start == planet.transform && path.end == target.transform) ||
+			    (path.end == planet.transform && path.start == target.transform)) {
 				chosenPath = path;
+				break;
 			}
+				
 		}
 		ship.LaunchShipOnPath (chosenPath, planet.transform, target);
 	}
