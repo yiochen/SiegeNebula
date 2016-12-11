@@ -36,10 +36,23 @@ public class CombatScript : MonoBehaviour {
 		
 		timer += Time.deltaTime;
 		if (timer >= ROUND_TICK) {
+			PlaySoundFx ();
 			Combat ();
 			timer = 0.0f;
 		}
 
+	}
+
+	void PlaySoundFx() {
+		gameManager.audioManager.PlaySound ("bassBoom");
+		bool playShortBurst = Random.value < 0.5f;
+		if (playShortBurst) {
+			bool playFirst = Random.value < 0.5f;
+			if (playFirst)
+				gameManager.audioManager.PlaySound ("shortBurst1");
+			else
+				gameManager.audioManager.PlaySound ("shortBurst2");
+		}
 	}
 		
 	void Combat() {

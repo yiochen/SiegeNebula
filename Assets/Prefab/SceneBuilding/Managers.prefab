@@ -4205,6 +4205,42 @@ MonoBehaviour:
     isLoop: 0
     fadeOutTime: 0
     isFading: 0
+  - name: shipCapacity
+    clip: {fileID: 8300000, guid: a22b8c429f521429084d616c68dda19a, type: 3}
+    volume: 0.7
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.05
+    isLoop: 0
+    fadeOutTime: 0
+    isFading: 0
+  - name: bassBoom
+    clip: {fileID: 8300000, guid: a5016a4da1b8c3f44908967039c7499b, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+    isLoop: 0
+    fadeOutTime: 0
+    isFading: 0
+  - name: shortBurst1
+    clip: {fileID: 8300000, guid: 2853a07e78a6d494a93f7ddd8584e6a8, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+    isLoop: 0
+    fadeOutTime: 0
+    isFading: 0
+  - name: shortBurst2
+    clip: {fileID: 8300000, guid: 4aba4a3fafc60b24dbc6e3684d00495a, type: 3}
+    volume: 0.5
+    pitch: 1
+    randomVolume: 0.1
+    randomPitch: 0.1
+    isLoop: 0
+    fadeOutTime: 0
+    isFading: 0
 --- !u!222 &222000010216738204
 CanvasRenderer:
   m_ObjectHideFlags: 1

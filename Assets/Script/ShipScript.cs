@@ -150,6 +150,8 @@ public class ShipScript : MonoBehaviour {
 						dockedPlanet.playerSoldiers -= unitRemain;
 						isSoldierLoading = false;
 					}
+					if(soldierCapacity == soldiersOnBoard)
+						ManagerScript.Instance.audioManager.PlaySound ("shipCapacity");
 					break;
 				case AbstractPlanet.Ownership.Enemy:
 					unitsToLoad = Mathf.Min (GamePlay.LOAD_UNITS, dockedPlanet.enemySoldiers);
