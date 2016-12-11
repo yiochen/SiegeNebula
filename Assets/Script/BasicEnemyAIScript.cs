@@ -15,7 +15,6 @@ public class BasicEnemyAIScript : MonoBehaviour {
 	private ManagerScript gameManager;
 	private float thinkTimer;
 	private AbstractPlanet neighboringPlanet;
-	private Vector3 launchingPosition;
 
 	// Use this for initialization
 	void Start () {
@@ -57,7 +56,6 @@ public class BasicEnemyAIScript : MonoBehaviour {
 			//Send units to a neighboring planet
 			neighboringPlanet = ChoosePlanet(planet);
 			//Launch Ship to neighboring planet
-			launchingPosition = (neighboringPlanet.transform.position - planet.transform.position) / 2.0f + planet.transform.position;
 			LaunchShip (planet, neighboringPlanet, planet.adjacentPaths, planet.ships [Indices.SHIP_ENEMY]);
 		}
 	}
@@ -70,10 +68,12 @@ public class BasicEnemyAIScript : MonoBehaviour {
 		PathScript chosenPath = null;
 		foreach (PathScript path in paths)
 		{
-			if (path.IsQualifiedForLaunching(launchingPosition))
-			{
+			if ((path.start == planet.transform && path.end == target.transform) ||
+				(path.end == planet.transform && path.start == target.transform)) {
 				chosenPath = path;
+				break;
 			}
+
 		}
 		ship.LaunchShipOnPath (chosenPath, planet.transform, target);
         //TODO remove reference in planetScript to enemyShip

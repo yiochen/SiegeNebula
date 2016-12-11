@@ -51,7 +51,8 @@ public class ManagerScript : Singleton<ManagerScript> {
 	private AbstractPlanet[] planets;
 	private Text[] textBoxes;
 	private AbstractPlanet selectedPlanet;
-
+	private bool isUpgrading;
+	private AbstractPlanet.Ownership upgrader;
 
 	// Use this for initialization
 	void Start () {
@@ -71,6 +72,31 @@ public class ManagerScript : Singleton<ManagerScript> {
 	void Update () {
 		SetPlanetStarRanking ();
 		CheckGameOver ();
+	}
+
+	public int GetPlayerLevel() {
+		return playerLevel;
+	}
+
+	public int GetEnemyLevel() {
+		return enemyLevel;
+	}
+
+	public bool GetUpgrading() {
+		return isUpgrading;
+	}
+
+	public void StopUpgrading() {
+		isUpgrading = false;;
+	}
+
+	public AbstractPlanet.Ownership GetUpgrader() {
+		return upgrader;
+	}
+
+	public void ActivateUpgrade(bool isUpgrading, AbstractPlanet.Ownership upgrader) {
+		this.isUpgrading = isUpgrading;
+		this.upgrader = upgrader;
 	}
 
 	void QuerySoldiers() {
@@ -99,36 +125,6 @@ public class ManagerScript : Singleton<ManagerScript> {
 
 	void CheckGameOver() {
         if (playerPlanets.Count == 0 || enemyPlanets.Count == 0) GameEnd();
-	}
-
-	string UpdatePlayerStats(string[] stats) {
-		StringBuilder sb = new StringBuilder ();
-		//Title
-		sb.Append (stats [0]);
-		sb.AppendLine ();
-		//Resources
-		sb.Append (UpdateStat(stats [1], playerResources));
-		sb.AppendLine ();
-		//Planets
-		sb.Append (UpdateStat(stats [2], playerPlanets.Count));
-		return sb.ToString ();
-	}
-
-	string UpdateEnemyStats(string[] stats) {
-		StringBuilder sb = new StringBuilder ();
-		//Title
-		sb.Append (stats [0]);
-		sb.AppendLine ();
-		//Planets
-		sb.Append (UpdateStat(stats [1], enemyPlanets.Count));
-		return sb.ToString ();
-	}
-
-	string UpdateStat(string str, int stat) {
-		int startPos = str.IndexOf (":") + 1;
-		string deleted = str.Remove (startPos);
-		string inserted = deleted.Insert (startPos, " " + stat);
-		return inserted;
 	}
 
 	void GameEnd() {
@@ -263,14 +259,14 @@ public class ManagerScript : Singleton<ManagerScript> {
 	}
 
 	public void LevelPlayer() {
-		if(playerLevel <= 2)
+		if(playerLevel <= 1)
 			playerLevel++;
 
 		SetStats (ref globalPlayerSoldiersStats, playerLevel);
 	}
 
 	public void LevelEnemy() {
-		if (enemyLevel <= 2)
+		if (enemyLevel <= 1)
 			enemyLevel++;
 
 		SetStats (ref globalEnemySoldiersStats, enemyLevel);
@@ -291,11 +287,6 @@ public class ManagerScript : Singleton<ManagerScript> {
 		case 2:
 			stats.defense = 2;
 			stats.defenseMod = 2;
-			stats.attackMod = 0;
-			break;
-		default:
-			stats.defense = 2;
-			stats.defenseMod = 3;
 			stats.attackMod = 1;
 			break;
 		}

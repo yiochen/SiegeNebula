@@ -12,7 +12,7 @@ public class HybridPlanetScript : AbstractPlanet {
 	}
 		
 
-	override protected void PlanetUpdates () {
+	override protected void PlanetTickUpdates () {
 		CreateSoldiers ();
 		MineResources ();
         if (isTrainingSoldiers)
@@ -30,4 +30,6 @@ public class HybridPlanetScript : AbstractPlanet {
             resourceParticle.Stop();
         }
 	}
+
+	protected override void PlanetFrameUpdates (){ }
 }

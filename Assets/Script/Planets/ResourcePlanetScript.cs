@@ -9,7 +9,7 @@ public class ResourcePlanetScript : AbstractPlanet {
 		type = PlanetType.Resource;
 	}
 
-	override protected void PlanetUpdates () {
+	override protected void PlanetTickUpdates () {
 		MineResources ();
         if (isMiningResources())
         {
@@ -19,4 +19,6 @@ public class ResourcePlanetScript : AbstractPlanet {
             particle.Stop();
         }
 	}
+
+	protected override void PlanetFrameUpdates (){}
 }
