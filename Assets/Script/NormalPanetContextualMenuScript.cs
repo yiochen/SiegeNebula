@@ -7,7 +7,6 @@ public class NormalPanetContextualMenuScript : AbstractPanel {
 
     AbstractPlanet planetScript;
     public StatLabelScript soldierLabel;
-    public StatLabelScript engineerLabel;
     public Button shipButton;
     public Slider shipButtonSlider;
 

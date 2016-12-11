@@ -17,10 +17,14 @@ using UnityEngine.SceneManagement;
 
 public class ManagerScript : Singleton<ManagerScript> {
 
-	public GameObject planetContainer;
-    public GameObject shipContainer;
+    [HideInInspector]
+	public PlanetContainerScript planetContainer;
+    [HideInInspector]
+    public ShipManagerScript shipContainer;
+    [HideInInspector]
     public PathManagerScript pathManager;
-	public AudioManager audioManager;
+    [HideInInspector]
+    public AudioManager audioManager;
 
 	public List<AbstractPlanet> playerPlanets;
 	public List<AbstractPlanet> enemyPlanets;
@@ -56,7 +60,13 @@ public class ManagerScript : Singleton<ManagerScript> {
 
 	// Use this for initialization
 	void Start () {
-		planets = planetContainer.GetComponentsInChildren<AbstractPlanet>();
+
+        planetContainer = PlanetContainerScript.Instance;
+        shipContainer = ShipManagerScript.Instance;
+        pathManager = PathManagerScript.Instance;
+        audioManager = AudioManager.Instance;
+
+        planets = planetContainer.GetComponentsInChildren<AbstractPlanet>();
 		playerPlanets.Capacity = planets.Length;
 		enemyPlanets.Capacity = planets.Length;
 		PlanetAssignment ();

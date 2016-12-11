@@ -60,7 +60,7 @@ public class Sound {
 	}
 }
 
-public class AudioManager : MonoBehaviour {
+public class AudioManager : Singleton<AudioManager> {
 
 	private Dictionary<string, Sound> soundMap;
 	public Sound[] sounds;
