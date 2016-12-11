@@ -13,9 +13,11 @@ public class SceneManagerScript : MonoBehaviour {
 		prevScene = PlayerPrefs.GetString (Prefs.PREV_SCENE);
         if (PlayerPrefs.GetInt(Prefs.GAME_RESULT) == 1)
         {
+			ManagerScript.Instance.audioManager.PlaySound ("gameWon");
             resultText.text = "You Won!";
         } else
         {
+			ManagerScript.Instance.audioManager.PlaySound ("gameLoss");
             resultText.text = "You Lost!";
         }
         nextScene = GameStageHelper.GetNextScene(prevScene);

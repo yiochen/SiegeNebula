@@ -623,11 +623,6 @@ Prefab:
       propertyPath: pathManager
       value: 
       objectReference: {fileID: 1185487057}
-    - target: {fileID: 114000010934973108, guid: 979ee613762373648826573e0eae54f7,
-        type: 2}
-      propertyPath: playerResources
-      value: 50
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 979ee613762373648826573e0eae54f7, type: 2}
   m_IsPrefabParent: 0

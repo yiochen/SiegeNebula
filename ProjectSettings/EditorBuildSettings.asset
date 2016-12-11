@@ -12,8 +12,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/tut2.unity
   - enabled: 1
+    path: Assets/Scene/tut3.unity
+  - enabled: 1
+    path: Assets/Scene/tut4.unity
+  - enabled: 1
     path: Assets/Scene/lvl0.unity
   - enabled: 1
     path: Assets/Scene/lvl1.unity
+  - enabled: 1
+    path: Assets/Scene/lvl2.unity
+  - enabled: 1
+    path: Assets/Scene/lvl3.unity
+  - enabled: 1
+    path: Assets/Scene/lvl4.unity
   - enabled: 1
     path: Assets/Scene/next.unity
