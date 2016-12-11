@@ -7,6 +7,8 @@ public class HUDScript : MonoBehaviour {
     public Text playerSoldier;
     public Text playerPlanet;
     public Text enemyPlanet;
+    public Text playerLevel;
+    public Text enemyLevel;
 
 	// Update is called once per frame
 	void Update () {
@@ -17,6 +19,7 @@ public class HUDScript : MonoBehaviour {
 
         enemyPlanet.text = FormatNumber(manager.enemyPlanets.Count);
 
+        
 	}
 
     string FormatNumber (int value)
