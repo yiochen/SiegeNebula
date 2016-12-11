@@ -68,6 +68,10 @@ public class ManagerScript : Singleton<ManagerScript> {
 		SetStats (ref globalEnemySoldiersStats, enemyLevel);
 	}
 
+	public void BackgroudMusic() {
+		audioManager.PlaySound ("backgroundMusic");
+	}
+
 	// Update is called once per frame
 	void Update () {
 		SetPlanetStarRanking ();
@@ -145,6 +149,7 @@ public class ManagerScript : Singleton<ManagerScript> {
 	}
 
 	void GameEnd() {
+		audioManager.StopSound ("backgroundMusic");
         if (playerPlanets.Count == 0)
             StartCoroutine(SceneChange(false));
         else

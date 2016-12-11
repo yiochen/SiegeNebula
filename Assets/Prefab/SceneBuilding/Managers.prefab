@@ -2280,7 +2280,7 @@ MonoBehaviour:
   playerPlanets: []
   enemyPlanets: []
   playerResources: 50
-  enemyResources: 20
+  enemyResources: 60
   playerSoldierCount: 0
   enemySoldierCount: 0
   globalPlayerSoldiersStats:
@@ -4501,6 +4501,15 @@ MonoBehaviour:
     randomVolume: 0
     randomPitch: 0
     isLoop: 0
+    fadeOutTime: 0
+    isFading: 0
+  - name: backgroundMusic
+    clip: {fileID: 8300000, guid: dbf4698b4012c124daf14675dcbb8ae8, type: 3}
+    volume: 0.25
+    pitch: 0.9
+    randomVolume: 0
+    randomPitch: 0
+    isLoop: 1
     fadeOutTime: 0
     isFading: 0
 --- !u!222 &222000010216738204

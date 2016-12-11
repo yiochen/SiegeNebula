@@ -74,6 +74,7 @@ public class AudioManager : MonoBehaviour {
 			s.SetSource (go.AddComponent<AudioSource> ());
 			soundMap.Add (s.name, s);
 		}
+		ManagerScript.Instance.BackgroudMusic ();
 	}
 
 	void Update() {
