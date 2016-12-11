@@ -10,7 +10,7 @@ public class SoldierPlanetScript : AbstractPlanet {
 		type = PlanetType.Soldier;
 	}
 
-	override protected void PlanetUpdates () {
+	override protected void PlanetTickUpdates () {
 		CreateSoldiers ();
         if (isTrainingSoldiers)
         {
@@ -20,5 +20,7 @@ public class SoldierPlanetScript : AbstractPlanet {
             particle.Stop();
         }
 	}
+
+	protected override void PlanetFrameUpdates (){}
 
 }

@@ -27,8 +27,6 @@ public abstract class AbstractPlanet : MonoBehaviour {
 	protected PlanetType type;
 	public Ownership planetOwnership;
 
-	private GameObject shipsContainer;
-
 	public int playerSoldiers;
 	public int enemySoldiers;
 
@@ -40,7 +38,7 @@ public abstract class AbstractPlanet : MonoBehaviour {
 
 	public RankingBarScript rankingScript;
 
-    private ManagerScript gameManager;
+    protected ManagerScript gameManager;
     private float timer;
 	private float changeTimer;
 
@@ -64,8 +62,6 @@ public abstract class AbstractPlanet : MonoBehaviour {
 		isRequestingSoldiers = false;
 		isFeeding = false;
 
-		shipsContainer = gameManager.shipContainer;
-
 		adjacentPaths = gameManager.pathManager.GetAdjacentPaths(this);
 		adjacentPlanet = gameManager.pathManager.GetAdjacentPlanets(this);
 	}
@@ -79,12 +75,16 @@ public abstract class AbstractPlanet : MonoBehaviour {
 
 		timer += Time.deltaTime;
 		if (timer >= GamePlay.PLANET_TICK) {
-			PlanetUpdates ();
+			PlanetTickUpdates ();
 			timer = 0;
 		}
+
+		PlanetFrameUpdates ();
     }
 
-	abstract protected void PlanetUpdates();
+	abstract protected void PlanetTickUpdates();
+
+	abstract protected void PlanetFrameUpdates();
 
 	public PlanetType GetPlanetType() {
 		return type;

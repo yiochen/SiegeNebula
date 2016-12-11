@@ -9,6 +9,8 @@ public class NormalPlanetScript : AbstractPlanet {
 		type = PlanetType.Normal;
 	}
 
-	override protected void PlanetUpdates () { }
+	override protected void PlanetTickUpdates () { }
+
+	protected override void PlanetFrameUpdates (){}
 
 }

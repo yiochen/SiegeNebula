@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000011015128030}
-  - 114: {fileID: 114000011148155954}
+  - 114: {fileID: 114000011621984418}
   m_Layer: 0
   m_Name: EnemyAI
   m_TagString: Untagged
@@ -40,7 +40,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &114000011148155954
+--- !u!114 &114000011621984418
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,6 +48,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000011364555410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40bd72053836bd542bc22c7d42236885, type: 3}
+  m_Script: {fileID: 11500000, guid: ecbb3fd805ba3444b967c04f20c9f334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  actionsLimit: 4
+  thinkTime: 7.5
