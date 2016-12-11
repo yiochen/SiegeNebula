@@ -56,7 +56,6 @@ public class BasicEnemyAIScript : MonoBehaviour {
 			//Send units to a neighboring planet
 			neighboringPlanet = ChoosePlanet(planet);
 			//Launch Ship to neighboring planet
-			launchingPosition = (neighboringPlanet.transform.position - planet.transform.position) / 2.0f + planet.transform.position;
 			LaunchShip (planet, neighboringPlanet, planet.adjacentPaths, planet.ships [Indices.SHIP_ENEMY]);
 		}
 	}
