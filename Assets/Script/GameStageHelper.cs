@@ -4,7 +4,7 @@ using System.Collections;
 public class GameStageHelper: MonoBehaviour {
     public const string NEXT_SCENE = "next";
 
-    public static readonly string[] LEVELS = { "tutorial", "tut1", "tut2", "lvl0", "lvl1", "lvl2" };
+    public static readonly string[] LEVELS = { "tutorial", "tut1", "tut2", "tut3", "tut4","lvl0", "lvl1", "lvl2" };
 	
     public static string GetNextScene(string currentScene)
     {
