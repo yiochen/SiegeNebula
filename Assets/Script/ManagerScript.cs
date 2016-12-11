@@ -259,14 +259,14 @@ public class ManagerScript : Singleton<ManagerScript> {
 	}
 
 	public void LevelPlayer() {
-		if(playerLevel <= 2)
+		if(playerLevel <= 1)
 			playerLevel++;
 
 		SetStats (ref globalPlayerSoldiersStats, playerLevel);
 	}
 
 	public void LevelEnemy() {
-		if (enemyLevel <= 2)
+		if (enemyLevel <= 1)
 			enemyLevel++;
 
 		SetStats (ref globalEnemySoldiersStats, enemyLevel);
@@ -287,11 +287,6 @@ public class ManagerScript : Singleton<ManagerScript> {
 		case 2:
 			stats.defense = 2;
 			stats.defenseMod = 2;
-			stats.attackMod = 0;
-			break;
-		default:
-			stats.defense = 2;
-			stats.defenseMod = 3;
 			stats.attackMod = 1;
 			break;
 		}

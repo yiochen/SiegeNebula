@@ -20,7 +20,7 @@ public class ReactorContextualMenuScript : AbstractPanel {
 	protected override void CheckForUpdate ()
 	{
 		reactorToggle.isOn = gameManager.GetUpgrading ();
-		if (ownership == AbstractPlanet.Ownership.Player && gameManager.GetPlayerLevel () < 3)
+		if (ownership == AbstractPlanet.Ownership.Player && gameManager.GetPlayerLevel () < 2)
 		{
 			reactorToggle.interactable = true;
 			reactorToggle.targetGraphic.transform.GetChild(0).gameObject.SetActive(true);

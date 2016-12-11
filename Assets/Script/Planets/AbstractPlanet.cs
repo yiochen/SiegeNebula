@@ -226,10 +226,10 @@ public abstract class AbstractPlanet : MonoBehaviour {
 	ShipScript ShipInstantiation(int index) {
 		switch (index) {
 		case Indices.SHIP_PLAYER:
-			ships [index] = ShipManagerScript.Instance.CreateShip (this, 0);
+			ships [index] = ShipManagerScript.Instance.CreateShip (this, gameManager.GetPlayerLevel());
 			break;
 		case Indices.SHIP_ENEMY:
-			ships [index] = ShipManagerScript.Instance.CreateShip(this, 0);
+			ships [index] = ShipManagerScript.Instance.CreateShip(this, gameManager.GetEnemyLevel());
 			break;
 		default:
 			break;

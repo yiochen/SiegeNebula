@@ -935,7 +935,7 @@ GameObject:
   - 224: {fileID: 224000010218607398}
   - 114: {fileID: 114000014007336488}
   m_Layer: 11
-  m_Name: SoldierGenToggle
+  m_Name: UpgradeToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1767,7 +1767,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reactorToggle: {fileID: 114000012564679904}
-  reactorSlider: {fileID: 114000014007336488}
 --- !u!114 &114000010158837250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3022,8 +3021,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: CreateSoldiers
-        m_Mode: 0
+        m_MethodName: UpgradeToggle
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
