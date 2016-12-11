@@ -94,9 +94,26 @@ public class ManagerScript : Singleton<ManagerScript> {
 		return upgrader;
 	}
 
-	public void ActivateUpgrade(bool isUpgrading, AbstractPlanet.Ownership upgrader) {
+	public bool ActivateUpgrade(bool isUpgrading, AbstractPlanet.Ownership upgrader) {
+		switch (upgrader) {
+		case AbstractPlanet.Ownership.Player:
+			if (playerResources >= GamePlay.UPGRADE_COST)
+				playerResources -= GamePlay.UPGRADE_COST;
+			else
+				return false;
+			break;
+		case AbstractPlanet.Ownership.Enemy:
+			if (enemyResources >= GamePlay.UPGRADE_COST)
+				enemyResources -= GamePlay.UPGRADE_COST;
+			else
+				return false;
+			break;
+		case AbstractPlanet.Ownership.Neutral:
+			break;
+		}
 		this.isUpgrading = isUpgrading;
 		this.upgrader = upgrader;
+		return true;
 	}
 
 	void QuerySoldiers() {
@@ -281,13 +298,13 @@ public class ManagerScript : Singleton<ManagerScript> {
 			break;
 		case 1:
 			stats.defense = 2;
-			stats.defenseMod = 1;
-			stats.attackMod = 0;
+			stats.defenseMod = 4;
+			stats.attackMod = 1;
 			break;
 		case 2:
 			stats.defense = 2;
-			stats.defenseMod = 2;
-			stats.attackMod = 1;
+			stats.defenseMod = 8;
+			stats.attackMod = 2;
 			break;
 		}
 	}

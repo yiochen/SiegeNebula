@@ -35,7 +35,11 @@ public class ReactorContextualMenuScript : AbstractPanel {
 		isUpgrading = !isUpgrading;
 		Debug.Log("upgrading " + isUpgrading);
 		ManagerScript.Instance.audioManager.PlaySound ("ButtonClick");
-		gameManager.ActivateUpgrade (isUpgrading, ownership);
+		if (!gameManager.ActivateUpgrade (isUpgrading, ownership)) {
+			Debug.Log("Not enough Resources to Upgrade");
+			isUpgrading = !isUpgrading;
+		}
+			
 	}
 
 }
