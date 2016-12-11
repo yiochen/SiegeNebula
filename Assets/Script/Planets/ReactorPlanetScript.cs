@@ -5,6 +5,7 @@ using System;
 public class ReactorPlanetScript : AbstractPlanet {
 
     public ParticleSystem particle;
+    public Animator levelUpAura;
 
 	private float upgradeTimer;
 	[Range(5f, 60f)]
@@ -54,4 +55,9 @@ public class ReactorPlanetScript : AbstractPlanet {
 		} else
 			upgradeTimer = 0;
 	}
+    // call this function to play the visual effect when upgrade finishes
+    private void PlayLevelUpFinishEffect()
+    {
+        levelUpAura.SetTrigger("isLeveledUp");
+    }
 }
