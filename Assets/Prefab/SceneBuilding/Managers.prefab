@@ -2279,7 +2279,7 @@ MonoBehaviour:
   audioManager: {fileID: 114000014264226292}
   playerPlanets: []
   enemyPlanets: []
-  playerResources: 0
+  playerResources: 50
   enemyResources: 20
   playerSoldierCount: 0
   enemySoldierCount: 0
@@ -3857,7 +3857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990ec0f31a8a47443985f0145c7d668d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soldierLabel: {fileID: 114000013644357484}
+  soldierLabel: {fileID: 114000013961625112}
   engineerLabel: {fileID: 114000011802298038}
   shipButton: {fileID: 114000012547605594}
   shipButtonSlider: {fileID: 114000013742089934}
