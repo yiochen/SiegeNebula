@@ -3045,7 +3045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990ec0f31a8a47443985f0145c7d668d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soldierLabel: {fileID: 114000012510742144}
+  soldierLabel: {fileID: 114000012961013146}
   engineerLabel: {fileID: 114000010452891590}
   shipButton: {fileID: 114000012244347284}
   shipButtonSlider: {fileID: 114000012312067688}
