@@ -29,6 +29,14 @@ class Prefs {
     public const string GAME_RESULT = "GAME_RESULT";
 }
 
+class PlanetNames {
+	public const string NORMAL_PLANET = "Barren Colony";
+	public const string HYBRID_PLANET = "Capital Planet";
+	public const string SOLDIER_PLANET = "Cyborg Colony";
+	public const string REACTOR_PLANET = "Research Vessel";
+	public const string RESOURCE_PLANET = "Crystal Colony";
+}
+
 class GamePlay 
 {
 	public const int UPGRADE_COST = 100;

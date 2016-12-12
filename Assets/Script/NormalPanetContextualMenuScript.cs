@@ -7,6 +7,7 @@ public class NormalPanetContextualMenuScript : AbstractPanel {
 
     AbstractPlanet planetScript;
     public StatLabelScript soldierLabel;
+	public Text planetLabel;
     public Button shipButton;
     public Slider shipButtonSlider;
 
@@ -19,6 +20,7 @@ public class NormalPanetContextualMenuScript : AbstractPanel {
     {
         if (planetScript)
         {
+			planetLabel.text = GetPlanetTypeName (planetScript);
             soldierLabel.SetValue("" + planetScript.playerSoldiers);
             if (planetScript.ships[Indices.SHIP_PLAYER]  || planetScript.planetOwnership.Equals(AbstractPlanet.Ownership.Player))
             {
@@ -49,6 +51,24 @@ public class NormalPanetContextualMenuScript : AbstractPanel {
         }
 
     }
+
+	string GetPlanetTypeName(AbstractPlanet planet) {
+		switch (planet.GetPlanetType ()) {
+		case AbstractPlanet.PlanetType.Hybrid:
+			return PlanetNames.HYBRID_PLANET;
+		case AbstractPlanet.PlanetType.Normal:
+			return PlanetNames.NORMAL_PLANET;
+		case AbstractPlanet.PlanetType.Reactor:
+			return PlanetNames.REACTOR_PLANET;
+		case AbstractPlanet.PlanetType.Resource:
+			return PlanetNames.RESOURCE_PLANET;
+		case AbstractPlanet.PlanetType.Soldier:
+			return PlanetNames.SOLDIER_PLANET;
+		}
+		Debug.LogError ("NormalContextMenu: PlanetType was not set on planet!");
+		return null;
+	}
+
 
     //helper function
     public void PlayerCreateShip()
