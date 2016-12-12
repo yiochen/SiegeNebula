@@ -12,7 +12,9 @@ public class CombatScript : MonoBehaviour {
 
 	private AbstractPlanet planet;
 	private float timer;
+	private float soundTimer = SOUND_TIME;
 
+	private const float SOUND_TIME = 3.0f;
 	private const float ROUND_TICK = 1.5f;
 	private const float SOLDIERS_PER_GROUP = 25.0f;
 	private const float ATTACK_ROLL_MAX = 20.0f;
@@ -31,28 +33,29 @@ public class CombatScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!planet.isContested)
+		if (!planet.isContested) {
+			soundTimer = SOUND_TIME;
 			return;
+		}
+			
 		
 		timer += Time.deltaTime;
 		if (timer >= ROUND_TICK) {
-			PlaySoundFx ();
 			Combat ();
 			timer = 0.0f;
+		}
+
+		soundTimer += Time.deltaTime;
+		if (soundTimer >= SOUND_TIME) {
+			PlaySoundFx ();
+			soundTimer = 0.0f;
 		}
 
 	}
 
 	void PlaySoundFx() {
+		
 		gameManager.audioManager.PlaySound ("bassBoom");
-		bool playShortBurst = Random.value < 0.5f;
-		if (playShortBurst) {
-			bool playFirst = Random.value < 0.5f;
-			if (playFirst)
-				gameManager.audioManager.PlaySound ("shortBurst1");
-			else
-				gameManager.audioManager.PlaySound ("shortBurst2");
-		}
 	}
 		
 	void Combat() {
