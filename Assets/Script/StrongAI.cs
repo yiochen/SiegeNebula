@@ -34,34 +34,19 @@ public class StrongAI : MonoBehaviour {
 		thinkTimer += Time.deltaTime;
 		if (thinkTimer >= thinkTime) {
 			//Check if I have a ship with units doing nothing
-			ships = gameManager.shipContainer.gameObject.GetComponentsInChildren<ShipScript>();
-			foreach (ShipScript s in ships) {
-				if (s.shipOwnership == AbstractPlanet.Ownership.Enemy) {
-					if (s.dockedPlanet != null && s.dockedPlanet.planetOwnership != AbstractPlanet.Ownership.Enemy) {
-						//Send to neighboring planet with this order: Enemy => Neutral => Player
-						AbstractPlanet docked = s.dockedPlanet;
-						AbstractPlanet bestPlanet = null;
-						foreach (AbstractPlanet planet in docked.adjacentPlanet) {
-							if (planet.planetOwnership == AbstractPlanet.Ownership.Enemy) {
-								bestPlanet = planet;
-								break;
-							} else if (planet.planetOwnership == AbstractPlanet.Ownership.Neutral) {
-								bestPlanet = planet;
-							}
-						}
-						if (bestPlanet == null)
-							bestPlanet = docked.adjacentPlanet [0];
-
-						LaunchShip (docked, bestPlanet, docked.adjacentPaths, s);
-					}
-				}
-			}
+			CheckShip();
 			//Enemy Planet Actions
 			for(int i = 0; i < enemyPlanets.Count; i++) {
 				AbstractPlanet planet = enemyPlanets [i];
 				actionHappened = false;
 				//Do nothing else if you have no more actions
 				if (action > actionsLimit)
+					continue;
+
+				//Can I upgrade
+				UpgradeAction (ref planet);
+
+				if (actionHappened)
 					continue;
 				//Am I being attacked
 				BeingAttackedAction(ref planet);
@@ -75,6 +60,7 @@ public class StrongAI : MonoBehaviour {
 					continue;
 
 				planet.isRequestingSoldiers = false;
+				planet.planetRequesting = null;
 				//Is a planet next to me being attacked
 				NeighborAttackedAction (ref planet);
 
@@ -82,6 +68,7 @@ public class StrongAI : MonoBehaviour {
 					continue;
 
 				planet.isFeeding = false;
+				planet.planetRequesting = null;
 				//Does my neighbor need soldiers
 				NeighborNeedsSoldiersAction (ref planet);
 
@@ -89,6 +76,7 @@ public class StrongAI : MonoBehaviour {
 					continue;
 
 				planet.isFeeding = false;
+				planet.planetRequesting = null;
 				//Do I want to expand
 				ExpandAction (ref planet);
 
@@ -108,20 +96,65 @@ public class StrongAI : MonoBehaviour {
 		}
 	}
 
+	void CheckShip() {
+		ships = gameManager.shipContainer.gameObject.GetComponentsInChildren<ShipScript>();
+		foreach (ShipScript s in ships) {
+			if (s.shipOwnership == AbstractPlanet.Ownership.Enemy) {
+				if (s.dockedPlanet != null && s.dockedPlanet.planetOwnership != AbstractPlanet.Ownership.Enemy) {
+					//Send to neighboring planet with this order: Enemy => Neutral => Player
+					AbstractPlanet docked = s.dockedPlanet;
+					AbstractPlanet bestPlanet = null;
+					foreach (AbstractPlanet planet in docked.adjacentPlanet) {
+						if (planet.planetOwnership == AbstractPlanet.Ownership.Enemy) {
+							bestPlanet = planet;
+							break;
+						} else if (planet.planetOwnership == AbstractPlanet.Ownership.Neutral) {
+							bestPlanet = planet;
+						}
+					}
+					if (bestPlanet == null)
+						bestPlanet = docked.adjacentPlanet [0];
+
+					LaunchShip (docked, bestPlanet, docked.adjacentPaths, s);
+				}
+			}
+		}
+	}
+
+	void UpgradeAction(ref AbstractPlanet planet) {
+		if (planet.GetPlanetType () == AbstractPlanet.PlanetType.Reactor) {
+			if (gameManager.enemyResources > 100 && CanNewUnitsBeCreated ()) {
+				if (!gameManager.GetUpgrading ()) {
+					gameManager.ActivateUpgrade (true, AbstractPlanet.Ownership.Enemy);
+					action++;
+					actionHappened = true;
+				}
+			}
+		}
+	}
+
 	void ExpandAction(ref AbstractPlanet planet) {
 		foreach (AbstractPlanet neigh in planet.adjacentPlanet) {
 			if (actionHappened)
 				continue;
 			if (neigh.planetOwnership == AbstractPlanet.Ownership.Neutral && neigh.isContested == false) {
-				planet.TrainSoldiers (true);
+				if (planet.GetPlanetType () != AbstractPlanet.PlanetType.Hybrid && planet.GetPlanetType () != AbstractPlanet.PlanetType.Soldier && planet.enemySoldiers == 0)
+					planet.isRequestingSoldiers = true;
+				else {
+					planet.isRequestingSoldiers = false;
+					planet.planetRequesting = null;
+					planet.TrainSoldiers (true);
+				}
+					
+				
 				ship = planet.CreateShip (AbstractPlanet.Ownership.Enemy);
 				if (ship.soldiersOnBoard >= 1 ||
-					(!CanNewUnitsBeCreated () && ship.soldiersOnBoard > 0)) {
+				    (!CanNewUnitsBeCreated () && ship.soldiersOnBoard > 0)) {
 					LaunchShip (planet, neigh, planet.adjacentPaths, ship);
 					planet.TrainSoldiers (false);
-				}else if (!ship.GetIsLoading ()) {
+				} else if (!ship.GetIsLoading ()) {
 					ship.StartLoadingSoldiersToShip (planet);
-				} 
+				}
 				action++;
 				actionHappened = true;
 			}
@@ -139,7 +172,7 @@ public class StrongAI : MonoBehaviour {
 				planet.planetRequesting = neigh;
 				target = neigh;
 			} else if (neigh.planetOwnership == AbstractPlanet.Ownership.Enemy && neigh.isFeeding) {
-				if (PlanetInPath (neigh, neigh.planetRequesting)) {
+				if (PlanetInPath (neigh, neigh.planetRequesting) && neigh != neigh.planetRequesting) {
 					planet.TrainSoldiers (true);
 					planet.isFeeding = true;
 					planet.planetRequesting = neigh.planetRequesting;
