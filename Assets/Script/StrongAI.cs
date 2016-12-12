@@ -116,6 +116,7 @@ public class StrongAI : MonoBehaviour {
 						bestPlanet = docked.adjacentPlanet [0];
 
 					LaunchShip (docked, bestPlanet, docked.adjacentPaths, s);
+					action++;
 				}
 			}
 		}
