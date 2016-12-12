@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class StrongAI : MonoBehaviour {
 
-	private List<AbstractPlanet> planets;
+	private List<AbstractPlanet> enemyPlanets;
 	private ManagerScript gameManager;
 	private AbstractPlanet neighboringPlanet;
 	private List<AbstractPlanet> searched = new List<AbstractPlanet> ();
@@ -13,6 +13,7 @@ public class StrongAI : MonoBehaviour {
 	private int action;
 	private bool actionHappened;
 	private ShipScript ship;
+	private ShipScript[] ships;
 
 	[Range(1, 6)]
 	public int actionsLimit = 4;
@@ -22,7 +23,7 @@ public class StrongAI : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameManager = ManagerScript.Instance;
-		planets = gameManager.enemyPlanets;
+		enemyPlanets = gameManager.enemyPlanets;
 		thinkTimer = 0.0f;
 		action = 0;
 		actionHappened = false;
@@ -32,8 +33,32 @@ public class StrongAI : MonoBehaviour {
 	void Update () {
 		thinkTimer += Time.deltaTime;
 		if (thinkTimer >= thinkTime) {
-			for(int i = 0; i < planets.Count; i++) {
-				AbstractPlanet planet = planets [i];
+			//Check if I have a ship with units doing nothing
+			ships = gameManager.shipContainer.gameObject.GetComponentsInChildren<ShipScript>();
+			foreach (ShipScript s in ships) {
+				if (s.shipOwnership == AbstractPlanet.Ownership.Enemy) {
+					if (s.dockedPlanet != null && s.dockedPlanet.planetOwnership != AbstractPlanet.Ownership.Enemy) {
+						//Send to neighboring planet with this order: Enemy => Neutral => Player
+						AbstractPlanet docked = s.dockedPlanet;
+						AbstractPlanet bestPlanet = null;
+						foreach (AbstractPlanet planet in docked.adjacentPlanet) {
+							if (planet.planetOwnership == AbstractPlanet.Ownership.Enemy) {
+								bestPlanet = planet;
+								break;
+							} else if (planet.planetOwnership == AbstractPlanet.Ownership.Neutral) {
+								bestPlanet = planet;
+							}
+						}
+						if (bestPlanet == null)
+							bestPlanet = docked.adjacentPlanet [0];
+
+						LaunchShip (docked, bestPlanet, docked.adjacentPaths, s);
+					}
+				}
+			}
+			//Enemy Planet Actions
+			for(int i = 0; i < enemyPlanets.Count; i++) {
+				AbstractPlanet planet = enemyPlanets [i];
 				actionHappened = false;
 				//Do nothing else if you have no more actions
 				if (action > actionsLimit)
@@ -252,11 +277,11 @@ public class StrongAI : MonoBehaviour {
 	bool CanNewUnitsBeCreated() {
 		int resourcePlanets = 0;
 		int trainingPlanets = 0;
-		for(int i = 0; i < planets.Count; i++) {
-			if (planets[i].GetPlanetType () == AbstractPlanet.PlanetType.Resource || planets[i].GetPlanetType () == AbstractPlanet.PlanetType.Hybrid)
+		for(int i = 0; i < enemyPlanets.Count; i++) {
+			if (enemyPlanets[i].GetPlanetType () == AbstractPlanet.PlanetType.Resource || enemyPlanets[i].GetPlanetType () == AbstractPlanet.PlanetType.Hybrid)
 				resourcePlanets++;
 
-			if (planets[i].isTrainingSoldiers)
+			if (enemyPlanets[i].isTrainingSoldiers)
 				trainingPlanets++;
 		}
 		if (2 * trainingPlanets < resourcePlanets || gameManager.enemyResources > 20)
@@ -267,7 +292,7 @@ public class StrongAI : MonoBehaviour {
 	}
 
 	void UpdatePlanetList() {
-		planets = gameManager.enemyPlanets;
+		enemyPlanets = gameManager.enemyPlanets;
 	}
 
 	void LaunchShip(AbstractPlanet planet, AbstractPlanet target, PathScript[] paths, ShipScript ship) {
