@@ -74,7 +74,8 @@ public class AudioManager : Singleton<AudioManager> {
 			s.SetSource (go.AddComponent<AudioSource> ());
 			soundMap.Add (s.name, s);
 		}
-		ManagerScript.Instance.BackgroudMusic ();
+        PlaySound("backgroundMusic");
+        
 	}
 
 	void Update() {

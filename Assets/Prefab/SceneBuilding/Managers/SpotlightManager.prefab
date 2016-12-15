@@ -9,17 +9,17 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1000010448787862}
+  m_RootGameObject: {fileID: 1000012186867538}
   m_IsPrefabParent: 1
---- !u!1 &1000010448787862
+--- !u!1 &1000012186867538
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 4000011806247036}
-  - 114: {fileID: 114000012245450254}
+  - 4: {fileID: 4000010245595020}
+  - 114: {fileID: 114000011368373934}
   m_Layer: 0
   m_Name: SpotlightManager
   m_TagString: Untagged
@@ -27,56 +27,56 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1000013652806308
+--- !u!1 &1000013771060160
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 4000010179439042}
-  - 108: {fileID: 108000011593636970}
-  - 114: {fileID: 114000010409635598}
+  - 4: {fileID: 4000011602560754}
+  - 108: {fileID: 108000014105727048}
+  - 114: {fileID: 114000013929061456}
   m_Layer: 10
   m_Name: SelectionSpotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4000010179439042
+  m_IsActive: 0
+--- !u!4 &4000010245595020
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013652806308}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 4000011806247036}
-  m_RootOrder: 0
---- !u!4 &4000011806247036
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010448787862}
+  m_GameObject: {fileID: 1000012186867538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 4000010179439042}
+  - {fileID: 4000011602560754}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!108 &108000011593636970
+--- !u!4 &4000011602560754
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013771060160}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -2.9656043, y: 5.7628126, z: -0.12352427}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 4000010245595020}
+  m_RootOrder: 0
+--- !u!108 &108000014105727048
 Light:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013652806308}
+  m_GameObject: {fileID: 1000013771060160}
   m_Enabled: 1
   serializedVersion: 7
   m_Type: 0
@@ -105,12 +105,24 @@ Light:
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114000010409635598
+--- !u!114 &114000011368373934
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013652806308}
+  m_GameObject: {fileID: 1000012186867538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc5de20edf62a09448fe3de6e4c1c846, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spotlight: {fileID: 114000013929061456}
+--- !u!114 &114000013929061456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013771060160}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e918a052ccf90048bf508b7a5342d97, type: 3}
@@ -118,15 +130,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   focusedObject: {fileID: 0}
   height: 7.38
---- !u!114 &114000012245450254
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010448787862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc5de20edf62a09448fe3de6e4c1c846, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spotlight: {fileID: 114000010409635598}

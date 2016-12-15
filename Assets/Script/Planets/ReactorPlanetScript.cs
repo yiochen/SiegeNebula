@@ -25,6 +25,12 @@ public class ReactorPlanetScript : AbstractPlanet {
 			particle.Stop ();
 
 	}
+
+    public float GetUpgradePercentage ()
+    {
+        return upgradeTimer / upgrade;
+    }
+
 	protected override void PlanetFrameUpdates ()
 	{
 		if (gameManager.GetUpgrading ()) {

@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1000011902402180}
+  m_RootGameObject: {fileID: 1000012684909556}
   m_IsPrefabParent: 1
---- !u!1 &1000011902402180
+--- !u!1 &1000012684909556
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 4000013098074050}
-  - 114: {fileID: 114000013970308016}
-  m_Layer: 0
-  m_Name: GameManager
+  - 4: {fileID: 4000013432285708}
+  - 114: {fileID: 114000012202058732}
+  m_Layer: 9
+  m_Name: EventManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4000013098074050
+--- !u!4 &4000013432285708
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011902402180}
+  m_GameObject: {fileID: 1000012684909556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,32 +40,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &114000013970308016
+--- !u!114 &114000012202058732
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000011902402180}
+  m_GameObject: {fileID: 1000012684909556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbf0d98bcc0d28c4fa148a05f4ccbac4, type: 3}
+  m_Script: {fileID: 11500000, guid: c42f2d471f8caa54fb55a37ae9df1110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planetContainer: {fileID: 0}
-  shipContainer: {fileID: 0}
-  pathManager: {fileID: 0}
-  slideManager: {fileID: 0}
-  playerPlanets: []
-  enemyPlanets: []
-  playerResources: 0
-  enemyResources: 0
-  playerSoldiers:
-    soldierCount: 0
-    defense: 0
-    defenseMod: 0
-    attackMod: 0
-  enemySoldiers:
-    soldierCount: 0
-    defense: 0
-    defenseMod: 0
-    attackMod: 0
