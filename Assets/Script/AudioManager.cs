@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Sound {
 	public string name;
 	public AudioClip clip;
-	[Range(0.5f, 1.0f)]
+	[Range(0.0f, 1.0f)]
 	public float volume = 0.7f;
 	[Range(0.5f, 1.5f)]
 	public float pitch = 1.0f;
