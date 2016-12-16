@@ -6,6 +6,8 @@ public class PlanetGUIScript : MonoBehaviour {
     public ShipIconScript shipIcon;
     public Image OwnershipImage;
 	public Slider combatBar;
+	public Image upgradeIcon;
+	public Image soldierIcon;
 
 	private Light spotLight;
 	private AbstractPlanet planet;
@@ -23,6 +25,11 @@ public class PlanetGUIScript : MonoBehaviour {
 		spotLight.intensity = 0;
 		combatBar.gameObject.SetActive (false);
 		isSoundPlaying = false;
+		//For Testing
+		if (upgradeIcon) {
+			upgradeIcon.gameObject.SetActive (false);
+			soldierIcon.gameObject.SetActive (false);
+		}
 	}
 
 	// Update is called once per frame
@@ -49,7 +56,22 @@ public class PlanetGUIScript : MonoBehaviour {
         }
 
 		CombatSliderUpdates ();
+
+		if(upgradeIcon)
+			UpdateIconStatus ();
     }
+
+	void UpdateIconStatus() {
+		if (planet.GetIsTrainingSoldiers ())
+			soldierIcon.gameObject.SetActive (true);
+		else
+			soldierIcon.gameObject.SetActive (false);
+
+		if (ManagerScript.Instance.GetUpgrading () && planet.GetPlanetType() == AbstractPlanet.PlanetType.Reactor)
+			upgradeIcon.gameObject.SetActive (true);
+		else
+			upgradeIcon.gameObject.SetActive (false);
+	}
 
 	void CombatSliderUpdates() {
 		if (planet.isContested) {
