@@ -37,6 +37,11 @@ class PlanetNames {
 	public const string RESOURCE_PLANET = "Crystal Colony";
 }
 
+class Notifications {
+	public const string NO_SOLDIER_RESOURCE_MSG = "Not enough resources for soldiers!";
+	public const string NO_UPGRADE_RESOURCE_MSG = "Not enough resources for upgrades!";
+}
+
 class GamePlay 
 {
 	public const int UPGRADE_COST = 100;

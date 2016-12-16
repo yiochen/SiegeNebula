@@ -113,8 +113,10 @@ public class ManagerScript : Singleton<ManagerScript> {
 		case AbstractPlanet.Ownership.Player:
 			if (playerResources >= GamePlay.UPGRADE_COST)
 				playerResources -= GamePlay.UPGRADE_COST;
-			else
+			else {
+				NotificationBoardScript.Instance.PushMessage (Notifications.NO_UPGRADE_RESOURCE_MSG);
 				return false;
+			}
 			break;
 		case AbstractPlanet.Ownership.Enemy:
 			if (enemyResources >= GamePlay.UPGRADE_COST)
@@ -339,7 +341,8 @@ public class ManagerScript : Singleton<ManagerScript> {
 				playerSoldierCount += GamePlay.SOLDIER_UNIT;
 				playerResources -= GamePlay.SOLDIER_COST;
 				planet.playerSoldiers += GamePlay.SOLDIER_UNIT;
-			}
+			} else 
+				NotificationBoardScript.Instance.PushMessage (Notifications.NO_SOLDIER_RESOURCE_MSG);
 			break;
 		case AbstractPlanet.Ownership.Enemy:
 			if (enemyResources >= GamePlay.SOLDIER_COST) {
