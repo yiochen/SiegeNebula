@@ -65,15 +65,20 @@ public class AudioManager : Singleton<AudioManager> {
 	private Dictionary<string, Sound> soundMap;
 	public Sound[] sounds;
 
+    void Awake()
+    {
+        soundMap = new Dictionary<string, Sound>(sounds.Length);
+        foreach (Sound s in sounds)
+        {
+            GameObject go = new GameObject("Sound_" + s.name);
+            go.transform.SetParent(this.transform);
+            s.SetSource(go.AddComponent<AudioSource>());
+            soundMap.Add(s.name, s);
+        }
+    }
+    
 	// Use this for initialization
 	void Start () {
-		soundMap = new Dictionary<string, Sound> (sounds.Length);
-		foreach (Sound s in sounds) {
-			GameObject go = new GameObject ("Sound_" + s.name);
-			go.transform.SetParent (this.transform);
-			s.SetSource (go.AddComponent<AudioSource> ());
-			soundMap.Add (s.name, s);
-		}
         PlaySound("backgroundMusic");
         
 	}
