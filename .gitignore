@@ -36,6 +36,8 @@ sysinfo.txt
 # ignore project version file. 
 ProjectVersion.txt
 
+Assets/Scene/*/*
+
 # Development scene
 YiouDevScene.unity
 YiouDevScene.unity.meta
