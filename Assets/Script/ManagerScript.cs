@@ -82,6 +82,10 @@ public class ManagerScript : Singleton<ManagerScript> {
 	void Update () {
 		SetPlanetStarRanking ();
 		CheckGameOver ();
+
+		//TODO: REMOVE CHEAT KEY
+		if (Input.GetKeyDown (KeyCode.N))
+			StartCoroutine (SceneChange (true));
 	}
 
 	public int GetPlayerLevel() {
