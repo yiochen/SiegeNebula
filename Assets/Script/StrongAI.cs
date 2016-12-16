@@ -330,7 +330,7 @@ public class StrongAI : MonoBehaviour {
 			if (enemyPlanets[i].isTrainingSoldiers)
 				trainingPlanets++;
 		}
-		if (2 * trainingPlanets < resourcePlanets || gameManager.enemyResources > 20)
+		if (trainingPlanets <= resourcePlanets || gameManager.enemyResources > 20)
 			return true;
 		else
 			return false;
