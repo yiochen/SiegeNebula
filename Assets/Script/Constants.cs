@@ -53,7 +53,7 @@ class GamePlay
 
 	public const float PLANET_TICK = 1.5f;
 	public const float PLANET_CHANGE = 1.0f;
-	public const int RESOURCE_RATE = 5;
+	public const int RESOURCE_RATE = 10;
 	public const int SOLDIERS_PER_SKULL = 50;
 
 	public const string PLAYER_WIN = "You Won!";
