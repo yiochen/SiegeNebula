@@ -122,6 +122,12 @@ public class StrongAI : MonoBehaviour {
 		}
 	}
 
+	bool ValidPlanetForTraining(ref AbstractPlanet planet) {
+		if (planet.GetPlanetType () == AbstractPlanet.PlanetType.Hybrid || planet.GetPlanetType () == AbstractPlanet.PlanetType.Soldier)
+			return true;
+		return false;
+	}
+
 	void UpgradeAction(ref AbstractPlanet planet) {
 		if (planet.GetPlanetType () == AbstractPlanet.PlanetType.Reactor) {
 			if (gameManager.enemyResources > 100 && CanNewUnitsBeCreated ()) {
@@ -144,7 +150,8 @@ public class StrongAI : MonoBehaviour {
 				else {
 					planet.isRequestingSoldiers = false;
 					planet.planetRequesting = null;
-					planet.TrainSoldiers (true);
+					if(ValidPlanetForTraining(ref planet))
+						planet.TrainSoldiers (true);
 				}
 					
 				
@@ -168,13 +175,15 @@ public class StrongAI : MonoBehaviour {
 				continue;
 			AbstractPlanet target = null;
 			if (neigh.planetOwnership == AbstractPlanet.Ownership.Enemy && neigh.isRequestingSoldiers) {
-				planet.TrainSoldiers (true);
+				if(ValidPlanetForTraining(ref planet))
+					planet.TrainSoldiers (true);
 				planet.isFeeding = true;
 				planet.planetRequesting = neigh;
 				target = neigh;
 			} else if (neigh.planetOwnership == AbstractPlanet.Ownership.Enemy && neigh.isFeeding) {
 				if (PlanetInPath (neigh, neigh.planetRequesting) && neigh != neigh.planetRequesting) {
-					planet.TrainSoldiers (true);
+					if(ValidPlanetForTraining(ref planet))
+						planet.TrainSoldiers (true);
 					planet.isFeeding = true;
 					planet.planetRequesting = neigh.planetRequesting;
 					target = neigh;				
@@ -234,7 +243,8 @@ public class StrongAI : MonoBehaviour {
 				continue;
 
 			if (neigh.isContested && planet.planetOwnership == AbstractPlanet.Ownership.Enemy) { //Is my neighbor planet being attacked
-				planet.TrainSoldiers (true);
+				if(ValidPlanetForTraining(ref planet))
+					planet.TrainSoldiers (true);
 				planet.isFeeding = true;
 				float totalUnits = neigh.enemySoldiers + neigh.playerSoldiers;
 				if (neigh.playerSoldiers / totalUnits > 0.50f) {
@@ -258,7 +268,8 @@ public class StrongAI : MonoBehaviour {
 				continue;
 
 			if (neigh.planetOwnership == AbstractPlanet.Ownership.Player) { //Is there an enemy next to me
-				planet.TrainSoldiers (true);
+				if(ValidPlanetForTraining(ref planet))
+					planet.TrainSoldiers (true);
 				planet.isRequestingSoldiers = true;
 				//Am I stronger then the enemy, then attack
 				int estimatedUnits = (int)Mathf.Max(neigh.rankingScript.currentRank * 50 - 25, 0);
@@ -281,7 +292,8 @@ public class StrongAI : MonoBehaviour {
 
 	void BeingAttackedAction(ref AbstractPlanet planet) {
 		if (planet.isContested) {
-			planet.TrainSoldiers (true);
+			if(ValidPlanetForTraining(ref planet))
+				planet.TrainSoldiers (true);
 			planet.isRequestingSoldiers = true;
 			//Unload my ship if I have one
 			ship = planet.ships [Indices.SHIP_ENEMY];
