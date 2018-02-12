@@ -1,35 +1,40 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HybridPlanetScript : AbstractPlanet {
+public class HybridPlanetScript : AbstractPlanet
+{
 
     public ParticleSystem resourceParticle;
     public ParticleSystem soldierParticle;
 
-	void Start() {
-		base.OnActivate ();
-		type = PlanetType.Hybrid;
-	}
-		
+    void Start()
+    {
+        base.OnActivate();
+        type = PlanetType.Hybrid;
+    }
 
-	override protected void PlanetTickUpdates () {
-		CreateSoldiers ();
-		MineResources ();
+
+    override protected void PlanetTickUpdates()
+    {
+        CreateSoldiers();
+        MineResources();
         if (isTrainingSoldiers)
         {
             soldierParticle.Play();
-        } else
+        }
+        else
         {
             soldierParticle.Stop();
         }
         if (isMiningResources())
         {
             resourceParticle.Play();
-        } else
+        }
+        else
         {
             resourceParticle.Stop();
         }
-	}
+    }
 
-	protected override void PlanetFrameUpdates (){ }
+    protected override void PlanetFrameUpdates() { }
 }

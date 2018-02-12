@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be42c0368e4a2b245bdb92bef61eb3d1, type: 3}
+  m_Name: SoldierPlanet
+  m_EditorClassIdentifier: 
+  planetType: Soldier
+  planetMesh: {fileID: 100000, guid: 6a025d706a7261548a2f45a66b45054c, type: 3}
+  meshScale: 1
+  meshRotation: {x: 21.75, y: 39.1, z: 182.68}

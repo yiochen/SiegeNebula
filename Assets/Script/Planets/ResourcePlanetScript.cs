@@ -1,24 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ResourcePlanetScript : AbstractPlanet {
-    public ParticleSystem particle; 
-	// Use this for initialization
-	void Start () {
-		base.OnActivate ();
-		type = PlanetType.Resource;
-	}
+public class ResourcePlanetScript : AbstractPlanet
+{
+    public ParticleSystem particle;
+    // Use this for initialization
+    void Start()
+    {
+        base.OnActivate();
+        type = PlanetType.Resource;
+    }
 
-	override protected void PlanetTickUpdates () {
-		MineResources ();
+    override protected void PlanetTickUpdates()
+    {
+        MineResources();
         if (isMiningResources())
         {
             particle.Play();
-        } else
+        }
+        else
         {
             particle.Stop();
         }
-	}
+    }
 
-	protected override void PlanetFrameUpdates (){}
+    protected override void PlanetFrameUpdates() { }
 }
