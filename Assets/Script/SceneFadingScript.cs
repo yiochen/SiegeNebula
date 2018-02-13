@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
-public class SceneFadingScript : Singleton<SceneFadingScript> {
+public class SceneFadingScript : Singleton<SceneFadingScript>
+{
 
     public Texture2D fadeOutTexture;
     public float fadeSpeed = 0.8f;
@@ -20,20 +22,30 @@ public class SceneFadingScript : Singleton<SceneFadingScript> {
         GUI.depth = drawDepth;
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), fadeOutTexture);
     }
-    
-    public float BeginFade (int direction)
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public float BeginFade(int direction)
     {
         fadeDir = direction;
         return 1.0f / fadeSpeed;
     }
 
-    void OnLevelWasLoaded(int level)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         BeginFade(-1);
     }
-    
+
     public float FadeOut()
     {
         return BeginFade(1);
-    } 
+    }
 }
