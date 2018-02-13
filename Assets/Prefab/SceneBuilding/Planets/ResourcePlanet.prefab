@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 135000011565845782}
   - component: {fileID: 114000014095526212}
   - component: {fileID: 114000013673539930}
+  - component: {fileID: 114795352267746944}
   m_Layer: 0
   m_Name: ResourcePlanet
   m_TagString: Untagged
@@ -673,6 +674,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5f2c4a002bcb54f8ff73c19c76aa47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114795352267746944
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011833804262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85a0a52038a28c04692373bf6c5171eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0, g: 1, b: 1, a: 1}
 --- !u!135 &135000011565845782
 SphereCollider:
   m_ObjectHideFlags: 1
